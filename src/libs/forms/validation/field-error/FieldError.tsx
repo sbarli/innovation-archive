@@ -29,8 +29,4 @@ const FieldError = ({ name }: { name: string }) => (
   />
 );
 
-// FieldError.propTypes = {
-//   name: PropTypes.string.isRequired,
-// };
-
 export default FieldError;

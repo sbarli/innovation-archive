@@ -10,6 +10,7 @@
  * ************************************
  */
 import React from 'react';
+import { FieldRenderProps } from 'react-final-form';
 import styled from 'styled-components/macro';
 
 import FieldError from '../../validation/field-error/FieldError';
@@ -28,27 +29,16 @@ const FieldContainer = styled.div`
   }
 `;
 
-const RenderText = () => (
+interface IRenderTextProps extends FieldRenderProps<string, HTMLElement> {
+  label: string;
+}
+
+const RenderText = ({ input, meta: { touched, error }, label }: IRenderTextProps) => (
   <FieldContainer>
-    <FieldError name={'test'} />
+    {label && <label>{label}</label>}
+    <input {...input} type="text" />
+    <FieldError name={input.name} />
   </FieldContainer>
 );
-
-// const RenderText = ({ input, meta: { touched, error }, label }) => (
-//   <FieldContainer>
-//     {label && <label>{label}</label>}
-//     <input {...input} type="text" />
-//     <FieldError name={input.name} />
-//   </FieldContainer>
-// );
-
-// RenderText.propTypes = {
-//   input: PropTypes.object.isRequired,
-//   meta: PropTypes.shape({
-//     touched: PropTypes.bool,
-//     error: PropTypes.string,
-//   }).isRequired,
-//   label: PropTypes.string,
-// };
 
 export default RenderText;
