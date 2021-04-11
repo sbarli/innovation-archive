@@ -1,7 +1,7 @@
-import { Cards, Colors, SplayDirections } from '../enums';
+import { CardIds, Colors, SplayDirections } from '../enums';
 
 export interface IBoardPile {
-  cards: Cards[];
+  cards: CardIds[];
   splayed: SplayDirections | null;
 }
 

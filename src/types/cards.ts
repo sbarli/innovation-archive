@@ -1,4 +1,20 @@
-import { Ages, Cards, Colors, Resources, SpecialAchievements } from '../enums';
+import { Ages, CardIds, CardNames, Colors, Resources, SpecialAchievements } from '../enums';
+
+export type TCardsById = {
+  [key in CardIds]: ICard;
+};
+
+export type TCardIdsByAge = {
+  [key in Ages]: CardIds[];
+};
+
+export type TDeck = {
+  [key in Ages]: CardIds[];
+};
+
+export type THand = {
+  [key in Colors]: CardIds[];
+};
 
 export interface IDogmaEffect {
   description: string;
@@ -7,7 +23,8 @@ export interface IDogmaEffect {
 }
 
 export interface ICard {
-  name: Cards;
+  id: CardIds;
+  name: CardNames;
   age: Ages;
   color: Colors;
   dogmaResource: Resources;
