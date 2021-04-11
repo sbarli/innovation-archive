@@ -1,8 +1,8 @@
 import { Ages, CardIds, CardNames, Colors, Resources, SpecialAchievements } from '../enums';
-import { ICard } from '../types';
+import { TCardsById } from '../types';
 
-export const cards: ICard[] = [
-  Object.freeze({
+export const cards: TCardsById = Object.freeze({
+  [CardIds.WRITING]: Object.freeze({
     id: CardIds.WRITING,
     name: CardNames.WRITING,
     age: Ages.ONE,
@@ -20,7 +20,7 @@ export const cards: ICard[] = [
     resourceSpace4: Resources.CROWNS,
     dogmaEffects: [{ description: 'Draw a 2.', code: () => {} }],
   }),
-  Object.freeze({
+  [CardIds.CLOTHING]: Object.freeze({
     id: CardIds.CLOTHING,
     name: CardNames.CLOTHING,
     age: Ages.ONE,
@@ -48,7 +48,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MASONRY]: Object.freeze({
     id: CardIds.MASONRY,
     name: CardNames.MASONRY,
     age: Ages.ONE,
@@ -73,7 +73,7 @@ export const cards: ICard[] = [
     ],
     specialAchievement: SpecialAchievements.MONUMENT,
   }),
-  Object.freeze({
+  [CardIds.METALWORKING]: Object.freeze({
     id: CardIds.METALWORKING,
     name: CardNames.METALWORKING,
     age: Ages.ONE,
@@ -97,7 +97,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CODE_OF_LAWS]: Object.freeze({
     id: CardIds.CODE_OF_LAWS,
     name: CardNames.CODE_OF_LAWS,
     age: Ages.ONE,
@@ -121,7 +121,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SAILING]: Object.freeze({
     id: CardIds.SAILING,
     name: CardNames.SAILING,
     age: Ages.ONE,
@@ -139,7 +139,7 @@ export const cards: ICard[] = [
     resourceSpace4: Resources.LEAVES,
     dogmaEffects: [{ description: 'Draw and meld a 1.', code: () => {} }],
   }),
-  Object.freeze({
+  [CardIds.POTTERY]: Object.freeze({
     id: CardIds.POTTERY,
     name: CardNames.POTTERY,
     age: Ages.ONE,
@@ -164,7 +164,7 @@ export const cards: ICard[] = [
       { description: 'Draw a 1.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.OARS]: Object.freeze({
     id: CardIds.OARS,
     name: CardNames.OARS,
     age: Ages.ONE,
@@ -190,7 +190,7 @@ export const cards: ICard[] = [
       { description: 'If no cards were transferred due to this demand, draw a 1.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ARCHERY]: Object.freeze({
     id: CardIds.ARCHERY,
     name: CardNames.ARCHERY,
     age: Ages.ONE,
@@ -215,7 +215,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.AGRICULTURE]: Object.freeze({
     id: CardIds.AGRICULTURE,
     name: CardNames.AGRICULTURE,
     age: Ages.ONE,
@@ -239,7 +239,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MYSTICISM]: Object.freeze({
     id: CardIds.MYSTICISM,
     name: CardNames.MYSTICISM,
     age: Ages.ONE,
@@ -263,7 +263,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CITY_STATES]: Object.freeze({
     id: CardIds.CITY_STATES,
     name: CardNames.CITY_STATES,
     age: Ages.ONE,
@@ -288,7 +288,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.DOMESTICATION]: Object.freeze({
     id: CardIds.DOMESTICATION,
     name: CardNames.DOMESTICATION,
     age: Ages.ONE,
@@ -306,7 +306,7 @@ export const cards: ICard[] = [
     resourceSpace4: Resources.CASTLES,
     dogmaEffects: [{ description: 'Meld the lowest card in your hand. Draw a 1.', code: () => {} }],
   }),
-  Object.freeze({
+  [CardIds.TOOLS]: Object.freeze({
     id: CardIds.TOOLS,
     name: CardNames.TOOLS,
     age: Ages.ONE,
@@ -333,7 +333,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.THE_WHEEL]: Object.freeze({
     id: CardIds.THE_WHEEL,
     name: CardNames.THE_WHEEL,
     age: Ages.ONE,
@@ -351,7 +351,7 @@ export const cards: ICard[] = [
     resourceSpace4: Resources.CASTLES,
     dogmaEffects: [{ description: 'Draw two 1.', code: () => {} }],
   }),
-  Object.freeze({
+  [CardIds.CURRENCY]: Object.freeze({
     id: CardIds.CURRENCY,
     name: CardNames.CURRENCY,
     age: Ages.TWO,
@@ -375,7 +375,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CANAL_BUILDING]: Object.freeze({
     id: CardIds.CANAL_BUILDING,
     name: CardNames.CANAL_BUILDING,
     age: Ages.TWO,
@@ -399,7 +399,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MONOTHEISM]: Object.freeze({
     id: CardIds.MONOTHEISM,
     name: CardNames.MONOTHEISM,
     age: Ages.TWO,
@@ -425,7 +425,7 @@ export const cards: ICard[] = [
       { description: 'Draw and tuck a 1.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ROAD_BUILDING]: Object.freeze({
     id: CardIds.ROAD_BUILDING,
     name: CardNames.ROAD_BUILDING,
     age: Ages.TWO,
@@ -449,7 +449,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CONSTRUCTION]: Object.freeze({
     id: CardIds.CONSTRUCTION,
     name: CardNames.CONSTRUCTION,
     age: Ages.TWO,
@@ -479,7 +479,7 @@ export const cards: ICard[] = [
     ],
     specialAchievement: SpecialAchievements.EMPIRE,
   }),
-  Object.freeze({
+  [CardIds.FERMENTING]: Object.freeze({
     id: CardIds.FERMENTING,
     name: CardNames.FERMENTING,
     age: Ages.TWO,
@@ -502,7 +502,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CALENDAR]: Object.freeze({
     id: CardIds.CALENDAR,
     name: CardNames.CALENDAR,
     age: Ages.TWO,
@@ -525,7 +525,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.PHILOSOPHY]: Object.freeze({
     id: CardIds.PHILOSOPHY,
     name: CardNames.PHILOSOPHY,
     age: Ages.TWO,
@@ -546,7 +546,7 @@ export const cards: ICard[] = [
       { description: 'You may score a card from your hand.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.MATHEMATICS]: Object.freeze({
     id: CardIds.MATHEMATICS,
     name: CardNames.MATHEMATICS,
     age: Ages.TWO,
@@ -570,7 +570,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MAPMAKING]: Object.freeze({
     id: CardIds.MAPMAKING,
     name: CardNames.MAPMAKING,
     age: Ages.TWO,
@@ -599,7 +599,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.PAPER]: Object.freeze({
     id: CardIds.PAPER,
     name: CardNames.PAPER,
     age: Ages.THREE,
@@ -620,7 +620,7 @@ export const cards: ICard[] = [
       { description: 'Draw a 4 for every color you have splayed left.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ENGINEERING]: Object.freeze({
     id: CardIds.ENGINEERING,
     name: CardNames.ENGINEERING,
     age: Ages.THREE,
@@ -646,7 +646,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your red cards left.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.TRANSLATION]: Object.freeze({
     id: CardIds.TRANSLATION,
     name: CardNames.TRANSLATION,
     age: Ages.THREE,
@@ -675,7 +675,7 @@ export const cards: ICard[] = [
     ],
     specialAchievement: SpecialAchievements.WORLD,
   }),
-  Object.freeze({
+  [CardIds.FEUDALISM]: Object.freeze({
     id: CardIds.FEUDALISM,
     name: CardNames.FEUDALISM,
     age: Ages.THREE,
@@ -701,7 +701,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow or purple cards left.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.MACHINERY]: Object.freeze({
     id: CardIds.MACHINERY,
     name: CardNames.MACHINERY,
     age: Ages.THREE,
@@ -731,7 +731,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MEDICINE]: Object.freeze({
     id: CardIds.MEDICINE,
     name: CardNames.MEDICINE,
     age: Ages.THREE,
@@ -756,7 +756,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.OPTICS]: Object.freeze({
     id: CardIds.OPTICS,
     name: CardNames.OPTICS,
     age: Ages.THREE,
@@ -780,7 +780,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.COMPASS]: Object.freeze({
     id: CardIds.COMPASS,
     name: CardNames.COMPASS,
     age: Ages.THREE,
@@ -805,7 +805,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.EDUCATION]: Object.freeze({
     id: CardIds.EDUCATION,
     name: CardNames.EDUCATION,
     age: Ages.THREE,
@@ -829,7 +829,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ALCHEMY]: Object.freeze({
     id: CardIds.ALCHEMY,
     name: CardNames.ALCHEMY,
     age: Ages.THREE,
@@ -857,7 +857,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.GUNPOWDER]: Object.freeze({
     id: CardIds.GUNPOWDER,
     name: CardNames.GUNPOWDER,
     age: Ages.FOUR,
@@ -886,7 +886,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.INVENTION]: Object.freeze({
     id: CardIds.INVENTION,
     name: CardNames.INVENTION,
     age: Ages.FOUR,
@@ -916,7 +916,7 @@ export const cards: ICard[] = [
     ],
     specialAchievement: SpecialAchievements.WONDER,
   }),
-  Object.freeze({
+  [CardIds.COLONIALISM]: Object.freeze({
     id: CardIds.COLONIALISM,
     name: CardNames.COLONIALISM,
     age: Ages.FOUR,
@@ -939,7 +939,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.REFORMATION]: Object.freeze({
     id: CardIds.REFORMATION,
     name: CardNames.REFORMATION,
     age: Ages.FOUR,
@@ -963,7 +963,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow or purple cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ANATOMY]: Object.freeze({
     id: CardIds.ANATOMY,
     name: CardNames.ANATOMY,
     age: Ages.FOUR,
@@ -988,7 +988,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ENTERPRISE]: Object.freeze({
     id: CardIds.ENTERPRISE,
     name: CardNames.ENTERPRISE,
     age: Ages.FOUR,
@@ -1014,7 +1014,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your green cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.PERSPECTIVE]: Object.freeze({
     id: CardIds.PERSPECTIVE,
     name: CardNames.PERSPECTIVE,
     age: Ages.FOUR,
@@ -1038,7 +1038,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.NAVIGATION]: Object.freeze({
     id: CardIds.NAVIGATION,
     name: CardNames.NAVIGATION,
     age: Ages.FOUR,
@@ -1063,7 +1063,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.PRINTING_PRESS]: Object.freeze({
     id: CardIds.PRINTING_PRESS,
     name: CardNames.PRINTING_PRESS,
     age: Ages.FOUR,
@@ -1088,7 +1088,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your blue cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.EXPERIMENTATION]: Object.freeze({
     id: CardIds.EXPERIMENTATION,
     name: CardNames.EXPERIMENTATION,
     age: Ages.FOUR,
@@ -1106,7 +1106,7 @@ export const cards: ICard[] = [
     resourceSpace4: Resources.LIGHTBULBS,
     dogmaEffects: [{ description: 'Draw and meld a 5.', code: () => {} }],
   }),
-  Object.freeze({
+  [CardIds.ASTRONOMY]: Object.freeze({
     id: CardIds.ASTRONOMY,
     name: CardNames.ASTRONOMY,
     age: Ages.FIVE,
@@ -1136,7 +1136,7 @@ export const cards: ICard[] = [
     ],
     specialAchievement: SpecialAchievements.UNIVERSE,
   }),
-  Object.freeze({
+  [CardIds.MEASUREMENT]: Object.freeze({
     id: CardIds.MEASUREMENT,
     name: CardNames.MEASUREMENT,
     age: Ages.FIVE,
@@ -1160,7 +1160,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.STATISTICS]: Object.freeze({
     id: CardIds.STATISTICS,
     name: CardNames.STATISTICS,
     age: Ages.FIVE,
@@ -1185,7 +1185,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.CHEMISTRY]: Object.freeze({
     id: CardIds.CHEMISTRY,
     name: CardNames.CHEMISTRY,
     age: Ages.FIVE,
@@ -1210,7 +1210,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.COAL]: Object.freeze({
     id: CardIds.COAL,
     name: CardNames.COAL,
     age: Ages.FIVE,
@@ -1236,7 +1236,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.THE_PIRATE_CODE]: Object.freeze({
     id: CardIds.THE_PIRATE_CODE,
     name: CardNames.THE_PIRATE_CODE,
     age: Ages.FIVE,
@@ -1266,7 +1266,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.STEAM_ENGINE]: Object.freeze({
     id: CardIds.STEAM_ENGINE,
     name: CardNames.STEAM_ENGINE,
     age: Ages.FIVE,
@@ -1286,7 +1286,7 @@ export const cards: ICard[] = [
       { description: 'Draw and tuck two 4, then score your bottom yellow card.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.BANKING]: Object.freeze({
     id: CardIds.BANKING,
     name: CardNames.BANKING,
     age: Ages.FIVE,
@@ -1312,7 +1312,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your green cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.PHYSICS]: Object.freeze({
     id: CardIds.PHYSICS,
     name: CardNames.PHYSICS,
     age: Ages.FIVE,
@@ -1336,7 +1336,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SOCIETIES]: Object.freeze({
     id: CardIds.SOCIETIES,
     name: CardNames.SOCIETIES,
     age: Ages.FIVE,
@@ -1361,7 +1361,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ATOMIC_THEORY]: Object.freeze({
     id: CardIds.ATOMIC_THEORY,
     name: CardNames.ATOMIC_THEORY,
     age: Ages.SIX,
@@ -1382,7 +1382,7 @@ export const cards: ICard[] = [
       { description: 'Draw and meld a 7.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.EMANCIPATION]: Object.freeze({
     id: CardIds.EMANCIPATION,
     name: CardNames.EMANCIPATION,
     age: Ages.SIX,
@@ -1408,7 +1408,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your red or purple cards to the right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.VACCINATION]: Object.freeze({
     id: CardIds.VACCINATION,
     name: CardNames.VACCINATION,
     age: Ages.SIX,
@@ -1437,7 +1437,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CLASSIFICATION]: Object.freeze({
     id: CardIds.CLASSIFICATION,
     name: CardNames.CLASSIFICATION,
     age: Ages.SIX,
@@ -1461,7 +1461,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.METRIC_SYSTEM]: Object.freeze({
     id: CardIds.METRIC_SYSTEM,
     name: CardNames.METRIC_SYSTEM,
     age: Ages.SIX,
@@ -1486,7 +1486,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your green cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ENCYCLOPEDIA]: Object.freeze({
     id: CardIds.ENCYCLOPEDIA,
     name: CardNames.ENCYCLOPEDIA,
     age: Ages.SIX,
@@ -1510,7 +1510,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MACHINE_TOOLS]: Object.freeze({
     id: CardIds.MACHINE_TOOLS,
     name: CardNames.MACHINE_TOOLS,
     age: Ages.SIX,
@@ -1533,7 +1533,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.INDUSTRIALIZATION]: Object.freeze({
     id: CardIds.INDUSTRIALIZATION,
     name: CardNames.INDUSTRIALIZATION,
     age: Ages.SIX,
@@ -1557,7 +1557,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your red or purple cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.DEMOCRACY]: Object.freeze({
     id: CardIds.DEMOCRACY,
     name: CardNames.DEMOCRACY,
     age: Ages.SIX,
@@ -1581,7 +1581,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CANNING]: Object.freeze({
     id: CardIds.CANNING,
     name: CardNames.CANNING,
     age: Ages.SIX,
@@ -1606,7 +1606,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow cards right.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.COMBUSTION]: Object.freeze({
     id: CardIds.COMBUSTION,
     name: CardNames.COMBUSTION,
     age: Ages.SEVEN,
@@ -1632,7 +1632,7 @@ export const cards: ICard[] = [
       { description: 'Return your bottom red card.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.BICYCLE]: Object.freeze({
     id: CardIds.BICYCLE,
     name: CardNames.BICYCLE,
     age: Ages.SEVEN,
@@ -1656,7 +1656,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.EVOLUTION]: Object.freeze({
     id: CardIds.EVOLUTION,
     name: CardNames.EVOLUTION,
     age: Ages.SEVEN,
@@ -1680,7 +1680,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SANITATION]: Object.freeze({
     id: CardIds.SANITATION,
     name: CardNames.SANITATION,
     age: Ages.SEVEN,
@@ -1705,7 +1705,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.EXPLOSIVES]: Object.freeze({
     id: CardIds.EXPLOSIVES,
     name: CardNames.EXPLOSIVES,
     age: Ages.SEVEN,
@@ -1730,7 +1730,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ELECTRICITY]: Object.freeze({
     id: CardIds.ELECTRICITY,
     name: CardNames.ELECTRICITY,
     age: Ages.SEVEN,
@@ -1754,7 +1754,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.PUBLICATIONS]: Object.freeze({
     id: CardIds.PUBLICATIONS,
     name: CardNames.PUBLICATIONS,
     age: Ages.SEVEN,
@@ -1778,7 +1778,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow or blue cards up.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.LIGHTING]: Object.freeze({
     id: CardIds.LIGHTING,
     name: CardNames.LIGHTING,
     age: Ages.SEVEN,
@@ -1802,7 +1802,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.RAILROAD]: Object.freeze({
     id: CardIds.RAILROAD,
     name: CardNames.RAILROAD,
     age: Ages.SEVEN,
@@ -1822,7 +1822,7 @@ export const cards: ICard[] = [
       { description: 'Return all cards from your hand, then draw three 6.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.REFRIGERATION]: Object.freeze({
     id: CardIds.REFRIGERATION,
     name: CardNames.REFRIGERATION,
     age: Ages.SEVEN,
@@ -1847,7 +1847,7 @@ export const cards: ICard[] = [
       { description: 'You may score a card from your hand.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ANTIBIOTICS]: Object.freeze({
     id: CardIds.ANTIBIOTICS,
     name: CardNames.ANTIBIOTICS,
     age: Ages.EIGHT,
@@ -1871,7 +1871,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MOBILITY]: Object.freeze({
     id: CardIds.MOBILITY,
     name: CardNames.MOBILITY,
     age: Ages.EIGHT,
@@ -1896,7 +1896,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.FLIGHT]: Object.freeze({
     id: CardIds.FLIGHT,
     name: CardNames.FLIGHT,
     age: Ages.EIGHT,
@@ -1920,7 +1920,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your red cards up.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.ROCKETRY]: Object.freeze({
     id: CardIds.ROCKETRY,
     name: CardNames.ROCKETRY,
     age: Ages.EIGHT,
@@ -1944,7 +1944,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SKYSCRAPERS]: Object.freeze({
     id: CardIds.SKYSCRAPERS,
     name: CardNames.SKYSCRAPERS,
     age: Ages.EIGHT,
@@ -1969,7 +1969,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SOCIALISM]: Object.freeze({
     id: CardIds.SOCIALISM,
     name: CardNames.SOCIALISM,
     age: Ages.EIGHT,
@@ -1993,7 +1993,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.CORPORATIONS]: Object.freeze({
     id: CardIds.CORPORATIONS,
     name: CardNames.CORPORATIONS,
     age: Ages.EIGHT,
@@ -2019,7 +2019,7 @@ export const cards: ICard[] = [
       { description: 'Draw and meld an 8.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.MASS_MEDIA]: Object.freeze({
     id: CardIds.MASS_MEDIA,
     name: CardNames.MASS_MEDIA,
     age: Ages.EIGHT,
@@ -2044,7 +2044,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your purple cards up.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.EMPIRICISM]: Object.freeze({
     id: CardIds.EMPIRICISM,
     name: CardNames.EMPIRICISM,
     age: Ages.EIGHT,
@@ -2072,7 +2072,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.QUANTUM_THEORY]: Object.freeze({
     id: CardIds.QUANTUM_THEORY,
     name: CardNames.QUANTUM_THEORY,
     age: Ages.EIGHT,
@@ -2096,7 +2096,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.COMPUTERS]: Object.freeze({
     id: CardIds.COMPUTERS,
     name: CardNames.COMPUTERS,
     age: Ages.NINE,
@@ -2121,7 +2121,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.COLLABORATION]: Object.freeze({
     id: CardIds.COLLABORATION,
     name: CardNames.COLLABORATION,
     age: Ages.NINE,
@@ -2150,7 +2150,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.GENETICS]: Object.freeze({
     id: CardIds.GENETICS,
     name: CardNames.GENETICS,
     age: Ages.NINE,
@@ -2170,7 +2170,7 @@ export const cards: ICard[] = [
       { description: 'Draw and meld a 10. Score all cards beneath it.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.SERVICES]: Object.freeze({
     id: CardIds.SERVICES,
     name: CardNames.SERVICES,
     age: Ages.NINE,
@@ -2195,7 +2195,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SPECIALIZATION]: Object.freeze({
     id: CardIds.SPECIALIZATION,
     name: CardNames.SPECIALIZATION,
     age: Ages.NINE,
@@ -2220,7 +2220,7 @@ export const cards: ICard[] = [
       { description: 'You may splay your yellow or blue cards up.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.SUBURBIA]: Object.freeze({
     id: CardIds.SUBURBIA,
     name: CardNames.SUBURBIA,
     age: Ages.NINE,
@@ -2244,7 +2244,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ECOLOGY]: Object.freeze({
     id: CardIds.ECOLOGY,
     name: CardNames.ECOLOGY,
     age: Ages.NINE,
@@ -2268,7 +2268,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.FISSION]: Object.freeze({
     id: CardIds.FISSION,
     name: CardNames.FISSION,
     age: Ages.NINE,
@@ -2297,7 +2297,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SATELLITES]: Object.freeze({
     id: CardIds.SATELLITES,
     name: CardNames.SATELLITES,
     age: Ages.NINE,
@@ -2323,7 +2323,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.COMPOSITES]: Object.freeze({
     id: CardIds.COMPOSITES,
     name: CardNames.COMPOSITES,
     age: Ages.NINE,
@@ -2348,7 +2348,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.ROBOTICS]: Object.freeze({
     id: CardIds.ROBOTICS,
     name: CardNames.ROBOTICS,
     age: Ages.TEN,
@@ -2372,7 +2372,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.BIOENGINEERING]: Object.freeze({
     id: CardIds.BIOENGINEERING,
     name: CardNames.BIOENGINEERING,
     age: Ages.TEN,
@@ -2401,7 +2401,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.DATABASES]: Object.freeze({
     id: CardIds.DATABASES,
     name: CardNames.DATABASES,
     age: Ages.TEN,
@@ -2425,7 +2425,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.MINIATURIZATION]: Object.freeze({
     id: CardIds.MINIATURIZATION,
     name: CardNames.MINIATURIZATION,
     age: Ages.TEN,
@@ -2449,7 +2449,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SOFTWARE]: Object.freeze({
     id: CardIds.SOFTWARE,
     name: CardNames.SOFTWARE,
     age: Ages.TEN,
@@ -2474,7 +2474,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.SELF_SERVICE]: Object.freeze({
     id: CardIds.SELF_SERVICE,
     name: CardNames.SELF_SERVICE,
     age: Ages.TEN,
@@ -2499,7 +2499,7 @@ export const cards: ICard[] = [
       { description: 'If you have more achievements than each opponent, you win.', code: () => {} },
     ],
   }),
-  Object.freeze({
+  [CardIds.AI]: Object.freeze({
     id: CardIds.AI,
     name: CardNames.AI,
     age: Ages.TEN,
@@ -2524,7 +2524,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.STEM_CELLS]: Object.freeze({
     id: CardIds.STEM_CELLS,
     name: CardNames.STEM_CELLS,
     age: Ages.TEN,
@@ -2548,7 +2548,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.GLOBALIZATION]: Object.freeze({
     id: CardIds.GLOBALIZATION,
     name: CardNames.GLOBALIZATION,
     age: Ages.TEN,
@@ -2577,7 +2577,7 @@ export const cards: ICard[] = [
       },
     ],
   }),
-  Object.freeze({
+  [CardIds.THE_INTERNET]: Object.freeze({
     id: CardIds.THE_INTERNET,
     name: CardNames.THE_INTERNET,
     age: Ages.TEN,
@@ -2599,4 +2599,4 @@ export const cards: ICard[] = [
       { description: 'Draw and meld a 10 for every two TIMEPIECES on your board.', code: () => {} },
     ],
   }),
-];
+});
