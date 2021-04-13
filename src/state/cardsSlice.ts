@@ -1,44 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { cards as cardData } from '../data/cards';
-import { Ages, BoardPlacementOptions, Cards, Colors, SplayDirections } from '../enums';
+import { cards as cardData } from '../data/cardsById';
+import { Ages, BoardPlacementOptions, CardIds, Colors, SplayDirections } from '../enums';
 import { RootState } from '../store';
-import { IBoard, ICard, IDogmaEffect } from '../types';
-
-/**
- * TODO: can this work instead?
- */
-// type Hand = {
-//   [Property in keyof Colors]: Cards[];
-// }
-// type Deck = {
-//   [Property in keyof Ages]: Cards[];
-// }
-
-interface IHand {
-  [Colors.RED]: Cards[];
-  [Colors.BLUE]: Cards[];
-  [Colors.GREEN]: Cards[];
-  [Colors.PURPLE]: Cards[];
-  [Colors.YELLOW]: Cards[];
-}
-
-interface IDeck {
-  [Ages.ONE]: Cards[];
-  [Ages.TWO]: Cards[];
-  [Ages.THREE]: Cards[];
-  [Ages.FOUR]: Cards[];
-  [Ages.FIVE]: Cards[];
-  [Ages.SIX]: Cards[];
-  [Ages.SEVEN]: Cards[];
-  [Ages.EIGHT]: Cards[];
-  [Ages.NINE]: Cards[];
-  [Ages.TEN]: Cards[];
-}
+import { IBoard, ICard, IDogmaEffect, TCardsById, TDeck, THand } from '../types';
+import { createBaseBoard } from '../utils/cardUtils';
 
 interface ICardActionProps {
   player: string;
-  card: Cards;
+  card: CardIds;
   color: Colors;
 }
 
@@ -61,35 +31,19 @@ interface IUnsplayActionProps extends IBaseSplayActionProps {
 
 interface IInitPlayerHandActionProps {
   player: string;
-  hand: IHand;
+  hand: THand;
 }
 
-const baseBoardPile = {
-  cards: [],
-  splayed: null,
-};
-
-const createBaseBoard = (player: string) => {
-  return {
-    player,
-    [Colors.RED]: Object.assign({}, baseBoardPile),
-    [Colors.BLUE]: Object.assign({}, baseBoardPile),
-    [Colors.GREEN]: Object.assign({}, baseBoardPile),
-    [Colors.PURPLE]: Object.assign({}, baseBoardPile),
-    [Colors.YELLOW]: Object.assign({}, baseBoardPile),
-  };
-};
-
 interface ICardsState {
-  cards: ICard[];
+  cards: TCardsById;
   dogmaEffects: IDogmaEffect[];
   boards: {
     [key: string]: IBoard;
   };
   hands: {
-    [key: string]: IHand;
+    [key: string]: THand;
   };
-  deck: IDeck | null;
+  deck: TDeck | null;
 }
 
 const initialState: ICardsState = {
@@ -105,7 +59,7 @@ export const cardsSlice = createSlice({
   initialState,
   reducers: {
     // deck reducers
-    initDeck: (state, { payload: { deck } }: PayloadAction<{ deck: IDeck }>) => {
+    initDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TDeck }>) => {
       state.deck = deck;
     },
     drawCardsFromDeck: (
@@ -121,7 +75,7 @@ export const cardsSlice = createSlice({
     returnCardsToDeck: (state, { payload: { cards } }: PayloadAction<{ cards: ICard[] }>) => {
       cards.forEach(card => {
         if (state.deck) {
-          state.deck[card.age].unshift(card.name);
+          state.deck[card.age].unshift(card.id);
         }
       });
     },
