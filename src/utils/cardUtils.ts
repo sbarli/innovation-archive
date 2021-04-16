@@ -109,12 +109,12 @@ export const createInitialHandsForPlayers = (
   playerOrder: string[],
   starterCards: CardIds[],
   hands: IHands = {} as IHands
-) => {
-  if (!playerOrder) {
+): IHands => {
+  if (!playerOrder?.length) {
     return hands;
   }
   // select cards for current first player
   hands[playerOrder[0]] = createBaseHand(starterCards.slice(0, 2));
   // recursively call
-  createInitialHandsForPlayers(playerOrder.slice(1), starterCards.slice(2), hands);
+  return createInitialHandsForPlayers(playerOrder.slice(1), starterCards.slice(2), hands);
 };

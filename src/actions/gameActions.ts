@@ -1,9 +1,10 @@
 import { cards as allCards } from '../data/cardsById';
 import { Ages } from '../enums';
-import { initDeck, initHands } from '../state/cardsSlice';
+import { initDeck } from '../state/cardsSlice';
+import { initHands } from '../state/handsSlice';
 import { initPlayers } from '../state/playersSlice';
 import { AppThunk } from '../store';
-import { IHands, TAgeAchievementCardIds } from '../types';
+import { TAgeAchievementCardIds } from '../types';
 import { createInitialHandsForPlayers, sortAndShuffleCards } from '../utils/cardUtils';
 import { orderAndFormatPlayers } from '../utils/playerUtils';
 
@@ -38,8 +39,12 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   // pull out age 1 cards for player hands
   // NOTE: purposely mutates starterDeck
   const handStartCards = starterDeck[Ages.ONE].splice(0, playerOrder.length * 2);
+  console.log('handStartCards: ', handStartCards);
   // create player hands with starter cards
-  const hands = createInitialHandsForPlayers(playerOrder, handStartCards) ?? ({} as IHands);
+  const hands = createInitialHandsForPlayers(playerOrder, handStartCards);
+  console.log('hands: ', hands);
+
+  console.log('deck: ', starterDeck);
 
   dispatch(initDeck({ deck: starterDeck }));
   dispatch(initPlayers({ players, playerOrder }));
