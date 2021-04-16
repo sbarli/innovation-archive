@@ -1,11 +1,16 @@
 import { cards as allCards } from '../data/cardsById';
 import { Ages } from '../enums';
+import { initBoards } from '../state/boardsSlice';
 import { initDeck } from '../state/cardsSlice';
 import { initHands } from '../state/handsSlice';
 import { initPlayers } from '../state/playersSlice';
 import { AppThunk } from '../store';
-import { TAgeAchievementCardIds } from '../types';
-import { createInitialHandsForPlayers, sortAndShuffleCards } from '../utils/cardUtils';
+import { IBoards, TAgeAchievementCardIds } from '../types';
+import {
+  createBaseBoard,
+  createInitialHandsForPlayers,
+  sortAndShuffleCards,
+} from '../utils/cardUtils';
 import { orderAndFormatPlayers } from '../utils/playerUtils';
 
 interface IPlayerName {
@@ -22,10 +27,7 @@ interface ISetupGameProps {
 // code can then be executed and other actions can be dispatched
 export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk => dispatch => {
   const starterDeck = sortAndShuffleCards(allCards);
-  console.log('starterDeck: ', starterDeck);
   const { players, playerOrder } = orderAndFormatPlayers(playerValues);
-  console.log('players: ', players);
-  console.log('playerOrder: ', playerOrder);
 
   // pull out age achievement cards
   // NOTE: purposely mutates starterDeck
@@ -39,15 +41,18 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   // pull out age 1 cards for player hands
   // NOTE: purposely mutates starterDeck
   const handStartCards = starterDeck[Ages.ONE].splice(0, playerOrder.length * 2);
-  console.log('handStartCards: ', handStartCards);
   // create player hands with starter cards
   const hands = createInitialHandsForPlayers(playerOrder, handStartCards);
-  console.log('hands: ', hands);
 
-  console.log('deck: ', starterDeck);
+  // create empty boards for players
+  const boards = playerOrder.reduce((acc, player) => {
+    acc[player] = createBaseBoard(player);
+    return acc;
+  }, {} as IBoards);
 
   dispatch(initDeck({ deck: starterDeck }));
   dispatch(initPlayers({ players, playerOrder }));
   dispatch(initHands({ hands }));
+  dispatch(initBoards({ boards }));
   // dispatch(initAgeAchievements({ achievements }));
 };

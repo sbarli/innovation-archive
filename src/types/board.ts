@@ -5,11 +5,14 @@ export interface IBoardPile {
   splayed: SplayDirections | null;
 }
 
-export interface IBoard {
+export type TBoard = {
+  [key in Colors]: IBoardPile;
+};
+
+export interface IBoard extends TBoard {
   player: string;
-  [Colors.RED]: IBoardPile;
-  [Colors.BLUE]: IBoardPile;
-  [Colors.GREEN]: IBoardPile;
-  [Colors.PURPLE]: IBoardPile;
-  [Colors.YELLOW]: IBoardPile;
+}
+
+export interface IBoards {
+  [key: string]: IBoard;
 }

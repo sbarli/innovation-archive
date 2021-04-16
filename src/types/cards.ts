@@ -9,7 +9,7 @@ export type TCardIdsByAge = {
 };
 
 export type TAgeAchievementCardIds = {
-  [key in Ages]: CardIds;
+  [key in Ages]?: CardIds;
 };
 
 export type TDeck = {
@@ -48,4 +48,10 @@ export interface ICard {
   resourceSpace4: Resources | null;
   dogmaEffects: IDogmaEffect[];
   specialAchievement?: SpecialAchievements;
+}
+
+export interface ICardActionProps {
+  player: string;
+  card: CardIds;
+  color: Colors;
 }

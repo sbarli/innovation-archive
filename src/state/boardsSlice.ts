@@ -2,8 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { BoardPlacementOptions, CardIds, Colors, SplayDirections } from '../enums';
 import { RootState } from '../store';
-import { IBoard } from '../types';
-import { createBaseBoard } from '../utils/cardUtils';
+import { IBoards } from '../types';
 
 interface ICardActionProps {
   player: string;
@@ -29,9 +28,7 @@ interface IUnsplayActionProps extends IBaseSplayActionProps {
 }
 
 interface IBoardsState {
-  boards: {
-    [key: string]: IBoard;
-  };
+  boards: IBoards;
 }
 
 const initialState: IBoardsState = {
@@ -42,10 +39,8 @@ export const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    initPlayerBoard: (state, { payload: { player } }: PayloadAction<{ player: string }>) => {
-      if (!state.boards[player]) {
-        state.boards[player] = createBaseBoard(player);
-      }
+    initBoards: (state, { payload: { boards } }: PayloadAction<{ boards: IBoards }>) => {
+      state.boards = boards;
     },
     addCardToBoard: (
       state,
@@ -92,7 +87,7 @@ export const boardsSlice = createSlice({
 });
 
 export const {
-  initPlayerBoard,
+  initBoards,
   addCardToBoard,
   removeCardFromBoard,
   splayColor,
