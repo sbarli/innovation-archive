@@ -18,7 +18,7 @@ export const cards: ICard[] = [
     resourceSpace2: Resources.LIGHTBULBS,
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: Resources.CROWNS,
-    dogmaEffects: [{ description: 'Draw a 2.', code: () => {} }],
+    dogmaEffects: [{ description: 'Draw a 2.', effectId: 'example' }],
   }),
   Object.freeze({
     id: CardIds.CLOTHING,
@@ -39,12 +39,12 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'Meld a card from your hand of a different color from any card on your board.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description:
           "Draw and score a 1 for each color present on your board not present on any opponent's board",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -68,7 +68,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may meld any number of cards from your hand, each with a CASTLES.\nIf you melded four or more cards in this way, claim the Monument achievement.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
     specialAchievement: SpecialAchievements.MONUMENT,
@@ -93,7 +93,7 @@ export const cards: ICard[] = [
       {
         description:
           'Draw and reveal a 1. If it has a CASTLES, score it and repeat this dogma effect.\nOtherwise, keep it.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -117,7 +117,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may tuck a card from your hand of the same color as any card on your board. If you do, you may sply that color of your cards left.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -137,7 +137,7 @@ export const cards: ICard[] = [
     resourceSpace2: Resources.CROWNS,
     resourceSpace3: null,
     resourceSpace4: Resources.LEAVES,
-    dogmaEffects: [{ description: 'Draw and meld a 1.', code: () => {} }],
+    dogmaEffects: [{ description: 'Draw and meld a 1.', effectId: 'example' }],
   }),
   Object.freeze({
     id: CardIds.POTTERY,
@@ -159,9 +159,9 @@ export const cards: ICard[] = [
       {
         description:
           'You may return up to three cards from your hand. If you returned any cards, draw and score a card of value equal to the number of cards you returned.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'Draw a 1.', code: () => {} },
+      { description: 'Draw a 1.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -184,10 +184,13 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a card with a CROWNS from your hand to my score pile! If you do, draw a 1, and repeat this dogma effect!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'If no cards were transferred due to this demand, draw a 1.', code: () => {} },
+      {
+        description: 'If no cards were transferred due to this demand, draw a 1.',
+        effectId: 'example',
+      },
     ],
   }),
   Object.freeze({
@@ -210,7 +213,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you draw a 1, then transfer the highest card in your hand to my hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -235,7 +238,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you do, draw and score a card of value one higher than the card you returned.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -259,7 +262,7 @@ export const cards: ICard[] = [
       {
         description:
           'Draw and reveal a 1. If it is the same color as any card on your board, meld it and draw a 1.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -283,7 +286,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top card with a CASTLES from your board to my board if you have at least four CASTLES on your board! If you do, draw a 1!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -304,7 +307,9 @@ export const cards: ICard[] = [
     resourceSpace2: Resources.CROWNS,
     resourceSpace3: null,
     resourceSpace4: Resources.CASTLES,
-    dogmaEffects: [{ description: 'Meld the lowest card in your hand. Draw a 1.', code: () => {} }],
+    dogmaEffects: [
+      { description: 'Meld the lowest card in your hand. Draw a 1.', effectId: 'example' },
+    ],
   }),
   Object.freeze({
     id: CardIds.TOOLS,
@@ -325,11 +330,11 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'You may return three cards from your hand. If you do, draw and meld a 3.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description: 'You may return a 3 from your hand. If you do, draw three 1.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -349,7 +354,7 @@ export const cards: ICard[] = [
     resourceSpace2: Resources.CASTLES,
     resourceSpace3: Resources.CASTLES,
     resourceSpace4: Resources.CASTLES,
-    dogmaEffects: [{ description: 'Draw two 1.', code: () => {} }],
+    dogmaEffects: [{ description: 'Draw two 1.', effectId: 'example' }],
   }),
   Object.freeze({
     id: CardIds.CURRENCY,
@@ -371,7 +376,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return any number of cards from your hand. If you do, draw and score a 2 for every different value of card you returned.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -395,7 +400,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may exchange all the highest cards in your hand with all the highest cards in your score.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -419,10 +424,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top card on your board of a different color from any card on my board to my score pile! If you do, draw and tuck a 1!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'Draw and tuck a 1.', code: () => {} },
+      { description: 'Draw and tuck a 1.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -445,7 +450,7 @@ export const cards: ICard[] = [
       {
         description:
           "Meld one or two cards from your hand. If you melded two, you may transfer your top red card to another player's board. If you do, transfer that player's top green card to your board.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -468,13 +473,13 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'I DEMAND you transfer two cards from your hand to my hand! Draw a 2!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description:
           'If you are the only player with five top cards, claim the Empire achievement.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
     specialAchievement: SpecialAchievements.EMPIRE,
@@ -498,7 +503,7 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'Draw a 2 for every color on your board with one or more LEAVES.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -521,7 +526,7 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'If you have more cards in your score pile than in your hand, draw two 3.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -542,8 +547,8 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: Resources.LIGHTBULBS,
     dogmaEffects: [
-      { description: 'You may splay left any one color of your cardNames.', code: () => {} },
-      { description: 'You may score a card from your hand.', code: () => {} },
+      { description: 'You may splay left any one color of your cardNames.', effectId: 'example' },
+      { description: 'You may score a card from your hand.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -566,7 +571,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you do, draw and meld a card of value one higher than the card you returned.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -590,12 +595,12 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a 1 from your score pile, if it has any, to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description: 'If any card was transferred due to the demand, draw and score a 1.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -616,8 +621,8 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: Resources.CROWNS,
     dogmaEffects: [
-      { description: 'You may splay your green or blue cards left.', code: () => {} },
-      { description: 'Draw a 4 for every color you have splayed left.', code: () => {} },
+      { description: 'You may splay your green or blue cards left.', effectId: 'example' },
+      { description: 'Draw a 4 for every color you have splayed left.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -640,10 +645,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer all top cards with a CASTLES from your board to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your red cards left.', code: () => {} },
+      { description: 'You may splay your red cards left.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -666,11 +671,11 @@ export const cards: ICard[] = [
       {
         description:
           'You may meld all of the cards in your score pile. If you meld one, you must meld them all.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description: 'If each top card on your board has a CROWNS, claim the World achievement.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
     specialAchievement: SpecialAchievements.WORLD,
@@ -695,10 +700,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a card with a CASTLES from your hand to my hand! If you do, unsplay that color of your cards!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your yellow or purple cards left.', code: () => {} },
+      { description: 'You may splay your yellow or purple cards left.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -721,13 +726,13 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you exchange all the cards in your hand with all the highest cards in my hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description:
           'Score a card from your hand with a CASTLES. You may splay your red cards left.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -751,7 +756,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you exchange the highest card in your score pile with the lowest card in my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -776,7 +781,7 @@ export const cards: ICard[] = [
       {
         description:
           'Draw and meld a 3. If it has a CROWNS, draw and score a 4. Otherwise, transfer a card from your score pile to the score pile of an opponent with fewer points than you.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -800,7 +805,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top non-green card with a LEAVES from your board to my board, and then you transfer a top card without a LEAVES from my board to your board!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -825,7 +830,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return the highest card from your score pile. If you do, draw a card of value two higher than the highest card remaining in your score pile.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -849,11 +854,11 @@ export const cards: ICard[] = [
       {
         description:
           'Draw and reveal a 4 for every three CASTLES on your board. If any of the drawn cards are red, return the cards drawn and all cards in your hand. Otherwise, keep them.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description: 'Meld a card from your hand, then score a card from your hand.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -877,12 +882,12 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top card with a CASTLES from your board to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description: 'If any card was transferred due to the demand, draw and score a 2.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -906,12 +911,12 @@ export const cards: ICard[] = [
       {
         description:
           'You may splay right any one color of your cards currently splayed left. If you do, draw and score a 4.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description:
           'If you have five colors splayed, each in any direction, claim the Wonder achievement.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
     specialAchievement: SpecialAchievements.WONDER,
@@ -935,7 +940,7 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'Draw and tuck a 3. If it has a CROWNS, repeat this dogma effect.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -958,9 +963,9 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'You may tuck a card from your hand for every two LEAVES on your board.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your yellow or purple cards right.', code: () => {} },
+      { description: 'You may splay your yellow or purple cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -983,7 +988,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you return a card from your score pile! If you do, return a top card of equal value from your board!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1008,10 +1013,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top non-purple card with a CROWNS from your board to my board! If you do, draw and meld a 4!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your green cards right.', code: () => {} },
+      { description: 'You may splay your green cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1034,7 +1039,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you do, score a card from your hand for every two LIGHTBULBS on your board.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1058,7 +1063,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a 2 or 3 from your score pile, if it has any, to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1083,9 +1088,9 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your score pile. If you do, draw a card of value two higher than the top purple card on your board.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your blue cards right.', code: () => {} },
+      { description: 'You may splay your blue cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1104,7 +1109,7 @@ export const cards: ICard[] = [
     resourceSpace2: Resources.LIGHTBULBS,
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: Resources.LIGHTBULBS,
-    dogmaEffects: [{ description: 'Draw and meld a 5.', code: () => {} }],
+    dogmaEffects: [{ description: 'Draw and meld a 5.', effectId: 'example' }],
   }),
   Object.freeze({
     id: CardIds.ASTRONOMY,
@@ -1126,12 +1131,12 @@ export const cards: ICard[] = [
       {
         description:
           'Draw and reveal a 6. If the card is green or blue, meld it and repeat this dogma effect.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description:
           'If all non-purple top cards on your board are value 6 or higher, claim the Universe achievement.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
     specialAchievement: SpecialAchievements.UNIVERSE,
@@ -1156,7 +1161,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may reveal and return a card from your hand. If you do, splay that color of your cards right, and draw a card of value equal to the number of cards of that color on your board.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1179,10 +1184,10 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'I DEMAND you transfer all the highest cards in your score pile to your hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your yellow cards right.', code: () => {} },
+      { description: 'You may splay your yellow cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1202,11 +1207,11 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.FACTORIES,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'You may splay your blue cards right.', code: () => {} },
+      { description: 'You may splay your blue cards right.', effectId: 'example' },
       {
         description:
           'Draw and score a card of value one higher than the highest top card on your board and then return a card from your score pile.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1227,12 +1232,12 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.FACTORIES,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'Draw and tuck a 5.', code: () => {} },
-      { description: 'You may splay your red cards right.', code: () => {} },
+      { description: 'Draw and tuck a 5.', effectId: 'example' },
+      { description: 'You may splay your red cards right.', effectId: 'example' },
       {
         description:
           'You may score any one of your top cardNames. If you do, also score the card beneath it.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1256,13 +1261,13 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer two cards of value 4 or less from your score pile to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description:
           'If any cards were transferred due to the demand, score the lowest top card with a CROWNS from your board.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1283,7 +1288,10 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.CROWNS,
     resourceSpace4: Resources.FACTORIES,
     dogmaEffects: [
-      { description: 'Draw and tuck two 4, then score your bottom yellow card.', code: () => {} },
+      {
+        description: 'Draw and tuck two 4, then score your bottom yellow card.',
+        effectId: 'example',
+      },
     ],
   }),
   Object.freeze({
@@ -1306,10 +1314,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top non-green card with a FACTORIES from your board to my board. If you do, draw and score a 5!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your green cards right.', code: () => {} },
+      { description: 'You may splay your green cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1332,7 +1340,7 @@ export const cards: ICard[] = [
       {
         description:
           'Draw three 6 and reveal them. If two or more of the drawn cards are the same color, return the drawn cards and all cards in your hand. Otherwise, keep them.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1356,7 +1364,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top card with a LIGHTBULBS higher than my top card of the same color from your board to my board! If you do, draw a 5!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1378,8 +1386,8 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'You may splay your blue cards right.', code: () => {} },
-      { description: 'Draw and meld a 7.', code: () => {} },
+      { description: 'You may splay your blue cards right.', effectId: 'example' },
+      { description: 'Draw and meld a 7.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1402,10 +1410,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a card from your hand to my score pile! If you do, draw a 6!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may splay your red or purple cards to the right.', code: () => {} },
+      { description: 'You may splay your red or purple cards to the right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1428,12 +1436,12 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you return all the lowest cards in your score pile! If you returned any, draw and meld a 6!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description: 'If any card was returned as a result of the demand, draw and meld a 7.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1457,7 +1465,7 @@ export const cards: ICard[] = [
       {
         description:
           "Reveal the color of a card from your hand. Take into your hand all cards of that color from all opponent's hands. Then, meld all cards of that color from your hand.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1481,9 +1489,9 @@ export const cards: ICard[] = [
       {
         description:
           'If your green cards are splayed right, you may splay any one color of your cards right.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your green cards right.', code: () => {} },
+      { description: 'You may splay your green cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1506,7 +1514,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may meld all the highest cards in your score pile. If you meld one of the highest, you must meld all of the highest.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1529,7 +1537,7 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'Draw and score a card of value equal to the highest card in your score pile.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1552,9 +1560,9 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'Draw and tuck a 6 for every color on your board with one or more FACTORIES.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your red or purple cards right.', code: () => {} },
+      { description: 'You may splay your red or purple cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1577,7 +1585,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return any number of cards from your hand. If you have returned more cards than any opponent due to Democracy so far during this dogma action, draw and score an 8.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1601,9 +1609,9 @@ export const cards: ICard[] = [
       {
         description:
           'You may draw and tuck a 6. If you do, score all your top cards without a FACTORIES.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your yellow cards right.', code: () => {} },
+      { description: 'You may splay your yellow cards right.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1626,10 +1634,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer one card from your score pile to my score pile for every four CROWNS on my board!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'Return your bottom red card.', code: () => {} },
+      { description: 'Return your bottom red card.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1652,7 +1660,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may exchange all cards in your hand with all the cards in your score pile. If you exchange one, you must exchange them all.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1676,7 +1684,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may choose to either draw and score an 8 and then return a card from your score pile, or draw a card of value one higher than the highest card in your score pile.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1700,7 +1708,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you exchange the two highest cards in your hand with the lowest card in my hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1725,7 +1733,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer the three highest cards from your hand to my hand! If you transferred any, and then have no cards in hand, draw a 7!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1750,7 +1758,7 @@ export const cards: ICard[] = [
       {
         description:
           'Return all your top cards without a FACTORIES, then draw an 8 for each card you returned.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1773,9 +1781,9 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'You may rearrange the order of one color of cards on your board.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your yellow or blue cards up.', code: () => {} },
+      { description: 'You may splay your yellow or blue cards up.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1798,7 +1806,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may tuck up to three cards from your hand. If you do, draw and score a 7 for every different value of card you tucked.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1819,7 +1827,7 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'Return all cards from your hand, then draw three 6.', code: () => {} },
+      { description: 'Return all cards from your hand, then draw three 6.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1841,10 +1849,10 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'I DEMAND you return half (rounded down) of the cards in your hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'You may score a card from your hand.', code: () => {} },
+      { description: 'You may score a card from your hand.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1867,7 +1875,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return up to three cards from your hand. For every different value of card that you returned, draw two 8.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1891,7 +1899,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer your two highest non-red top cards without a FACTORIES from your board to my score pile! If you transferred any cards, draw an 8!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1915,9 +1923,9 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'If your red cards are splayed up, you may splay any one color your cards up.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your red cards up.', code: () => {} },
+      { description: 'You may splay your red cards up.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -1940,7 +1948,7 @@ export const cards: ICard[] = [
       {
         description:
           "Return a card in any opponent's score pile for every two TIMEPIECES on your board.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -1964,7 +1972,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top non-yellow card with a TIMEPIECES from your board to my board! If you do, score the card beneath it, and return all other cards from that pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -1989,7 +1997,7 @@ export const cards: ICard[] = [
       {
         description:
           "You may tuck all cards from your hand. If you tuck one, you must tuck them all. If you tucked at least one purple card, take all the lowest cards in each opponent's hand into your hand.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2013,10 +2021,10 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer a top non-green card with a FACTORIES from your board to my score pile! If you do, draw and meld an 8!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
-      { description: 'Draw and meld an 8.', code: () => {} },
+      { description: 'Draw and meld an 8.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -2039,9 +2047,9 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you do, choose a value, and return all cards of that value from all score piles.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your purple cards up.', code: () => {} },
+      { description: 'You may splay your purple cards up.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -2064,11 +2072,11 @@ export const cards: ICard[] = [
       {
         description:
           'Choose two colors, then draw and reveal a 9. If it is either of the colors you chose, meld it and you may splay your cards of that color up.',
-        code: () => {},
+        effectId: 'example',
       },
       {
         description: 'If you have twenty or more LIGHTBULBS on your board, you win.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2092,7 +2100,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return up to two cards from your hand. If you return two, draw a 10 and then draw and score a 10.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2113,11 +2121,11 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: Resources.FACTORIES,
     dogmaEffects: [
-      { description: 'You may splay your red cards or your green cards up.', code: () => {} },
+      { description: 'You may splay your red cards or your green cards up.', effectId: 'example' },
       {
         description:
           'Draw and meld a 10, then execute each of its non-demand dogma effects. Do not share them.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2141,12 +2149,12 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you draw two 9 and reveal them! Transfer the card of my choice to my board, and meld the other!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description: 'If you have ten or more green cards on your board, you win.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2167,7 +2175,7 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.LIGHTBULBS,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'Draw and meld a 10. Score all cards beneath it.', code: () => {} },
+      { description: 'Draw and meld a 10. Score all cards beneath it.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -2190,7 +2198,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer all the highest cards from your score pile to my hand! If you transferred any cards, then transfer a top card from my board without a LEAVES to your hand!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -2215,9 +2223,9 @@ export const cards: ICard[] = [
       {
         description:
           "Reveal a card from your hand. Take into your hand the top card of that color from all opponents' boards.",
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'You may splay your yellow or blue cards up.', code: () => {} },
+      { description: 'You may splay your yellow or blue cards up.', effectId: 'example' },
     ],
   }),
   Object.freeze({
@@ -2240,7 +2248,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may tuck any number of cards from your hand. Draw and score a 1 for each card you tucked.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2264,7 +2272,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you do, score a card from your hand and draw two 10.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2288,12 +2296,12 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you draw a 10! If it is red, remove all hands, boards, and score piles from the game! If this occurs, the dogma action is complete.',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description: "Return a top card other than Fission from any player's board. Draw a 10.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2314,12 +2322,12 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: Resources.TIMEPIECES,
     dogmaEffects: [
-      { description: 'Return all cards from your hand, and draw three 8.', code: () => {} },
-      { description: 'You may splay your purple cards up.', code: () => {} },
+      { description: 'Return all cards from your hand, and draw three 8.', effectId: 'example' },
+      { description: 'You may splay your purple cards up.', effectId: 'example' },
       {
         description:
           'Meld a card from your hand and then execute each of its non-demand dogma effects. Do not share them.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2343,7 +2351,7 @@ export const cards: ICard[] = [
       {
         description:
           'I DEMAND you transfer all but one card from your hand to my hand! Also transfer the highest card from your score pile to my score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -2368,7 +2376,7 @@ export const cards: ICard[] = [
       {
         description:
           'Score your top green card. Draw and meld a 10, then execute each of its non-demand dogma effects. Do not share them.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2392,12 +2400,12 @@ export const cards: ICard[] = [
       {
         description:
           "Transfer a top card with a LEAVES from any opponent's board to your score pile.",
-        code: () => {},
+        effectId: 'example',
       },
       {
         description:
           'If any player has fewer than three LEAVES on their board, the player with the most LEAVES on their board wins.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2420,7 +2428,7 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'I DEMAND you return half (rounded up) of the cards in your score pile!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
     ],
@@ -2445,7 +2453,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may return a card from your hand. If you returned a 10, draw a 10 for every different value of card in your score pile.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2466,11 +2474,11 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'Draw and score a 10.', code: () => {} },
+      { description: 'Draw and score a 10.', effectId: 'example' },
       {
         description:
           "Draw and meld two 10, then execute each of the second card's non-demand dogma effects. Do not share them.",
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2494,9 +2502,12 @@ export const cards: ICard[] = [
       {
         description:
           'Execute each of the non-demand dogma effects of any other top card on your board. Do not share them.',
-        code: () => {},
+        effectId: 'example',
       },
-      { description: 'If you have more achievements than each opponent, you win.', code: () => {} },
+      {
+        description: 'If you have more achievements than each opponent, you win.',
+        effectId: 'example',
+      },
     ],
   }),
   Object.freeze({
@@ -2516,11 +2527,11 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: null,
     dogmaEffects: [
-      { description: 'Draw and score a 10.', code: () => {} },
+      { description: 'Draw and score a 10.', effectId: 'example' },
       {
         description:
           'If Robotics and Software are top cards on any board, the single player with the lowest score wins.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2544,7 +2555,7 @@ export const cards: ICard[] = [
       {
         description:
           'You may score all cards from your hand. If you score one, you must score them all.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2567,13 +2578,13 @@ export const cards: ICard[] = [
     dogmaEffects: [
       {
         description: 'I DEMAND you return a top card with a LEAVES on your board!',
-        code: () => {},
+        effectId: 'example',
         isDemand: true,
       },
       {
         description:
           'Draw and score a 6. If no player has more LEAVES than FACTORIES on their board, the single player with the highest score wins.',
-        code: () => {},
+        effectId: 'example',
       },
     ],
   }),
@@ -2594,9 +2605,12 @@ export const cards: ICard[] = [
     resourceSpace3: Resources.TIMEPIECES,
     resourceSpace4: Resources.LIGHTBULBS,
     dogmaEffects: [
-      { description: 'You may splay your green cards up.', code: () => {} },
-      { description: 'Draw and score a 10.', code: () => {} },
-      { description: 'Draw and meld a 10 for every two TIMEPIECES on your board.', code: () => {} },
+      { description: 'You may splay your green cards up.', effectId: 'example' },
+      { description: 'Draw and score a 10.', effectId: 'example' },
+      {
+        description: 'Draw and meld a 10 for every two TIMEPIECES on your board.',
+        effectId: 'example',
+      },
     ],
   }),
 ];
