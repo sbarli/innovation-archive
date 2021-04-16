@@ -7,6 +7,7 @@ import styled from 'styled-components/macro';
 
 import RenderText from '../../libs/forms/fields/RenderText/RenderText';
 import { minChar, required } from '../../libs/forms/utils/validation';
+import { formatPlayerId } from '../../utils/playerUtils';
 
 const StyledPlayerInput = styled.div`
   display: flex;
@@ -51,11 +52,15 @@ const validateForm = (values: { players: IPlayer[] }) => {
     errors.players[ARRAY_ERROR] = 'Cannot have more than 4 players.';
   } else {
     const dedupedNames = new Set();
-    filledPlayers.forEach(p => dedupedNames.add(p.name));
+    // NOTE: uses formatPlayerId because this will be the unique id used to distinguish the player
+    // it removes things like spaces and special characters
+    // need to check this value for dupes
+    filledPlayers.forEach(p => dedupedNames.add(formatPlayerId(p.name)));
     if (dedupedNames.size !== filledPlayers.length) {
       errors.players = [];
       // @ts-ignore
-      errors.players[ARRAY_ERROR] = 'Player names must be unique.';
+      errors.players[ARRAY_ERROR] =
+        'Player names must be unique. (based on lowercased, alphanumeric characters only)';
     }
   }
   return errors;
@@ -86,6 +91,7 @@ export const StartForm = ({ onSubmit }: { onSubmit: (values: any) => void }) => 
         pristine,
         submitting,
       }) => {
+        const maxPlayerInputsVisible = values?.players?.length >= 4;
         return (
           <form onSubmit={handleSubmit}>
             <h2>Setup your game</h2>
@@ -93,12 +99,13 @@ export const StartForm = ({ onSubmit }: { onSubmit: (values: any) => void }) => 
               <button
                 type="button"
                 onClick={() => {
-                  if (!values.players || values.players.length < 4) {
+                  if (!maxPlayerInputsVisible) {
                     push('players', createNewPlayer());
                   }
                 }}
+                disabled={maxPlayerInputsVisible}
               >
-                Add Player
+                {maxPlayerInputsVisible ? 'Max 4 Players' : 'Add Player'}
               </button>
             </div>
             <FieldArray name="players">
