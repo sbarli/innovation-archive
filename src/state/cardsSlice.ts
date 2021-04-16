@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { cards as cardData } from '../data/cardsById';
 import { Ages, BoardPlacementOptions, CardIds, Colors, SplayDirections } from '../enums';
 import { RootState } from '../store';
-import { IBoard, ICard, IDogmaEffect, TCardsById, TDeck, THand } from '../types';
+import { IBoard, ICard, IDogmaEffect, IHands, TCardIdsByAge, TCardsById } from '../types';
 import { createBaseBoard } from '../utils/cardUtils';
 
 interface ICardActionProps {
@@ -29,21 +29,14 @@ interface IUnsplayActionProps extends IBaseSplayActionProps {
   forced: boolean;
 }
 
-interface IInitPlayerHandActionProps {
-  player: string;
-  hand: THand;
-}
-
 interface ICardsState {
   cards: TCardsById;
   dogmaEffects: IDogmaEffect[];
   boards: {
     [key: string]: IBoard;
   };
-  hands: {
-    [key: string]: THand;
-  };
-  deck: TDeck | null;
+  hands: IHands;
+  deck: TCardIdsByAge | null;
 }
 
 const initialState: ICardsState = {
@@ -59,7 +52,7 @@ export const cardsSlice = createSlice({
   initialState,
   reducers: {
     // deck reducers
-    initDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TDeck }>) => {
+    initDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TCardIdsByAge }>) => {
       state.deck = deck;
     },
     drawCardsFromDeck: (
@@ -81,13 +74,8 @@ export const cardsSlice = createSlice({
     },
 
     // hand reducers
-    initPlayerHand: (
-      state,
-      { payload: { player, hand } }: PayloadAction<IInitPlayerHandActionProps>
-    ) => {
-      if (!state.hands[player]) {
-        state.hands[player] = hand;
-      }
+    initHands: (state, { payload: { hands } }: PayloadAction<{ hands: IHands }>) => {
+      state.hands = hands;
     },
     addCardToHand: (
       state,
@@ -163,7 +151,7 @@ export const {
   initDeck,
   drawCardsFromDeck,
   returnCardsToDeck,
-  initPlayerHand,
+  initHands,
   addCardToHand,
   removeCardFromHand,
   initPlayerBoard,

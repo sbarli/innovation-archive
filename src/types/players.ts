@@ -3,6 +3,7 @@ export interface IPlayer {
   name: string;
   left: string;
   right: string;
+  isFirst?: boolean;
 }
 
 export interface IPlayers {

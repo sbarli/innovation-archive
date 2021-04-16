@@ -8,6 +8,10 @@ export type TCardIdsByAge = {
   [key in Ages]: CardIds[];
 };
 
+export type TAgeAchievementCardIds = {
+  [key in Ages]: CardIds;
+};
+
 export type TDeck = {
   [key in Ages]: CardIds[];
 };
@@ -16,9 +20,13 @@ export type THand = {
   [key in Colors]: CardIds[];
 };
 
+export interface IHands {
+  [key: string]: THand;
+}
+
 export interface IDogmaEffect {
+  effectId: string;
   description: string;
-  code: () => void;
   isDemand?: boolean;
 }
 

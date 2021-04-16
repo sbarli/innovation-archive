@@ -1,5 +1,6 @@
-import { Ages, Colors, TOTAL_CARDS_IN_AGE } from '../enums';
-import { TCardIdsByAge, TCardsById } from '../types';
+import { cards as cardsById } from '../data/cardsById';
+import { Ages, CardIds, Colors, TOTAL_CARDS_IN_AGE } from '../enums';
+import { IHands, TCardIdsByAge, TCardsById, THand } from '../types';
 
 import { shuffleArray } from './sharedUtils';
 
@@ -40,6 +41,43 @@ export const createBaseBoard = (player: string) => {
   };
 };
 
+const determineCardColor = (cardId: CardIds) => cardsById[cardId].color;
+
+/**
+ * @name createBaseHand
+ * @param starterCards
+ *  first two cards for this hand
+ * @description
+ *  creates a new hand with first two cards populated
+ * @returns {object}
+ *  ex. {
+ *        red: ['card-1'],
+ *        blue: [],
+ *        green: [],
+ *        purple: ['card-2'],
+ *        yellow: [],
+ *      }
+ */
+export const createBaseHand = (starterCards: CardIds[]) => {
+  // define empty hand
+  const hand = {
+    [Colors.RED]: [],
+    [Colors.BLUE]: [],
+    [Colors.GREEN]: [],
+    [Colors.PURPLE]: [],
+    [Colors.YELLOW]: [],
+  } as THand;
+
+  // populate hand with starter cards:
+  //  determine color of starter card
+  //  and push to hand
+  starterCards.forEach(cardId => {
+    hand[determineCardColor(cardId)].push(cardId);
+  });
+
+  return hand;
+};
+
 export const sortAndShuffleCards = (cards: TCardsById): TCardIdsByAge => {
   return Object.values(cards).reduce(
     (d, c) => {
@@ -65,4 +103,18 @@ export const sortAndShuffleCards = (cards: TCardsById): TCardIdsByAge => {
       [Ages.TEN]: [],
     } as TCardIdsByAge
   );
+};
+
+export const createInitialHandsForPlayers = (
+  playerOrder: string[],
+  starterCards: CardIds[],
+  hands: IHands = {} as IHands
+) => {
+  if (!playerOrder) {
+    return hands;
+  }
+  // select cards for current first player
+  hands[playerOrder[0]] = createBaseHand(starterCards.slice(0, 2));
+  // recursively call
+  createInitialHandsForPlayers(playerOrder.slice(1), starterCards.slice(2), hands);
 };

@@ -1,30 +1,36 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
-import { IPlayer, IPlayers } from '../types';
+import { IPlayers } from '../types';
 
 interface PlayersState {
   players: IPlayers;
+  playerOrder: string[];
   currentPlayer: string | null;
-  firstPlayer: string | null;
 }
 
 const initialState: PlayersState = {
   players: {},
+  playerOrder: [],
   currentPlayer: null,
-  firstPlayer: null,
 };
 
 export const playersSlice = createSlice({
   name: 'players',
   initialState,
   reducers: {
-    addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      const newPlayer = action.payload;
-      if (state.players[newPlayer.id]) {
-        return state;
-      }
-      state.players[newPlayer.id] = newPlayer;
+    initPlayers: (
+      state,
+      {
+        payload: { players, playerOrder },
+      }: PayloadAction<{ players: IPlayers; playerOrder: string[] }>
+    ) => {
+      // add all players
+      state.players = players;
+      // add player order
+      state.playerOrder = playerOrder;
+      // setup current player as first player id
+      state.currentPlayer = playerOrder[0];
     },
     nextPlayer: state => {
       if (!state.currentPlayer) {
@@ -35,7 +41,7 @@ export const playersSlice = createSlice({
   },
 });
 
-export const { addPlayer, nextPlayer } = playersSlice.actions;
+export const { initPlayers, nextPlayer } = playersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
