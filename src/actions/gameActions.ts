@@ -1,11 +1,13 @@
 import { cards as allCards } from '../data/cardsById';
 import { Ages } from '../enums';
+import { initAchievements } from '../state/achievementsSlice';
 import { initBoards } from '../state/boardsSlice';
 import { initDeck } from '../state/cardsSlice';
 import { initHands } from '../state/handsSlice';
 import { initPlayers } from '../state/playersSlice';
 import { AppThunk } from '../store';
-import { IBoards, TAgeAchievementCardIds } from '../types';
+import { IAchievementsByPlayer, IBoards, TAgeAchievements } from '../types';
+import { createInitialPlayerAchievements } from '../utils/achievementUtils';
 import {
   createBaseBoard,
   createInitialHandsForPlayers,
@@ -31,12 +33,11 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
 
   // pull out age achievement cards
   // NOTE: purposely mutates starterDeck
-  const achievements = Object.keys(starterDeck).reduce((acc, key) => {
+  const ageAchievements = Object.keys(starterDeck).reduce((acc, key) => {
     const age = Number(key) as Ages;
     acc[age] = starterDeck[age].pop();
     return acc;
-  }, {} as TAgeAchievementCardIds);
-  console.log('achievements: ', achievements);
+  }, {} as TAgeAchievements);
 
   // pull out age 1 cards for player hands
   // NOTE: purposely mutates starterDeck
@@ -44,15 +45,19 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   // create player hands with starter cards
   const hands = createInitialHandsForPlayers(playerOrder, handStartCards);
 
-  // create empty boards for players
-  const boards = playerOrder.reduce((acc, player) => {
-    acc[player] = createBaseBoard(player);
-    return acc;
-  }, {} as IBoards);
+  // create empty board and achievements for players
+  const { boards, playerAchievements } = playerOrder.reduce(
+    (acc, player) => {
+      acc.boards[player] = createBaseBoard(player);
+      acc.playerAchievements[player] = createInitialPlayerAchievements();
+      return acc;
+    },
+    { boards: {} as IBoards, playerAchievements: {} as IAchievementsByPlayer }
+  );
 
   dispatch(initDeck({ deck: starterDeck }));
   dispatch(initPlayers({ players, playerOrder }));
   dispatch(initHands({ hands }));
   dispatch(initBoards({ boards }));
-  // dispatch(initAgeAchievements({ achievements }));
+  dispatch(initAchievements({ ageAchievements, playerAchievements }));
 };

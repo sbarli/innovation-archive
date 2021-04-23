@@ -271,3 +271,11 @@ export const TOTAL_CARDS_IN_AGE = {
   [Ages.NINE]: 10,
   [Ages.TEN]: 10,
 };
+
+export const BASE_SPECIAL_ACHIEVEMENTS = {
+  [SpecialAchievements.EMPIRE]: true,
+  [SpecialAchievements.MONUMENT]: true,
+  [SpecialAchievements.WONDER]: true,
+  [SpecialAchievements.WORLD]: true,
+  [SpecialAchievements.UNIVERSE]: true,
+};

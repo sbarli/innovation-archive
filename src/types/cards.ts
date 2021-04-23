@@ -8,8 +8,12 @@ export type TCardIdsByAge = {
   [key in Ages]: CardIds[];
 };
 
-export type TAgeAchievementCardIds = {
+export type TAgeAchievements = {
   [key in Ages]?: CardIds;
+};
+
+export type TSpecialAchievements = {
+  [key in SpecialAchievements]: boolean;
 };
 
 export type TDeck = {
