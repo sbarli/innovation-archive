@@ -1,0 +1,1 @@
+export { CurrentPlayerView } from './CurrentPlayerView';
