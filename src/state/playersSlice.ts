@@ -47,5 +47,6 @@ export const { initPlayers, nextPlayer } = playersSlice.actions;
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.players.value)`
 export const selectPlayers = (state: RootState) => state.players.players;
+export const selectCurrentPlayer = (state: RootState) => state.players.currentPlayer;
 
 export default playersSlice.reducer;
