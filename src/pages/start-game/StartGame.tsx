@@ -1,18 +1,20 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { setupGame } from '../../actions/gameActions';
 import { StartForm } from '../../components/start-form';
 
 export function StartGame() {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(
     (values: any) => {
       dispatch(setupGame(values));
+      history.push('/game');
     },
-    [dispatch]
+    [dispatch, history]
   );
 
   return (
