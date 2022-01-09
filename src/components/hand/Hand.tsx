@@ -7,7 +7,6 @@ import { Card } from '../card';
 
 export function Hand({ player }: { player: string }) {
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
-  console.log('playerHand: ', playerHand);
 
   if (!playerHand) {
     return null;
