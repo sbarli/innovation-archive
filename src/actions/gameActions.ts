@@ -1,12 +1,18 @@
 import { cards as allCards } from '../data/cardsById';
-import { Ages, CardIds } from '../enums';
+import { Ages } from '../enums';
 import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
 import { initDeck } from '../state/cardsSlice';
 import { initHands, removeCardsFromHands } from '../state/handsSlice';
 import { initPlayerOrder, initPlayers } from '../state/playersSlice';
 import { AppThunk } from '../store';
-import { IAchievementsByPlayer, IBoards, ICard, TAgeAchievements } from '../types';
+import {
+  IAchievementsByPlayer,
+  IBoards,
+  ICard,
+  IStarterCardIdsData,
+  TAgeAchievements,
+} from '../types';
 import { createInitialPlayerAchievements } from '../utils/achievementUtils';
 import {
   createBaseBoard,
@@ -23,10 +29,6 @@ interface IPlayerName {
 
 interface ISetupGameProps {
   players: IPlayerName[];
-}
-interface IStarterCardIdsData {
-  card: CardIds;
-  player: string;
 }
 
 interface IStarterCardSetup {

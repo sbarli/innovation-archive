@@ -1,39 +1,65 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { cards as cardsById } from '../../data/cardsById';
-import { Colors } from '../../enums';
+import { CardIds, Colors } from '../../enums';
 import { selectHands } from '../../state/handsSlice';
+import { IHands, IStarterCardIdsData } from '../../types';
+
+const mapHandForPlayer = ({
+  hands,
+  onCardClick,
+  playerChoosing,
+}: {
+  hands: IHands;
+  onCardClick: (cardId: CardIds) => void;
+  playerChoosing: string;
+}) =>
+  Object.keys(hands[playerChoosing]).reduce((acc: any, cur: any) => {
+    if (hands[playerChoosing][cur as Colors].length) {
+      hands[playerChoosing][cur as Colors].forEach(cardId => {
+        acc.push(
+          <button key={`${playerChoosing}-${cardId}`} onClick={() => onCardClick(cardId)}>
+            {cardsById[cardId].name}
+          </button>
+        );
+      });
+    }
+    return acc;
+  }, []);
 
 export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }) => {
   const hands = useSelector(selectHands);
   const players = Object.keys(hands);
-  const MappedHands = Object.keys(hands).map(pid =>
-    Object.keys(hands[pid]).reduce((acc: any, cur: any) => {
-      if (hands[pid][cur as Colors].length) {
-        hands[pid][cur as Colors].forEach(cardId => {
-          acc.push(
-            <div key={`${pid}-${cardId}`}>
-              {cardId}: {cardsById[cardId].name}
-            </div>
-          );
-        });
+
+  const [playerChoosingIdx, setPlayerChoosingIdx] = useState(0);
+  const [selectedFirstCards, setSelectedFirstCards] = useState<IStarterCardIdsData[]>([]);
+
+  const playerChoosingName = players[playerChoosingIdx];
+
+  const onCardClick = useCallback(
+    (cardId: CardIds) => {
+      setSelectedFirstCards(state => [...state, { card: cardId, player: playerChoosingName }]);
+      if (playerChoosingIdx === players.length - 1) {
+        onSubmit(selectedFirstCards);
+        return;
       }
-      return acc;
-    }, [])
+      setPlayerChoosingIdx(state => state + 1);
+    },
+    [onSubmit, playerChoosingIdx, playerChoosingName, players.length, selectedFirstCards]
   );
-  const mappedHandsByPlayer = MappedHands.reduce((acc, hand, idx) => {
-    acc[players[idx]] = hand;
-    return acc;
-  }, {});
+
+  const playerChoosingHand = mapHandForPlayer({
+    hands,
+    onCardClick,
+    playerChoosing: playerChoosingName,
+  });
+
   return (
     <div>
-      {players.map(pid => (
-        <div key={pid}>
-          <p>{pid}</p>
-          {mappedHandsByPlayer[pid]}
-        </div>
-      ))}
+      <h2>{playerChoosingName}</h2>
+      <h3>Choose your first card</h3>
+      {playerChoosingHand}
     </div>
   );
 };

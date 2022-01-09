@@ -59,3 +59,8 @@ export interface ICardActionProps {
   card: CardIds;
   color: Colors;
 }
+
+export interface IStarterCardIdsData {
+  card: CardIds;
+  player: string;
+}
