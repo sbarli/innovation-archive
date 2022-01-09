@@ -14,10 +14,25 @@ eslint-plugin-cypress
 
 ### Immediate
 
-[ ] Add Achievements store data
-[ ] Connect `setupGame` action to initialize achievements on start of game
-
 ### Future
 
 [ ] Add game play logic
 [ ] Add dogma action functions
+
+## Start Game:
+
+1. User adds players
+<!-- USER SUBMITS FORM -->
+1. Create deck
+1. Pull out achievements
+1. Create initial player boards
+1. Create initial player hands with initial cards
+<!-- SET STATE -->
+1. Each player selects first card to meld
+<!-- SUBMIT FIRST CARD  -->
+1. Remove card from hand
+1. Add card to board
+<!-- REPEAT FOR EACH PLAYER -->
+1. Determine player order
+<!-- SET PLAYER ORDER STATE -->
+<!-- READY TO START GAME -->
