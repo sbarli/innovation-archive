@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { BoardPlacementOptions, CardIds, Colors, SplayDirections } from '../enums';
 import { RootState } from '../store';
-import { IBoards } from '../types';
+import { IBoards, ICard } from '../types';
 
 interface ICardActionProps {
   player: string;
@@ -53,6 +53,19 @@ export const boardsSlice = createSlice({
         state.boards[player][color].cards.unshift(card);
       }
     },
+    addCardsToBoards: (
+      state,
+      { payload: { data } }: PayloadAction<{ data: { [key: string]: ICard[] } }>
+    ) => {
+      Object.keys(data).forEach(player => {
+        if (!state.boards[player]) {
+          return state;
+        }
+        data[player].forEach(card => {
+          state.boards[player][card.color].cards.unshift(card.id);
+        });
+      });
+    },
     removeCardFromBoard: (
       state,
       { payload: { player, color, card } }: PayloadAction<ICardActionProps>
@@ -87,8 +100,9 @@ export const boardsSlice = createSlice({
 });
 
 export const {
-  initBoards,
   addCardToBoard,
+  addCardsToBoards,
+  initBoards,
   removeCardFromBoard,
   splayColor,
   unsplayColor,
