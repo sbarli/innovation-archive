@@ -1,12 +1,7 @@
-import { IPlayers } from '../types';
-
-import { shuffleArray } from './sharedUtils';
+import { IPlayers, IStarterCardsData } from '../types';
 
 interface IPlayerName {
   name: string;
-}
-interface IPlayerWithId extends IPlayerName {
-  id: string;
 }
 
 const VALID_PLAYER_ID_CHARACTERS: { [key: string]: string } = {
@@ -59,37 +54,24 @@ export const formatPlayerId = (playerName: string) => {
   return playerId;
 };
 
-export const createBasePlayers = (players: IPlayerWithId[]) => {
+export const createBasePlayers = (players: IPlayerName[]) => {
   return players.reduce((acc, player, i) => {
     // format current player's details
     const name = player.name;
-    const id = player.id;
-    const isFirst = i === 0;
-    // add the ids for the player sitting to their left and right
-    const left = i === 0 ? players[players.length - 1].id : players[i - 1].id;
-    const right = i === players.length - 1 ? players[0].id : players[i + 1].id;
+    const id = formatPlayerId(name);
     acc[id] = {
       id,
       name,
-      left,
-      right,
-      isFirst,
+      left: null,
+      right: null,
+      isFirst: false,
     };
     return acc;
   }, {} as IPlayers);
 };
 
-export const orderAndFormatPlayers = (players: IPlayerName[]) => {
-  // first map all players to an id as well
-  const playersWithId = players.map(player => ({
-    name: player.name,
-    id: formatPlayerId(player.name),
-  }));
-  // randomize the player order
-  const randomizedPlayers = shuffleArray(playersWithId);
-  // get list of just player ids in order
-  const playerOrder = randomizedPlayers.map(pl => pl.id);
-  // create a LL of players
-  const formattedPlayers = createBasePlayers(randomizedPlayers);
-  return { players: formattedPlayers, playerOrder };
+export const getPlayerOrder = (starterCards: IStarterCardsData[]) => {
+  return starterCards
+    .sort((a: IStarterCardsData, b: IStarterCardsData) => (a.card > b.card ? 1 : 0))
+    .map((data: IStarterCardsData) => data.player);
 };

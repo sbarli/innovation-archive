@@ -3,8 +3,8 @@ import { CardIds, SpecialAchievements } from '../enums';
 export interface IPlayer {
   id: string;
   name: string;
-  left: string;
-  right: string;
+  left: string | null;
+  right: string | null;
   isFirst?: boolean;
 }
 
@@ -20,4 +20,9 @@ export interface IPlayerAchievements {
 
 export interface IAchievementsByPlayer {
   [key: string]: IPlayerAchievements;
+}
+
+export interface IStarterCardsData {
+  card: string;
+  player: string;
 }
