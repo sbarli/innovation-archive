@@ -1,27 +1,44 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-import { setupGame } from '../../actions/gameActions';
-import { StartForm } from '../../components/start-form';
+import { setupGame, setupPlayerOrder } from '../../actions/gameActions';
+import { StartFormCards } from '../../components/start-form-cards';
+import { StartFormPlayers } from '../../components/start-form-players';
 
 export function StartGame() {
-  const history = useHistory();
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(
+  const [page, setPage] = useState(1);
+
+  const onSubmitPage1 = useCallback(
+    // TODO: type values
     (values: any) => {
       dispatch(setupGame(values));
-      history.push('/game');
+      setPage(2);
     },
-    [dispatch, history]
+    [dispatch]
   );
+
+  const onSubmitPage2 = useCallback(
+    // TODO: type values
+    (values: any) => {
+      dispatch(setupPlayerOrder(values));
+      setPage(3);
+    },
+    [dispatch]
+  );
+
+  if (page === 3) {
+    return <Redirect to="/game" from="/start" />;
+  }
 
   return (
     <div className="StartGame">
       <h1>Welcome to the Start Game Page!</h1>
       <Link to="/">Go Home</Link>
-      <StartForm onSubmit={onSubmit} />
+      {page === 1 && <StartFormPlayers onSubmit={onSubmitPage1} />}
+      {page === 2 && <StartFormCards onSubmit={onSubmitPage2} />}
     </div>
   );
 }
