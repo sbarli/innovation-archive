@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
-import { ICardActionProps, IHands } from '../types';
+import { ICard, ICardActionProps, IHands } from '../types';
 
 interface IHandsState {
   hands: IHands;
@@ -37,10 +37,32 @@ export const handsSlice = createSlice({
         }
       }
     },
+    removeCardsFromHands: (
+      state,
+      { payload: { data } }: PayloadAction<{ data: { [key: string]: ICard[] } }>
+    ) => {
+      Object.keys(data).forEach(player => {
+        const playerHand = state.hands[player];
+        if (!playerHand) {
+          return state;
+        }
+        data[player].forEach(card => {
+          const cardIdx = playerHand[card.color].indexOf(card.id);
+          if (cardIdx > -1) {
+            state.hands[player][card.color].splice(cardIdx, 1);
+          }
+        });
+      });
+    },
   },
 });
 
-export const { initHands, addCardToHand, removeCardFromHand } = handsSlice.actions;
+export const {
+  initHands,
+  addCardToHand,
+  removeCardFromHand,
+  removeCardsFromHands,
+} = handsSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
