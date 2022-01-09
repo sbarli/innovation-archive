@@ -9,7 +9,7 @@ export function Card({ cardId }: { cardId: CardIds }) {
   return (
     <div style={{ color: cardDetails.color }} data-testid="card">
       <h3>{cardDetails.name}</h3>
-      <p>{cardDetails.age}</p>
+      <p>Age: {cardDetails.age}</p>
     </div>
   );
 }
