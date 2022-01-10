@@ -26,3 +26,7 @@ export interface IStarterCardsData {
   card: string;
   player: string;
 }
+
+export interface IScoresByPlayer {
+  [key: string]: number;
+}

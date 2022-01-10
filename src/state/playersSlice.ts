@@ -1,18 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
-import { IPlayers } from '../types';
+import { IPlayers, IScoresByPlayer } from '../types';
 
 interface PlayersState {
   players: IPlayers;
   playerOrder: string[];
   currentPlayer: string | null;
+  scores: IScoresByPlayer;
 }
 
 const initialState: PlayersState = {
   players: {},
   playerOrder: [],
   currentPlayer: null,
+  scores: {},
 };
 
 export const playersSlice = createSlice({
@@ -22,6 +24,11 @@ export const playersSlice = createSlice({
     initPlayers: (state, { payload: { players } }: PayloadAction<{ players: IPlayers }>) => {
       // add all players
       state.players = players;
+      // add default scores for players
+      state.scores = Object.values(players).reduce((acc, player) => {
+        acc[player.id] = 0;
+        return acc;
+      }, {} as IScoresByPlayer);
     },
     initPlayerOrder: (
       state,
