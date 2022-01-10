@@ -5,14 +5,22 @@ import { RootState } from '../../store';
 import { ResourceTotals } from '../resource-totals';
 
 export function Stats({ player }: { player: string }) {
+  const allPlayersData = useSelector((state: RootState) => state.players);
   const playerAchievements = useSelector(
     (state: RootState) => state.achievements.playerAchievements[player]
   );
   const playerScore = useSelector((state: RootState) => state.scores.scores[player]);
 
-  const playerResourceTotals = useSelector((state: RootState) => state.players.resources[player]);
+  const playerResourceTotals = allPlayersData.resources[player];
+  const playerAge = allPlayersData.players[player].age;
 
-  if (!player || !playerResourceTotals || !playerAchievements || playerScore === undefined) {
+  if (
+    !player ||
+    !playerResourceTotals ||
+    !playerAchievements ||
+    !playerAge ||
+    playerScore === undefined
+  ) {
     return null;
   }
 
@@ -21,6 +29,7 @@ export function Stats({ player }: { player: string }) {
   return (
     <div data-testid="player-stats">
       <h3>Stats</h3>
+      <p>Age: {playerAge}</p>
       <p>Achievements: {totalAchievements}</p>
       <p>Score: {playerScore}</p>
       <ResourceTotals resourceTotals={playerResourceTotals} />

@@ -58,10 +58,24 @@ export const playersSlice = createSlice({
       // add all players
       state.resources = playerResources;
     },
+    updatePlayerAge: (
+      state,
+      { payload: { player, newAge } }: PayloadAction<{ player: string; newAge: number }>
+    ) => {
+      if (state.players[player]) {
+        state.players[player].age = newAge;
+      }
+    },
   },
 });
 
-export const { initPlayers, initPlayerOrder, updateResources, nextPlayer } = playersSlice.actions;
+export const {
+  initPlayers,
+  initPlayerOrder,
+  nextPlayer,
+  updatePlayerAge,
+  updateResources,
+} = playersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

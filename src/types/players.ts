@@ -8,6 +8,7 @@ export interface IPlayer {
   left: string | null;
   right: string | null;
   isFirst?: boolean;
+  age: number;
 }
 
 export interface IPlayers {

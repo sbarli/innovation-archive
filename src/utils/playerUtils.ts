@@ -68,6 +68,7 @@ export const createBasePlayers = (players: IPlayerName[]) => {
       left: null,
       right: null,
       isFirst: false,
+      age: 1,
     };
     return acc;
   }, {} as IPlayers);
