@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentPlayer } from '../../state/playersSlice';
 import { Board } from '../board';
 import { Hand } from '../hand';
+import { Stats } from '../stats';
 
 export function CurrentPlayerView() {
   const currentPlayer = useSelector(selectCurrentPlayer);
@@ -15,6 +16,7 @@ export function CurrentPlayerView() {
   return (
     <div data-testid="current-player-view">
       <h2>{currentPlayer}'s Turn</h2>
+      <Stats player={currentPlayer} />
       <Hand player={currentPlayer} />
       <Board player={currentPlayer} />
     </div>
