@@ -14,6 +14,28 @@ eslint-plugin-cypress
 
 ### Immediate
 
+#### Current Player View
+[ ] Show Current Player Details
+  [x] hand
+  [x] board
+  [ ] score
+  [ ] achievements
+  [ ] resource totals
+  [ ] highest age
+[ ] Show Action Details
+  [ ] current action number
+  [ ] current action options
+[ ] Show card piles
+  [ ] # cards remaining (per age)
+  [ ] achievements
+[ ] Show Opponents Details
+  [ ] boards
+  [ ] scores
+  [ ] score pile details
+  [ ] achievements
+  [ ] rescource totals
+  [ ] hands (basic)
+
 ### Future
 
 [ ] Add game play logic
