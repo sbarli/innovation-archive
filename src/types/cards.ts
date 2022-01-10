@@ -24,6 +24,10 @@ export type THand = {
   [key in Colors]: CardIds[];
 };
 
+export type TResourceTotals = {
+  [key in Resources]: number;
+};
+
 export interface IHands {
   [key: string]: THand;
 }

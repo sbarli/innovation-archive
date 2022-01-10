@@ -6,6 +6,7 @@ import cardsReducer from '../state/cardsSlice';
 import counterReducer from '../state/counterSlice';
 import handsReducer from '../state/handsSlice';
 import playersReducer from '../state/playersSlice';
+import scoresReducer from '../state/scoresSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     counter: counterReducer,
     hands: handsReducer,
     players: playersReducer,
+    scores: scoresReducer,
   },
 });
 

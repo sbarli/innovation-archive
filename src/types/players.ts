@@ -1,4 +1,6 @@
-import { CardIds, SpecialAchievements } from '../enums';
+import { CardIds, CardNames, SpecialAchievements } from '../enums';
+
+import { TResourceTotals } from './cards';
 
 export interface IPlayer {
   id: string;
@@ -23,10 +25,10 @@ export interface IAchievementsByPlayer {
 }
 
 export interface IStarterCardsData {
-  card: string;
+  card: CardNames;
   player: string;
 }
 
-export interface IScoresByPlayer {
-  [key: string]: number;
+export interface IResourcesByPlayer {
+  [key: string]: TResourceTotals;
 }

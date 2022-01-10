@@ -4,12 +4,14 @@ import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
 import { initDeck } from '../state/cardsSlice';
 import { initHands, removeCardsFromHands } from '../state/handsSlice';
-import { initPlayerOrder, initPlayers } from '../state/playersSlice';
+import { initPlayerOrder, initPlayers, updateResources } from '../state/playersSlice';
+import { initScores } from '../state/scoresSlice';
 import { AppThunk } from '../store';
 import {
   IAchievementsByPlayer,
   IBoards,
   ICard,
+  IResourcesByPlayer,
   IStarterCardIdsData,
   TAgeAchievements,
 } from '../types';
@@ -17,9 +19,11 @@ import { createInitialPlayerAchievements } from '../utils/achievementUtils';
 import {
   createBaseBoard,
   createInitialHandsForPlayers,
+  createInitialResourceTotals,
   sortAndShuffleCards,
 } from '../utils/cardUtils';
-import { createBasePlayers, getPlayerOrder } from '../utils/playerUtils';
+import { calculatePlayerResources, createBasePlayers, getPlayerOrder } from '../utils/playerUtils';
+import { createInitialScoreData } from '../utils/scoreUtils';
 
 const NUM_CARDS_TO_START = 2;
 
@@ -69,11 +73,22 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
     { boards: {} as IBoards, playerAchievements: {} as IAchievementsByPlayer }
   );
 
+  // create default score and score pile for players
+  const { scores, scorePiles } = createInitialScoreData(playerIds);
+
+  // create default resources totals
+  const playerResources = playerIds.reduce((acc, player) => {
+    acc[player] = createInitialResourceTotals();
+    return acc;
+  }, {} as IResourcesByPlayer);
+
   dispatch(initDeck({ deck: starterDeck }));
   dispatch(initPlayers({ players }));
   dispatch(initHands({ hands }));
   dispatch(initBoards({ boards }));
   dispatch(initAchievements({ ageAchievements, playerAchievements }));
+  dispatch(initScores({ scores, scorePiles }));
+  dispatch(updateResources({ playerResources }));
 };
 
 export const setupPlayerOrder = (
@@ -96,7 +111,16 @@ export const setupPlayerOrder = (
     return acc;
   }, {} as IStarterCardSetup);
 
+  // update resources totals for players
+  const playerResources = playerOrder.reduce((acc, player) => {
+    const cardsMovingToBoard = data[player].map(card => card.id);
+    const playerResourceTotal = calculatePlayerResources(cardsMovingToBoard);
+    acc[player] = playerResourceTotal;
+    return acc;
+  }, {} as IResourcesByPlayer);
+
   dispatch(initPlayerOrder({ playerOrder }));
   dispatch(removeCardsFromHands({ data }));
   dispatch(addCardsToBoards({ data }));
+  dispatch(updateResources({ playerResources }));
 };

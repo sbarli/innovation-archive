@@ -1,8 +1,10 @@
 import { cards as cardsById } from '../data/cardsById';
-import { Ages, CardIds, Colors, TOTAL_CARDS_IN_AGE } from '../enums';
+import { Ages, CardIds, Colors, Resources, TOTAL_CARDS_IN_AGE } from '../enums';
 import { IHands, TCardIdsByAge, TCardsById, THand } from '../types';
 
 import { shuffleArray } from './sharedUtils';
+
+export const getCardById = (cardId: CardIds) => cardsById[cardId];
 
 /**
  * @name baseBoardPile
@@ -117,4 +119,47 @@ export const createInitialHandsForPlayers = (
   hands[playerOrder[0]] = createBaseHand(starterCards.slice(0, 2));
   // recursively call
   return createInitialHandsForPlayers(playerOrder.slice(1), starterCards.slice(2), hands);
+};
+
+const baseCardResourceTotals = Object.freeze({
+  [Resources.CASTLES]: 0,
+  [Resources.CROWNS]: 0,
+  [Resources.FACTORIES]: 0,
+  [Resources.LEAVES]: 0,
+  [Resources.LIGHTBULBS]: 0,
+  [Resources.TIMEPIECES]: 0,
+});
+
+export const createInitialResourceTotals = () => ({ ...baseCardResourceTotals });
+
+export const calculateCardResources = (cardId: CardIds) => {
+  const card = cardsById[cardId];
+
+  const cardResourceTotals = { ...baseCardResourceTotals };
+
+  cardResourceTotals[Resources.CASTLES] = card.numCastles;
+  cardResourceTotals[Resources.CROWNS] = card.numCrowns;
+  cardResourceTotals[Resources.FACTORIES] = card.numFactories;
+  cardResourceTotals[Resources.LEAVES] = card.numLeaves;
+  cardResourceTotals[Resources.LIGHTBULBS] = card.numLightbulbs;
+  cardResourceTotals[Resources.TIMEPIECES] = card.numTimepieces;
+
+  return cardResourceTotals;
+};
+
+export const calculateTotalResourcesForCards = (cardIds: CardIds[]) => {
+  const resourcesPerCard = cardIds.map(calculateCardResources);
+
+  const resourceTotals = { ...baseCardResourceTotals };
+
+  resourcesPerCard.forEach(cardResources => {
+    resourceTotals[Resources.CASTLES] += cardResources[Resources.CASTLES];
+    resourceTotals[Resources.CROWNS] += cardResources[Resources.CROWNS];
+    resourceTotals[Resources.FACTORIES] += cardResources[Resources.FACTORIES];
+    resourceTotals[Resources.LEAVES] += cardResources[Resources.LEAVES];
+    resourceTotals[Resources.LIGHTBULBS] += cardResources[Resources.LIGHTBULBS];
+    resourceTotals[Resources.TIMEPIECES] += cardResources[Resources.TIMEPIECES];
+  });
+
+  return resourceTotals;
 };

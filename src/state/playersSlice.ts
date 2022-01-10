@@ -1,20 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
-import { IPlayers, IScoresByPlayer } from '../types';
+import { IPlayers, IResourcesByPlayer } from '../types';
 
 interface PlayersState {
   players: IPlayers;
   playerOrder: string[];
   currentPlayer: string | null;
-  scores: IScoresByPlayer;
+  resources: IResourcesByPlayer;
 }
 
 const initialState: PlayersState = {
   players: {},
   playerOrder: [],
   currentPlayer: null,
-  scores: {},
+  resources: {},
 };
 
 export const playersSlice = createSlice({
@@ -24,11 +24,6 @@ export const playersSlice = createSlice({
     initPlayers: (state, { payload: { players } }: PayloadAction<{ players: IPlayers }>) => {
       // add all players
       state.players = players;
-      // add default scores for players
-      state.scores = Object.values(players).reduce((acc, player) => {
-        acc[player.id] = 0;
-        return acc;
-      }, {} as IScoresByPlayer);
     },
     initPlayerOrder: (
       state,
@@ -56,10 +51,17 @@ export const playersSlice = createSlice({
       }
       state.currentPlayer = state.players[state.currentPlayer].right;
     },
+    updateResources: (
+      state,
+      { payload: { playerResources } }: PayloadAction<{ playerResources: IResourcesByPlayer }>
+    ) => {
+      // add all players
+      state.resources = playerResources;
+    },
   },
 });
 
-export const { initPlayers, initPlayerOrder, nextPlayer } = playersSlice.actions;
+export const { initPlayers, initPlayerOrder, updateResources, nextPlayer } = playersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
