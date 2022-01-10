@@ -18,10 +18,10 @@ eslint-plugin-cypress
 [ ] Show Current Player Details
   [x] hand
   [x] board
-  [ ] score
-  [ ] achievements
-  [ ] resource totals
-  [ ] highest age
+  [x] score
+  [x] achievements
+  [x] resource totals
+  [x] age
 [ ] Show Action Details
   [ ] current action number
   [ ] current action options
@@ -49,11 +49,14 @@ eslint-plugin-cypress
 1. Pull out achievements
 1. Create initial player boards
 1. Create initial player hands with initial cards
+1. Create initial scores and score piles
+1. Create initial resource totals 
 <!-- SET STATE -->
 1. Each player selects first card to meld
 <!-- SUBMIT FIRST CARD  -->
 1. Remove card from hand
 1. Add card to board
+1. Update resource totals
 <!-- REPEAT FOR EACH PLAYER -->
 1. Determine player order
 <!-- SET PLAYER ORDER STATE -->
