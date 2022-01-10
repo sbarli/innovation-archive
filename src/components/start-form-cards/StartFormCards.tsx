@@ -39,11 +39,11 @@ export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }
 
   const onCardClick = useCallback(
     (cardId: CardIds) => {
-      setSelectedFirstCards(state => [...state, { card: cardId, player: playerChoosingName }]);
       if (playerChoosingIdx === players.length - 1) {
-        onSubmit(selectedFirstCards);
+        onSubmit([...selectedFirstCards, { card: cardId, player: playerChoosingName }]);
         return;
       }
+      setSelectedFirstCards(state => [...state, { card: cardId, player: playerChoosingName }]);
       setPlayerChoosingIdx(state => state + 1);
     },
     [onSubmit, playerChoosingIdx, playerChoosingName, players.length, selectedFirstCards]
