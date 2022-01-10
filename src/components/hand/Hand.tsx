@@ -19,6 +19,7 @@ export function Hand({ player }: { player: string }) {
 
   return (
     <div data-testid="player-hand">
+      <h3>Hand</h3>
       {CardsByColor.map((section, idx) => (
         <div key={idx}>{section}</div>
       ))}
