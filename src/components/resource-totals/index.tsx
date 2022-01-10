@@ -1,0 +1,1 @@
+export { ResourceTotals } from './ResourceTotals';
