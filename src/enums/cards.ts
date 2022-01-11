@@ -272,6 +272,25 @@ export const TOTAL_CARDS_IN_AGE = {
   [Ages.TEN]: 10,
 };
 
+const BASE_AGE_ACHIEVEMENT = Object.freeze({
+  card: undefined,
+  cost: 0,
+  isAvailable: true,
+});
+
+export const BASE_AGE_ACHIEVEMENTS = Object.freeze({
+  [Ages.ONE]: { ...BASE_AGE_ACHIEVEMENT, cost: 5 },
+  [Ages.TWO]: { ...BASE_AGE_ACHIEVEMENT, cost: 10 },
+  [Ages.THREE]: { ...BASE_AGE_ACHIEVEMENT, cost: 15 },
+  [Ages.FOUR]: { ...BASE_AGE_ACHIEVEMENT, cost: 20 },
+  [Ages.FIVE]: { ...BASE_AGE_ACHIEVEMENT, cost: 25 },
+  [Ages.SIX]: { ...BASE_AGE_ACHIEVEMENT, cost: 30 },
+  [Ages.SEVEN]: { ...BASE_AGE_ACHIEVEMENT, cost: 35 },
+  [Ages.EIGHT]: { ...BASE_AGE_ACHIEVEMENT, cost: 40 },
+  [Ages.NINE]: { ...BASE_AGE_ACHIEVEMENT, cost: 45 },
+  [Ages.TEN]: { ...BASE_AGE_ACHIEVEMENT, isAvailable: false },
+});
+
 export const BASE_SPECIAL_ACHIEVEMENTS = {
   [SpecialAchievements.EMPIRE]: true,
   [SpecialAchievements.MONUMENT]: true,

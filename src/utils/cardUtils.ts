@@ -1,6 +1,6 @@
 import { cards as cardsById } from '../data/cardsById';
 import { Ages, CardIds, Colors, Resources, TOTAL_CARDS_IN_AGE } from '../enums';
-import { IHands, TCardIdsByAge, TCardsById, THand } from '../types';
+import { IBoard, IHands, TCardIdsByAge, TCardsById, THand } from '../types';
 
 import { shuffleArray } from './sharedUtils';
 
@@ -162,4 +162,19 @@ export const calculateTotalResourcesForCards = (cardIds: CardIds[]) => {
   });
 
   return resourceTotals;
+};
+
+export const calculateTotalCardsInHand = (hand: THand) => {
+  const total = Object.values(hand).reduce((acc, cards) => (acc += cards.length), 0);
+  return total;
+};
+
+export const calculateTotalTopCardsOnBoard = (board: IBoard) => {
+  const total = Object.keys(board).reduce((acc, key) => {
+    if (key !== 'player' && board[key as Colors].cards.length) {
+      acc += 1;
+    }
+    return acc;
+  }, 0);
+  return total;
 };

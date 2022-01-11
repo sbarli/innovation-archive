@@ -8,8 +8,14 @@ export type TCardIdsByAge = {
   [key in Ages]: CardIds[];
 };
 
+export interface IAgeAchievement {
+  card: CardIds | undefined;
+  cost: number;
+  isAvailable: boolean;
+}
+
 export type TAgeAchievements = {
-  [key in Ages]?: CardIds;
+  [key in Ages]: IAgeAchievement;
 };
 
 export type TSpecialAchievements = {

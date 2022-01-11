@@ -23,9 +23,9 @@ eslint-plugin-cypress
     * [x] achievements
     * [x] resource totals
     * [x] age
-* [ ] Show Action Details
-    * [ ] current action number
-    * [ ] current action options
+* [x] Show Action Details
+    * [x] current action number
+    * [x] current action options
 * [x] Show card piles
     * [x] # cards remaining (per age)
     * [x] achievements

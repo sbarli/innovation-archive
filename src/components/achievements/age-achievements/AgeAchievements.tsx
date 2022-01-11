@@ -14,7 +14,7 @@ export function AgeAchievements({ ageAchievements }: IAgeAchievementsProps) {
 
   const AgeAchievementComponents = Object.keys(ageAchievements)
     .map(ageKey => {
-      if (ageAchievements[(ageKey as unknown) as Ages] !== undefined) {
+      if (ageAchievements[Number(ageKey) as Ages].isAvailable) {
         return (
           <p key={ageKey} data-testid={`age-${ageKey}-achievement`}>
             Age {ageKey} Achievement

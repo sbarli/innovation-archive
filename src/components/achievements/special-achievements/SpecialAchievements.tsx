@@ -14,7 +14,7 @@ export function SpecialAchievements({ specialAchievements }: ISpecialAchievement
 
   const SpecialAchievementComponents = Object.keys(specialAchievements)
     .map(specialAchievementName => {
-      if (specialAchievements[(specialAchievementName as unknown) as SpecialAchievementsEnum]) {
+      if (specialAchievements[specialAchievementName as SpecialAchievementsEnum]) {
         return (
           <p
             key={specialAchievementName}

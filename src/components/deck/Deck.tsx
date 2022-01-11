@@ -14,7 +14,7 @@ export function Deck() {
   }
 
   const StacksByAge = Object.keys(deck).map(ageKey => {
-    const age = (ageKey as unknown) as Ages;
+    const age = Number(ageKey) as Ages;
     return <Stack key={age} age={age} cards={deck[age]} />;
   });
 

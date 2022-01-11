@@ -13,9 +13,12 @@ import {
   ICard,
   IResourcesByPlayer,
   IStarterCardIdsData,
-  TAgeAchievements,
 } from '../types';
-import { createInitialPlayerAchievements } from '../utils/achievementUtils';
+import {
+  createInitialAgeAchievements,
+  createInitialPlayerAchievements,
+  pullAgeAchievementsFromStarterDeck,
+} from '../utils/achievementUtils';
 import {
   createBaseBoard,
   createInitialHandsForPlayers,
@@ -50,12 +53,8 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   const playerIds = Object.keys(players);
 
   // pull out age achievement cards
-  // NOTE: purposely mutates starterDeck
-  const ageAchievements = Object.keys(starterDeck).reduce((acc, key) => {
-    const age = Number(key) as Ages;
-    acc[age] = starterDeck[age].pop();
-    return acc;
-  }, {} as TAgeAchievements);
+  const ageAchievementCardIds = pullAgeAchievementsFromStarterDeck(starterDeck);
+  const ageAchievements = createInitialAgeAchievements(ageAchievementCardIds);
 
   // pull out age 1 cards for player hands
   // NOTE: purposely mutates starterDeck

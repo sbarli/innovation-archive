@@ -1,6 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Ages, BASE_SPECIAL_ACHIEVEMENTS, SpecialAchievements } from '../enums';
+import {
+  Ages,
+  BASE_AGE_ACHIEVEMENTS,
+  BASE_SPECIAL_ACHIEVEMENTS,
+  SpecialAchievements,
+} from '../enums';
 import { RootState } from '../store';
 import { IAchievementsByPlayer, TAgeAchievements, TSpecialAchievements } from '../types';
 
@@ -12,7 +17,7 @@ interface ICardsState {
 
 const initialState: ICardsState = {
   specialAchievements: { ...BASE_SPECIAL_ACHIEVEMENTS },
-  ageAchievements: {},
+  ageAchievements: { ...BASE_AGE_ACHIEVEMENTS },
   playerAchievements: {},
 };
 
@@ -36,10 +41,12 @@ export const achievementsSlice = createSlice({
       state,
       { payload: { playerId, age } }: PayloadAction<{ playerId: string; age: Ages }>
     ) => {
-      const cardId = state.ageAchievements[age];
-      delete state.ageAchievements[age];
-      if (cardId && state.playerAchievements?.[playerId]?.ageAchievements) {
-        state.playerAchievements[playerId].ageAchievements.push(cardId);
+      if (state.ageAchievements[age].isAvailable) {
+        const cardId = state.ageAchievements[age].card;
+        state.ageAchievements[age].isAvailable = false;
+        if (cardId && state.playerAchievements?.[playerId]?.ageAchievements) {
+          state.playerAchievements[playerId].ageAchievements.push(cardId);
+        }
       }
     },
     applyPlayerSpecialAchievement: (
