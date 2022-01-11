@@ -26,9 +26,9 @@ eslint-plugin-cypress
 * [ ] Show Action Details
     * [ ] current action number
     * [ ] current action options
-* [ ] Show card piles
-    * [ ] # cards remaining (per age)
-    * [ ] achievements
+* [x] Show card piles
+    * [x] # cards remaining (per age)
+    * [x] achievements
 * [ ] Show Opponents Details
     * [ ] boards
     * [ ] scores
