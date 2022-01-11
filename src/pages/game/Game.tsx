@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { Achievements } from '../../components/achievements';
 import { CurrentPlayerView } from '../../components/current-player-view';
 import { Deck } from '../../components/deck';
 import { PlayersBar } from '../../components/players-bar';
@@ -19,6 +20,7 @@ export function Game() {
       <PlayersBar />
       <CurrentPlayerView />
       <Deck />
+      <Achievements />
     </div>
   );
 }
