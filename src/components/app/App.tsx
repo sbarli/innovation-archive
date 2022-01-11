@@ -5,15 +5,11 @@ import { Game } from '../../pages/game';
 import { Home } from '../../pages/home';
 import { StartGame } from '../../pages/start-game';
 import GlobalStyle from '../../styles/global';
-import { Counter } from '../counter/Counter';
 
 export function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <header>
-        <Counter />
-      </header>
       <Switch>
         <Route exact path="/">
           <Home />

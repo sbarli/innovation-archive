@@ -3,7 +3,6 @@ import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import achievementsReducer from '../state/achievementsSlice';
 import boardsReducer from '../state/boardsSlice';
 import cardsReducer from '../state/cardsSlice';
-import counterReducer from '../state/counterSlice';
 import handsReducer from '../state/handsSlice';
 import playersReducer from '../state/playersSlice';
 import scoresReducer from '../state/scoresSlice';
@@ -13,7 +12,6 @@ export const store = configureStore({
     achievements: achievementsReducer,
     boards: boardsReducer,
     cards: cardsReducer,
-    counter: counterReducer,
     hands: handsReducer,
     players: playersReducer,
     scores: scoresReducer,
