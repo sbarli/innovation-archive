@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { ActionNumbers } from '../enums/game';
 import { RootState } from '../store';
 import { IPlayers, IResourcesByPlayer } from '../types';
 
@@ -8,12 +9,14 @@ interface PlayersState {
   playerOrder: string[];
   currentPlayer: string | null;
   resources: IResourcesByPlayer;
+  currentPlayerActionNumber: ActionNumbers;
 }
 
 const initialState: PlayersState = {
   players: {},
   playerOrder: [],
   currentPlayer: null,
+  currentPlayerActionNumber: ActionNumbers.ONE,
   resources: {},
 };
 
@@ -45,11 +48,15 @@ export const playersSlice = createSlice({
           idx === 0 ? playerOrder[playerOrder.length - 1] : playerOrder[idx - 1];
       });
     },
+    nextAction: state => {
+      state.currentPlayerActionNumber = ActionNumbers.TWO;
+    },
     nextPlayer: state => {
       if (!state.currentPlayer) {
         return state;
       }
       state.currentPlayer = state.players[state.currentPlayer].right;
+      state.currentPlayerActionNumber = ActionNumbers.ONE;
     },
     updateResources: (
       state,
@@ -72,6 +79,7 @@ export const playersSlice = createSlice({
 export const {
   initPlayers,
   initPlayerOrder,
+  nextAction,
   nextPlayer,
   updatePlayerAge,
   updateResources,
