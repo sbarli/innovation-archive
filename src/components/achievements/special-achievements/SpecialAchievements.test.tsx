@@ -2,16 +2,17 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 
+import { BASE_SPECIAL_ACHIEVEMENTS } from '../../../enums';
 import { store } from '../../../store';
 
-import { Stack } from '.';
+import { SpecialAchievements } from '.';
 
-test('renders stack', () => {
+test('renders special achievements', () => {
   const { getByTestId } = render(
     <Provider store={store}>
-      <Stack age={1} cards={[1]} />
+      <SpecialAchievements specialAchievements={{ ...BASE_SPECIAL_ACHIEVEMENTS }} />
     </Provider>
   );
 
-  expect(getByTestId('stack-1')).toBeInTheDocument();
+  expect(getByTestId('special-achievements')).toBeInTheDocument();
 });

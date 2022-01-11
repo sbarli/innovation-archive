@@ -4,14 +4,15 @@ import { Provider } from 'react-redux';
 
 import { store } from '../../../store';
 
-import { Stack } from '.';
+import { AgeAchievements } from '.';
 
-test('renders stack', () => {
-  const { getByTestId } = render(
+test('renders no age achievements text when no age achievements passed', () => {
+  const { getByTestId, getByText } = render(
     <Provider store={store}>
-      <Stack age={1} cards={[1]} />
+      <AgeAchievements ageAchievements={{}} />
     </Provider>
   );
 
-  expect(getByTestId('stack-1')).toBeInTheDocument();
+  expect(getByTestId('age-achievements')).toBeInTheDocument();
+  expect(getByText('No More Age Achievements')).toBeInTheDocument();
 });

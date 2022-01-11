@@ -12,24 +12,31 @@ export function SpecialAchievements({ specialAchievements }: ISpecialAchievement
     return null;
   }
 
+  const SpecialAchievementComponents = Object.keys(specialAchievements)
+    .map(specialAchievementName => {
+      if (specialAchievements[(specialAchievementName as unknown) as SpecialAchievementsEnum]) {
+        return (
+          <p
+            key={specialAchievementName}
+            data-testid={`special-achievement-${specialAchievementName}`}
+          >
+            {specialAchievementName} Achievement
+          </p>
+        );
+      }
+      return null;
+    })
+    .filter(ach => !!ach);
+
   return (
     <div data-testid="special-achievements">
       <h4>Special Achievements</h4>
-      {Object.keys(specialAchievements)
-        .map(specialAchievementName => {
-          if (specialAchievements[(specialAchievementName as unknown) as SpecialAchievementsEnum]) {
-            return (
-              <p
-                key={specialAchievementName}
-                data-testid={`special-achievement-${specialAchievementName}`}
-              >
-                {specialAchievementName} Achievement
-              </p>
-            );
-          }
-          return null;
-        })
-        .filter(ach => !!ach)}
+      {}
+      {SpecialAchievementComponents.length ? (
+        SpecialAchievementComponents
+      ) : (
+        <p>No More Special Achievements</p>
+      )}
     </div>
   );
 }
