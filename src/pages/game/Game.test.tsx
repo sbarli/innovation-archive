@@ -1,17 +1,21 @@
-import { render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import { store } from '../../store';
+import { createInitialPlayersStore } from '../../__fixtures__/player';
+import { renderWithProviders } from '../../utils/testing/renderWithProviders';
 
 import { Game } from '.';
 
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <Game />
-    </Provider>
-  );
+describe('<Game />', () => {
+  it('renders', () => {
+    renderWithProviders(<Game />, {
+      context: {
+        reduxStore: {
+          players: createInitialPlayersStore(['foo', 'bar']),
+        },
+      },
+    });
 
-  expect(getByText(/Game/i)).toBeInTheDocument();
+    expect(screen.getByTestId('game')).toBeInTheDocument();
+  });
 });

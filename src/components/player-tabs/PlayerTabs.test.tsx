@@ -1,10 +1,19 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
+
+import { store } from '../../store';
 
 import { PlayerTabs } from '.';
 
-test('renders player tabs', () => {
-  const { getByTestId } = render(<PlayerTabs />);
+describe('<PlayerTabs />', () => {
+  it('renders null when no current player exists', () => {
+    const { container } = render(
+      <Provider store={store}>
+        <PlayerTabs />
+      </Provider>
+    );
 
-  expect(getByTestId('player-tabs')).toBeInTheDocument();
+    expect(container.children).toHaveLength(0);
+  });
 });
