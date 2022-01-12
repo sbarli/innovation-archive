@@ -31,7 +31,7 @@ interface IBoardsState {
   boards: IBoards;
 }
 
-const initialState: IBoardsState = {
+export const initialState: IBoardsState = {
   boards: {},
 };
 

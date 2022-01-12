@@ -12,7 +12,7 @@ interface PlayersState {
   currentPlayerActionNumber: ActionNumbers;
 }
 
-const initialState: PlayersState = {
+export const initialState: PlayersState = {
   players: {},
   playerOrder: [],
   currentPlayer: null,

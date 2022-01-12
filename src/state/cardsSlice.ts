@@ -11,7 +11,7 @@ interface ICardsState {
   deck: TCardIdsByAge | null;
 }
 
-const initialState: ICardsState = {
+export const initialState: ICardsState = {
   cards: cardData,
   dogmaEffects: [],
   deck: null,

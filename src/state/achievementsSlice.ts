@@ -15,7 +15,7 @@ interface ICardsState {
   playerAchievements: IAchievementsByPlayer;
 }
 
-const initialState: ICardsState = {
+export const initialState: ICardsState = {
   specialAchievements: { ...BASE_SPECIAL_ACHIEVEMENTS },
   ageAchievements: { ...BASE_AGE_ACHIEVEMENTS },
   playerAchievements: {},

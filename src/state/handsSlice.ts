@@ -7,7 +7,7 @@ interface IHandsState {
   hands: IHands;
 }
 
-const initialState: IHandsState = {
+export const initialState: IHandsState = {
   hands: {},
 };
 

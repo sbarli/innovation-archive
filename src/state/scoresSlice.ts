@@ -13,7 +13,7 @@ interface IScoresState {
   scorePiles: IScorePilesByPlayer;
 }
 
-const initialState: IScoresState = {
+export const initialState: IScoresState = {
   scores: {},
   scorePiles: {},
 };
