@@ -1,1 +1,0 @@
-export { PlayersBar } from './PlayersBar';
