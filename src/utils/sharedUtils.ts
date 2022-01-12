@@ -1,3 +1,14 @@
+import {
+  IAchievementsByPlayer,
+  IBoards,
+  IResourcesByPlayer,
+  IScorePilesByPlayer,
+  IScoresByPlayer,
+} from '../types';
+
+import { createInitialPlayerAchievements } from './achievementUtils';
+import { createBaseBoard, createInitialResourceTotals } from './cardUtils';
+
 export const shuffleArray = (initArray: any[]) => {
   const copiedArray = [...initArray];
   let currentIndex = copiedArray.length;
@@ -18,3 +29,22 @@ export const shuffleArray = (initArray: any[]) => {
 
   return copiedArray;
 };
+
+export const createDefaultGameData = (playerIds: string[]) =>
+  playerIds.reduce(
+    (acc, player) => {
+      acc.boards[player] = createBaseBoard(player);
+      acc.playerAchievements[player] = createInitialPlayerAchievements();
+      acc.playerResources[player] = createInitialResourceTotals();
+      acc.scores[player] = 0;
+      acc.scorePiles[player] = [];
+      return acc;
+    },
+    {
+      boards: {} as IBoards,
+      playerAchievements: {} as IAchievementsByPlayer,
+      playerResources: {} as IResourcesByPlayer,
+      scores: {} as IScoresByPlayer,
+      scorePiles: {} as IScorePilesByPlayer,
+    }
+  );

@@ -7,26 +7,14 @@ import { initHands, removeCardsFromHands } from '../state/handsSlice';
 import { initPlayerOrder, initPlayers, updateResources } from '../state/playersSlice';
 import { initScores } from '../state/scoresSlice';
 import { AppThunk } from '../store';
-import {
-  IAchievementsByPlayer,
-  IBoards,
-  ICard,
-  IResourcesByPlayer,
-  IStarterCardIdsData,
-} from '../types';
+import { ICard, IResourcesByPlayer, IStarterCardIdsData } from '../types';
 import {
   createInitialAgeAchievements,
-  createInitialPlayerAchievements,
   pullAgeAchievementsFromStarterDeck,
 } from '../utils/achievementUtils';
-import {
-  createBaseBoard,
-  createInitialHandsForPlayers,
-  createInitialResourceTotals,
-  sortAndShuffleCards,
-} from '../utils/cardUtils';
+import { createInitialHandsForPlayers, sortAndShuffleCards } from '../utils/cardUtils';
 import { calculatePlayerResources, createBasePlayers, getPlayerOrder } from '../utils/playerUtils';
-import { createInitialScoreData } from '../utils/scoreUtils';
+import { createDefaultGameData } from '../utils/sharedUtils';
 
 const NUM_CARDS_TO_START = 2;
 
@@ -62,24 +50,15 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   // create player hands with starter cards
   const hands = createInitialHandsForPlayers(playerIds, handStartCards);
 
-  // create empty board and achievements for players
-  const { boards, playerAchievements } = playerIds.reduce(
-    (acc, player) => {
-      acc.boards[player] = createBaseBoard(player);
-      acc.playerAchievements[player] = createInitialPlayerAchievements();
-      return acc;
-    },
-    { boards: {} as IBoards, playerAchievements: {} as IAchievementsByPlayer }
+  // create the following for players
+  // - empty board
+  // - empty achievements
+  // - resources
+  // - scores
+  // - scorePiles
+  const { boards, playerAchievements, playerResources, scores, scorePiles } = createDefaultGameData(
+    playerIds
   );
-
-  // create default score and score pile for players
-  const { scores, scorePiles } = createInitialScoreData(playerIds);
-
-  // create default resources totals
-  const playerResources = playerIds.reduce((acc, player) => {
-    acc[player] = createInitialResourceTotals();
-    return acc;
-  }, {} as IResourcesByPlayer);
 
   dispatch(initDeck({ deck: starterDeck }));
   dispatch(initPlayers({ players }));
