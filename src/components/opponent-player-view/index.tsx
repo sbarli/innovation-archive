@@ -1,0 +1,1 @@
+export { OpponentPlayerView } from './OpponentPlayerView';
