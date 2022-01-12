@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SpecialAchievements as SpecialAchievementsEnum } from '../../../enums';
+import { Collapse } from '../../../libs/ui/collapse';
 import { TSpecialAchievements } from '../../../types';
 
 interface ISpecialAchievementsProps {
@@ -30,13 +31,13 @@ export function SpecialAchievements({ specialAchievements }: ISpecialAchievement
 
   return (
     <div data-testid="special-achievements">
-      <h4>Special Achievements</h4>
-      {}
-      {SpecialAchievementComponents.length ? (
-        SpecialAchievementComponents
-      ) : (
-        <p>No More Special Achievements</p>
-      )}
+      <Collapse header="Special Achievements" headerSize={4} showCaret={false}>
+        {SpecialAchievementComponents.length ? (
+          SpecialAchievementComponents
+        ) : (
+          <p>No More Special Achievements</p>
+        )}
+      </Collapse>
     </div>
   );
 }

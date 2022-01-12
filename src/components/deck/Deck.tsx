@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { Ages } from '../../enums';
+import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 
 import { Stack } from './stack';
@@ -20,8 +21,9 @@ export function Deck() {
 
   return (
     <div data-testid="deck">
-      <h3>Deck</h3>
-      {StacksByAge}
+      <Collapse header="Deck" showCaret={false}>
+        {StacksByAge}
+      </Collapse>
     </div>
   );
 }

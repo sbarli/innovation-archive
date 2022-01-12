@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 import { ResourceTotals } from '../resource-totals';
 
@@ -28,11 +29,12 @@ export function Stats({ player }: { player: string }) {
 
   return (
     <div data-testid="player-stats">
-      <h3>Stats</h3>
-      <p>Age: {playerAge}</p>
-      <p>Achievements: {totalAchievements}</p>
-      <p>Score: {playerScore}</p>
-      <ResourceTotals resourceTotals={playerResourceTotals} />
+      <Collapse header="Stats" showCaret={false}>
+        <p>Age: {playerAge}</p>
+        <p>Achievements: {totalAchievements}</p>
+        <p>Score: {playerScore}</p>
+        <ResourceTotals resourceTotals={playerResourceTotals} />
+      </Collapse>
     </div>
   );
 }

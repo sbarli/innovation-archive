@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { Achievements } from '../../components/achievements';
-import { ActionsBar } from '../../components/actions-bar';
 import { CurrentPlayerView } from '../../components/current-player-view';
 import { Deck } from '../../components/deck';
 import { PlayersBar } from '../../components/players-bar';
@@ -19,7 +18,6 @@ export function Game() {
     <div className="Game">
       <h1>Innovation</h1>
       <PlayersBar />
-      <ActionsBar />
       <CurrentPlayerView />
       <Deck />
       <Achievements />

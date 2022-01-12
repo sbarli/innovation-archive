@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Colors } from '../../enums';
+import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 import { Card } from '../card';
 
@@ -21,10 +22,11 @@ export function Board({ player }: { player: string }) {
 
   return (
     <div data-testid="player-board">
-      <h3>Board</h3>
-      {CardsByColor.map((section, idx) => (
-        <div key={idx}>{section}</div>
-      ))}
+      <Collapse header="Board" showCaret={false}>
+        {CardsByColor.map((section, idx) => (
+          <div key={idx}>{section}</div>
+        ))}
+      </Collapse>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Ages } from '../../../enums';
+import { Collapse } from '../../../libs/ui/collapse';
 import { TAgeAchievements } from '../../../types';
 
 interface IAgeAchievementsProps {
@@ -27,8 +28,13 @@ export function AgeAchievements({ ageAchievements }: IAgeAchievementsProps) {
 
   return (
     <div data-testid="age-achievements">
-      <h4>Age Achievements</h4>
-      {AgeAchievementComponents.length ? AgeAchievementComponents : <p>No More Age Achievements</p>}
+      <Collapse header="Age Achievements" headerSize={4} showCaret={false}>
+        {AgeAchievementComponents.length ? (
+          AgeAchievementComponents
+        ) : (
+          <p>No More Age Achievements</p>
+        )}
+      </Collapse>
     </div>
   );
 }
