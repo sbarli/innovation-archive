@@ -16,7 +16,7 @@ export function Game() {
     return <Redirect to="/start" />;
   }
   return (
-    <div className="Game">
+    <div data-testid="game">
       <h1>Innovation</h1>
       <h2>{currentPlayerName}'s Turn</h2>
       <PlayerTabs />

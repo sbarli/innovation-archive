@@ -165,13 +165,19 @@ export const calculateTotalResourcesForCards = (cardIds: CardIds[]) => {
 };
 
 export const calculateTotalCardsInHand = (hand: THand) => {
+  if (!hand) {
+    return 0;
+  }
   const total = Object.values(hand).reduce((acc, cards) => (acc += cards.length), 0);
   return total;
 };
 
 export const calculateTotalTopCardsOnBoard = (board: IBoard) => {
+  if (!board) {
+    return 0;
+  }
   const total = Object.keys(board).reduce((acc, key) => {
-    if (key !== 'player' && board[key as Colors].cards.length) {
+    if (key !== 'player' && board[key as Colors]?.cards?.length) {
       acc += 1;
     }
     return acc;

@@ -11,16 +11,20 @@ import { Card } from '../card';
 const createCurrentPlayerCardView = (playerHand: THand) =>
   Object.keys(playerHand)
     .reduce((acc, color) => {
-      acc.push(playerHand[color as Colors].map(cardId => <Card key={cardId} cardId={cardId} />));
+      const colorPile = playerHand[color as Colors];
+      if (colorPile?.length) {
+        acc.push(colorPile.map(cardId => <Card key={cardId} cardId={cardId} />));
+      }
       return acc;
     }, [] as ReactNode[])
     .map((section, idx) => <div key={idx}>{section}</div>);
 
 const createOpponentPlayerCardView = (playerHand: THand) =>
   Object.keys(playerHand).reduce((acc, color) => {
-    acc.push(
-      playerHand[color as Colors].map(cardId => <div key={cardId}>{cardsById[cardId].age}</div>)
-    );
+    const colorPile = playerHand[color as Colors];
+    if (colorPile?.length) {
+      acc.push(colorPile.map(cardId => <div key={cardId}>{cardsById[cardId].age}</div>));
+    }
     return acc;
   }, [] as ReactNode[]);
 

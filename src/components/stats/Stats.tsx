@@ -13,7 +13,7 @@ export function Stats({ player }: { player: string }) {
   const playerScore = useSelector((state: RootState) => state.scores.scores[player]);
 
   const playerResourceTotals = allPlayersData.resources[player];
-  const playerAge = allPlayersData.players[player].age;
+  const playerAge = allPlayersData.players[player]?.age ?? null;
 
   if (
     !player ||

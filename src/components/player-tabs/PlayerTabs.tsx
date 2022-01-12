@@ -37,12 +37,17 @@ export const PlayerTabs = () => {
     name: player.id === currentPlayer ? `${player.name} ✅` : player.name,
   }));
 
-  const TabContent = currentTab === currentPlayer ? CurrentPlayerView : OpponentPlayerView;
+  const TabContent =
+    currentTab === currentPlayer ? (
+      <CurrentPlayerView player={currentTab} />
+    ) : (
+      <OpponentPlayerView player={currentTab} />
+    );
 
   return (
     <PlayerTabsWrapper data-testid="player-tabs">
       <TabsPanel activeTab={currentTab} onTabClick={onTabClick} tabs={tabItemsData} />
-      <TabContent player={currentTab} />
+      {TabContent}
     </PlayerTabsWrapper>
   );
 };
