@@ -3,22 +3,23 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { Achievements } from '../../components/achievements';
-import { CurrentPlayerView } from '../../components/current-player-view';
 import { Deck } from '../../components/deck';
-import { PlayersBar } from '../../components/players-bar';
+import { PlayerTabs } from '../../components/player-tabs';
+import { usePlayerName } from '../../hooks/use-player-name';
 import { selectCurrentPlayer } from '../../state/playersSlice';
 
 export function Game() {
-  const currentPlayer = useSelector(selectCurrentPlayer);
+  const currentPlayerId = useSelector(selectCurrentPlayer);
+  const currentPlayerName = usePlayerName(currentPlayerId ?? '');
 
-  if (!currentPlayer) {
+  if (!currentPlayerId) {
     return <Redirect to="/start" />;
   }
   return (
     <div className="Game">
       <h1>Innovation</h1>
-      <PlayersBar />
-      <CurrentPlayerView />
+      <h2>{currentPlayerName}'s Turn</h2>
+      <PlayerTabs />
       <Deck />
       <Achievements />
     </div>

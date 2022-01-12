@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { cards as cardsById } from '../../data/cardsById';
 import { CardIds, Colors } from '../../enums';
+import { usePlayerName } from '../../hooks/use-player-name';
 import { selectHands } from '../../state/handsSlice';
 import { IHands, IStarterCardIdsData } from '../../types';
 
@@ -35,24 +36,26 @@ export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }
   const [playerChoosingIdx, setPlayerChoosingIdx] = useState(0);
   const [selectedFirstCards, setSelectedFirstCards] = useState<IStarterCardIdsData[]>([]);
 
-  const playerChoosingName = players[playerChoosingIdx];
+  const playerChoosingId = players[playerChoosingIdx];
+
+  const playerChoosingName = usePlayerName(playerChoosingId);
 
   const onCardClick = useCallback(
     (cardId: CardIds) => {
       if (playerChoosingIdx === players.length - 1) {
-        onSubmit([...selectedFirstCards, { card: cardId, player: playerChoosingName }]);
+        onSubmit([...selectedFirstCards, { card: cardId, player: playerChoosingId }]);
         return;
       }
-      setSelectedFirstCards(state => [...state, { card: cardId, player: playerChoosingName }]);
+      setSelectedFirstCards(state => [...state, { card: cardId, player: playerChoosingId }]);
       setPlayerChoosingIdx(state => state + 1);
     },
-    [onSubmit, playerChoosingIdx, playerChoosingName, players.length, selectedFirstCards]
+    [onSubmit, playerChoosingIdx, playerChoosingId, players.length, selectedFirstCards]
   );
 
   const playerChoosingHand = mapHandForPlayer({
     hands,
     onCardClick,
-    playerChoosing: playerChoosingName,
+    playerChoosing: playerChoosingId,
   });
 
   return (
