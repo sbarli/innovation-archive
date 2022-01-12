@@ -5,9 +5,11 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.5",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "10.4.4",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
+    "@types/lodash-es": "^4.17.5",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -30,6 +32,8 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "final-form": "^4.20.2",
     "final-form-arrays": "^3.0.2",
+    "jest-mock-extended": "^2.0.4",
+    "lodash-es": "4.17.11",
     "prettier": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -65,5 +69,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash"
+    }
   }
 }
