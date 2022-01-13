@@ -91,3 +91,27 @@ export const calculatePlayerResources = (cardIds: CardIds[]) => {
 
   return calculateTotalResourcesForCards(cardIds);
 };
+
+export const updatePlayersWithOrder = (playerOrder: string[]) => {
+  const playersToUpdate = createBasePlayers(
+    playerOrder.map(name => ({
+      name,
+    }))
+  );
+  playerOrder.forEach((name, idx) => {
+    const id = formatPlayerId(name);
+    const lastIndex = playerOrder.length - 1;
+    if (idx === 0) {
+      playersToUpdate[id].isFirst = true;
+      playersToUpdate[id].left = formatPlayerId(playerOrder[lastIndex]);
+      playersToUpdate[id].right = formatPlayerId(playerOrder[1]);
+    } else if (idx === lastIndex) {
+      playersToUpdate[id].left = formatPlayerId(playerOrder[idx - 1]);
+      playersToUpdate[id].right = formatPlayerId(playerOrder[0]);
+    } else {
+      playersToUpdate[id].left = formatPlayerId(playerOrder[idx - 1]);
+      playersToUpdate[id].right = formatPlayerId(playerOrder[idx + 1]);
+    }
+  });
+  return playersToUpdate;
+};

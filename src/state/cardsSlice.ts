@@ -51,5 +51,8 @@ export const { initDeck, drawCardsFromDeck, returnCardsToDeck } = cardsSlice.act
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
 export const selectCards = (state: RootState) => state.cards.cards;
+export const selectDeck = (state: RootState) => state.cards.deck;
+export const selectAgeCards = (state: RootState, age: Ages) =>
+  state.cards.deck ? state.cards.deck[age] : state.cards.deck;
 
 export default cardsSlice.reducer;

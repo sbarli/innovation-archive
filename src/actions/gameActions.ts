@@ -4,7 +4,7 @@ import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
 import { initDeck } from '../state/cardsSlice';
 import { initHands, removeCardsFromHands } from '../state/handsSlice';
-import { initPlayerOrder, initPlayers, updateResources } from '../state/playersSlice';
+import { initPlayerOrder, setWinner, updatePlayers, updateResources } from '../state/playersSlice';
 import { initScores } from '../state/scoresSlice';
 import { AppThunk } from '../store';
 import { ICard, IResourcesByPlayer, IStarterCardIdsData } from '../types';
@@ -13,7 +13,12 @@ import {
   pullAgeAchievementsFromStarterDeck,
 } from '../utils/achievementUtils';
 import { createInitialHandsForPlayers, sortAndShuffleCards } from '../utils/cardUtils';
-import { calculatePlayerResources, createBasePlayers, getPlayerOrder } from '../utils/playerUtils';
+import {
+  calculatePlayerResources,
+  createBasePlayers,
+  getPlayerOrder,
+  updatePlayersWithOrder,
+} from '../utils/playerUtils';
 import { createDefaultGameData } from '../utils/sharedUtils';
 
 const NUM_CARDS_TO_START = 2;
@@ -61,7 +66,7 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   );
 
   dispatch(initDeck({ deck: starterDeck }));
-  dispatch(initPlayers({ players }));
+  dispatch(updatePlayers({ players }));
   dispatch(initHands({ hands }));
   dispatch(initBoards({ boards }));
   dispatch(initAchievements({ ageAchievements, playerAchievements }));
@@ -81,6 +86,7 @@ export const setupPlayerOrder = (
     };
   });
   const playerOrder = getPlayerOrder(starterCardNamesData);
+  const updatedPlayersWithOrder = updatePlayersWithOrder(playerOrder);
 
   // create a map of the cards to remove from
   // each players hand and add to their board
@@ -101,4 +107,9 @@ export const setupPlayerOrder = (
   dispatch(removeCardsFromHands({ data }));
   dispatch(addCardsToBoards({ data }));
   dispatch(updateResources({ playerResources }));
+  dispatch(updatePlayers({ players: updatedPlayersWithOrder }));
+};
+
+export const setWinningPlayer = (playerId: string): AppThunk => dispatch => {
+  dispatch(setWinner({ playerId }));
 };

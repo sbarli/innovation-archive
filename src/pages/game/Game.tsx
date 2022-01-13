@@ -1,16 +1,31 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { Achievements } from '../../components/achievements';
 import { Deck } from '../../components/deck';
 import { PlayerTabs } from '../../components/player-tabs';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
-import { selectCurrentPlayer } from '../../state/playersSlice';
+import {
+  selectCurrentPlayerId,
+  selectSpecificPlayer,
+  selectWinner,
+} from '../../state/playersSlice';
 
 export function Game() {
-  const currentPlayerId = useSelector(selectCurrentPlayer);
+  const winnerId = useAppSelector(selectWinner);
+  const currentPlayerId = useAppSelector(selectCurrentPlayerId);
   const currentPlayerName = usePlayerName(currentPlayerId ?? '');
+  const winner = useAppSelector(state => selectSpecificPlayer(state, winnerId ?? ''));
+
+  if (winnerId && winner) {
+    return (
+      <>
+        <h1>WE HAVE A WINNER!</h1>
+        <h2>Congratulations, {winner.name}</h2>
+      </>
+    );
+  }
 
   if (!currentPlayerId) {
     return <Redirect to="/start" />;

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { TabsPanel } from '../../libs/ui/tabs-panel';
-import { selectCurrentPlayer, selectPlayers } from '../../state/playersSlice';
+import { selectCurrentPlayerId, selectPlayers } from '../../state/playersSlice';
 import { CurrentPlayerView } from '../current-player-view';
 import { OpponentPlayerView } from '../opponent-player-view';
 
@@ -14,7 +14,7 @@ const PlayerTabsWrapper = styled.div`
 
 export const PlayerTabs = () => {
   const allPlayers = useSelector(selectPlayers);
-  const currentPlayer = useSelector(selectCurrentPlayer);
+  const currentPlayer = useSelector(selectCurrentPlayerId);
 
   const [currentTab, setCurrentTab] = useState<string>('');
 

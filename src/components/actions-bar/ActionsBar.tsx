@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { useActionOptions } from '../../hooks/use-action-options';
 import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
-
-import { useActionOptions } from './use-action-options';
 
 export function ActionsBar() {
   const currentPlayer = useSelector((state: RootState) => state.players.currentPlayer);
@@ -12,7 +11,7 @@ export function ActionsBar() {
     (state: RootState) => state.players.currentPlayerActionNumber
   );
 
-  const { canAchieve, canDogma, canDraw, canMeld } = useActionOptions({
+  const { canAchieve, canDogma, canDraw, canMeld, drawAction } = useActionOptions({
     player: currentPlayer ?? '',
   });
 
@@ -25,12 +24,12 @@ export function ActionsBar() {
       <Collapse header="Action Details" showCaret={false}>
         <p>Current Action Number: {currentActionNumber}</p>
         <h4>Current Action Options:</h4>
-        <ul>
-          {canAchieve && <li>Achieve</li>}
-          {canDogma && <li>Dogma</li>}
-          {canDraw && <li>Draw</li>}
-          {canMeld && <li>Meld</li>}
-        </ul>
+        <div>
+          {canAchieve && <button>Achieve</button>}
+          {canDogma && <button>Dogma</button>}
+          {canDraw && <button onClick={drawAction}>Draw</button>}
+          {canMeld && <button>Meld</button>}
+        </div>
       </Collapse>
     </div>
   );

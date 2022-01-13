@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 
-import { Ages } from '../../enums';
-import { RootState } from '../../store';
-import { checkIfPlayerCanAchieve } from '../../utils/achievementUtils';
-import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../../utils/cardUtils';
+import { Ages } from '../enums';
+import { RootState } from '../store';
+import { checkIfPlayerCanAchieve } from '../utils/achievementUtils';
+import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../utils/cardUtils';
+
+import { useDrawCard } from './use-draw-card';
 
 export const useActionOptions = ({ player }: { player: string }) => {
   const playerData = useSelector((state: RootState) => state.players.players[player]);
@@ -12,6 +14,7 @@ export const useActionOptions = ({ player }: { player: string }) => {
   const ageAchievements = useSelector((state: RootState) => state.achievements.ageAchievements);
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
   const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
+  const playerDrawAction = useDrawCard(player);
 
   if (!player) {
     return {
@@ -37,5 +40,6 @@ export const useActionOptions = ({ player }: { player: string }) => {
     canDogma,
     canDraw: true,
     canMeld,
+    drawAction: playerDrawAction,
   };
 };
