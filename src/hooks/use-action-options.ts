@@ -4,8 +4,19 @@ import { Ages } from '../enums';
 import { RootState } from '../store';
 import { checkIfPlayerCanAchieve } from '../utils/achievementUtils';
 import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../utils/cardUtils';
+import noop from '../utils/noop';
 
 import { useDrawCard } from './use-draw-card';
+import { useMeldCard } from './use-meld-card';
+
+const BASE_ACTION_OPTIONS = {
+  canAchieve: false,
+  canDogma: false,
+  canDraw: false,
+  canMeld: false,
+  drawAction: noop,
+  meldAction: noop,
+};
 
 export const useActionOptions = ({ player }: { player: string }) => {
   const playerData = useSelector((state: RootState) => state.players.players[player]);
@@ -15,13 +26,11 @@ export const useActionOptions = ({ player }: { player: string }) => {
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
   const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
   const playerDrawAction = useDrawCard(player);
+  const playerMeldAction = useMeldCard(player);
 
   if (!player) {
     return {
-      canAchieve: false,
-      canDogma: false,
-      canDraw: false,
-      canMeld: false,
+      ...BASE_ACTION_OPTIONS,
     };
   }
 
@@ -36,10 +45,12 @@ export const useActionOptions = ({ player }: { player: string }) => {
   });
 
   return {
+    ...BASE_ACTION_OPTIONS,
     canAchieve,
     canDogma,
     canDraw: true,
     canMeld,
     drawAction: playerDrawAction,
+    meldAction: playerMeldAction,
   };
 };
