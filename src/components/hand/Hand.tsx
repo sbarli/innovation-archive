@@ -2,18 +2,23 @@ import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 
 import { cards as cardsById } from '../../data/cardsById';
-import { Colors } from '../../enums';
+import { CardIds, Colors } from '../../enums';
 import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 import { THand } from '../../types';
+import noop from '../../utils/noop';
 import { Card } from '../card';
 
-const createCurrentPlayerCardView = (playerHand: THand) =>
+const createCurrentPlayerCardView = (playerHand: THand, meldAction: (cardId: CardIds) => void) =>
   Object.keys(playerHand)
     .reduce((acc, color) => {
       const colorPile = playerHand[color as Colors];
       if (colorPile?.length) {
-        acc.push(colorPile.map(cardId => <Card key={cardId} cardId={cardId} />));
+        acc.push(
+          colorPile.map(cardId => (
+            <Card key={cardId} cardId={cardId} onCardClick={() => meldAction(cardId)} />
+          ))
+        );
       }
       return acc;
     }, [] as ReactNode[])
@@ -30,10 +35,11 @@ const createOpponentPlayerCardView = (playerHand: THand) =>
 
 interface IHandProps {
   isCurrentPlayer: boolean;
+  meldAction?(cardId: CardIds): void;
   player: string;
 }
 
-export function Hand({ isCurrentPlayer, player }: IHandProps) {
+export function Hand({ isCurrentPlayer, meldAction = noop, player }: IHandProps) {
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
 
   if (!playerHand) {
@@ -41,7 +47,7 @@ export function Hand({ isCurrentPlayer, player }: IHandProps) {
   }
 
   const CardsInHand = isCurrentPlayer
-    ? createCurrentPlayerCardView(playerHand)
+    ? createCurrentPlayerCardView(playerHand, meldAction)
     : createOpponentPlayerCardView(playerHand);
 
   return (

@@ -1,24 +1,24 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { useActionOptions } from '../../hooks/use-action-options';
+import { ActionNumbers } from '../../enums/game';
 import { Collapse } from '../../libs/ui/collapse';
-import { RootState } from '../../store';
 
-export function ActionsBar() {
-  const currentPlayer = useSelector((state: RootState) => state.players.currentPlayer);
-  const currentActionNumber = useSelector(
-    (state: RootState) => state.players.currentPlayerActionNumber
-  );
-
-  const { canAchieve, canDogma, canDraw, canMeld, drawAction } = useActionOptions({
-    player: currentPlayer ?? '',
-  });
-
-  if (!currentPlayer) {
-    return null;
-  }
-
+interface IActionsBarProps {
+  canAchieve: boolean;
+  canDogma: boolean;
+  canDraw: boolean;
+  canMeld: boolean;
+  currentActionNumber: ActionNumbers;
+  drawAction(): void;
+}
+export const ActionsBar = ({
+  canAchieve,
+  canDogma,
+  canDraw,
+  canMeld,
+  currentActionNumber,
+  drawAction,
+}: IActionsBarProps) => {
   return (
     <div data-testid="actions-bar">
       <Collapse header="Action Details" showCaret={false}>
@@ -33,4 +33,4 @@ export function ActionsBar() {
       </Collapse>
     </div>
   );
-}
+};
