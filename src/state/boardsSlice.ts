@@ -11,7 +11,7 @@ interface ICardActionProps {
 }
 
 interface IBoardCardActionProps extends ICardActionProps {
-  placement: BoardPlacementOptions;
+  placement?: BoardPlacementOptions;
 }
 
 interface IBaseSplayActionProps {
@@ -44,7 +44,9 @@ export const boardsSlice = createSlice({
     },
     addCardToBoard: (
       state,
-      { payload: { player, color, card, placement } }: PayloadAction<IBoardCardActionProps>
+      {
+        payload: { player, color, card, placement = BoardPlacementOptions.MELD },
+      }: PayloadAction<IBoardCardActionProps>
     ) => {
       if (state.boards[player]?.[color].cards) {
         if (placement === BoardPlacementOptions.TUCK) {
@@ -112,5 +114,7 @@ export const {
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)
 export const selectBoards = (state: RootState) => state.boards.boards;
+export const selectPlayerBoard = (state: RootState, playerId: string) =>
+  state.boards.boards[playerId];
 
 export default boardsSlice.reducer;

@@ -68,5 +68,6 @@ export const {
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
 export const selectHands = (state: RootState) => state.hands.hands;
+export const selectPlayerHand = (state: RootState, playerId: string) => state.hands.hands[playerId];
 
 export default handsSlice.reducer;

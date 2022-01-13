@@ -1,6 +1,6 @@
 import { cards as cardsById } from '../data/cardsById';
-import { Ages, CardIds, Colors, Resources, TOTAL_CARDS_IN_AGE } from '../enums';
-import { IBoard, IHands, TCardIdsByAge, TCardsById, THand } from '../types';
+import { Ages, CardIds, Colors, Resources, SplayDirections, TOTAL_CARDS_IN_AGE } from '../enums';
+import { IBoard, IHands, TCardIdsByAge, TCardsById, THand, TResourceTotals } from '../types';
 
 import { shuffleArray } from './sharedUtils';
 
@@ -132,7 +132,7 @@ const baseCardResourceTotals = Object.freeze({
 
 export const createInitialResourceTotals = () => ({ ...baseCardResourceTotals });
 
-export const calculateCardResources = (cardId: CardIds) => {
+export const createCardResources = (cardId: CardIds) => {
   const card = cardsById[cardId];
 
   const cardResourceTotals = { ...baseCardResourceTotals };
@@ -147,21 +147,92 @@ export const calculateCardResources = (cardId: CardIds) => {
   return cardResourceTotals;
 };
 
+export const combineResourceTotals = (...args: TResourceTotals[]) =>
+  args.reduce(
+    (updatedResourceTotals, item) => {
+      updatedResourceTotals[Resources.CASTLES] += item[Resources.CASTLES];
+      updatedResourceTotals[Resources.CROWNS] += item[Resources.CROWNS];
+      updatedResourceTotals[Resources.FACTORIES] += item[Resources.FACTORIES];
+      updatedResourceTotals[Resources.LEAVES] += item[Resources.LEAVES];
+      updatedResourceTotals[Resources.LIGHTBULBS] += item[Resources.LIGHTBULBS];
+      updatedResourceTotals[Resources.TIMEPIECES] += item[Resources.TIMEPIECES];
+      return updatedResourceTotals;
+    },
+    { ...baseCardResourceTotals } as TResourceTotals
+  );
+
+interface IRemoveCardResourcesFromTotalsProps {
+  coveringCardId?: CardIds;
+  meldingCardId: CardIds;
+  resourceTotals: TResourceTotals;
+  splayDirection: SplayDirections | null;
+}
+export const updateResourceTotalsWhenMelding = ({
+  coveringCardId,
+  meldingCardId,
+  resourceTotals,
+  splayDirection = null,
+}: IRemoveCardResourcesFromTotalsProps) => {
+  const coveringCard = coveringCardId ? cardsById[coveringCardId] : null;
+  const meldingCard = cardsById[meldingCardId];
+  if (!meldingCard || (coveringCardId && !coveringCard)) {
+    return resourceTotals;
+  }
+  const updatedResourceTotals = { ...resourceTotals };
+  // remove resources for card being covered (if exists)
+  if (coveringCard) {
+    // resource removal depends on whether the pile is splayed or not
+    switch (splayDirection) {
+      case SplayDirections.LEFT:
+        // remove resource spaces 1, 2, 3
+        if (coveringCard.resourceSpace1) {
+          updatedResourceTotals[coveringCard.resourceSpace1] -= 1;
+        }
+        if (coveringCard.resourceSpace2) {
+          updatedResourceTotals[coveringCard.resourceSpace2] -= 1;
+        }
+        if (coveringCard.resourceSpace3) {
+          updatedResourceTotals[coveringCard.resourceSpace3] -= 1;
+        }
+        break;
+      case SplayDirections.RIGHT:
+        // remove resource spaces 3, 4
+        if (coveringCard.resourceSpace3) {
+          updatedResourceTotals[coveringCard.resourceSpace3] -= 1;
+        }
+        if (coveringCard.resourceSpace4) {
+          updatedResourceTotals[coveringCard.resourceSpace4] -= 1;
+        }
+        break;
+      case SplayDirections.UP:
+        // remove resource space 1
+        if (coveringCard.resourceSpace1) {
+          updatedResourceTotals[coveringCard.resourceSpace1] -= 1;
+        }
+        break;
+      default:
+        // remove all resources
+        updatedResourceTotals[Resources.CASTLES] -= coveringCard.numCastles;
+        updatedResourceTotals[Resources.CROWNS] -= coveringCard.numCrowns;
+        updatedResourceTotals[Resources.FACTORIES] -= coveringCard.numFactories;
+        updatedResourceTotals[Resources.LEAVES] -= coveringCard.numLeaves;
+        updatedResourceTotals[Resources.LIGHTBULBS] -= coveringCard.numLightbulbs;
+        updatedResourceTotals[Resources.TIMEPIECES] -= coveringCard.numTimepieces;
+    }
+  }
+  // add resources for card being melded
+  updatedResourceTotals[Resources.CASTLES] += meldingCard.numCastles;
+  updatedResourceTotals[Resources.CROWNS] += meldingCard.numCrowns;
+  updatedResourceTotals[Resources.FACTORIES] += meldingCard.numFactories;
+  updatedResourceTotals[Resources.LEAVES] += meldingCard.numLeaves;
+  updatedResourceTotals[Resources.LIGHTBULBS] += meldingCard.numLightbulbs;
+  updatedResourceTotals[Resources.TIMEPIECES] += meldingCard.numTimepieces;
+  return updatedResourceTotals;
+};
+
 export const calculateTotalResourcesForCards = (cardIds: CardIds[]) => {
-  const resourcesPerCard = cardIds.map(calculateCardResources);
-
-  const resourceTotals = { ...baseCardResourceTotals };
-
-  resourcesPerCard.forEach(cardResources => {
-    resourceTotals[Resources.CASTLES] += cardResources[Resources.CASTLES];
-    resourceTotals[Resources.CROWNS] += cardResources[Resources.CROWNS];
-    resourceTotals[Resources.FACTORIES] += cardResources[Resources.FACTORIES];
-    resourceTotals[Resources.LEAVES] += cardResources[Resources.LEAVES];
-    resourceTotals[Resources.LIGHTBULBS] += cardResources[Resources.LIGHTBULBS];
-    resourceTotals[Resources.TIMEPIECES] += cardResources[Resources.TIMEPIECES];
-  });
-
-  return resourceTotals;
+  const resourcesPerCard = cardIds.map(createCardResources);
+  return combineResourceTotals(...resourcesPerCard);
 };
 
 export const calculateTotalCardsInHand = (hand: THand) => {

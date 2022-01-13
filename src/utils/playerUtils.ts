@@ -1,7 +1,4 @@
-import { CardIds } from '../enums';
 import { IPlayers, IStarterCardsData } from '../types';
-
-import { calculateTotalResourcesForCards } from './cardUtils';
 
 interface IPlayerName {
   name: string;
@@ -79,17 +76,6 @@ export const getPlayerOrder = (starterCards: IStarterCardsData[]) => {
     .sort((a: IStarterCardsData, b: IStarterCardsData) => a.card.localeCompare(b.card))
     .map((data: IStarterCardsData) => data.player);
   return sortedOrder;
-};
-
-export const calculatePlayerResources = (cardIds: CardIds[]) => {
-  // const cardIds = Object.keys(board).reduce((acc, k) => {
-  //   if (k !== 'player') {
-  //     acc = [...acc, ...board[k as Colors].cards];
-  //   }
-  //   return acc;
-  // }, [] as CardIds[]);
-
-  return calculateTotalResourcesForCards(cardIds);
 };
 
 export const updatePlayersWithOrder = (playerOrder: string[]) => {

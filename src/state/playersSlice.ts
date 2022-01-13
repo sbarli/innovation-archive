@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ActionNumbers } from '../enums/game';
 import { RootState } from '../store';
-import { IPlayers, IResourcesByPlayer } from '../types';
+import { IPlayers, IResourcesByPlayer, TResourceTotals } from '../types';
 
 interface PlayersState {
   players: IPlayers;
@@ -49,7 +49,7 @@ export const playersSlice = createSlice({
     setWinner: (state, { payload: { playerId } }: PayloadAction<{ playerId: string }>) => {
       state.winner = playerId;
     },
-    updateResources: (
+    updateAllPlayersResources: (
       state,
       { payload: { playerResources } }: PayloadAction<{ playerResources: IResourcesByPlayer }>
     ) => {
@@ -64,6 +64,16 @@ export const playersSlice = createSlice({
         state.players[player].age = newAge;
       }
     },
+    updatePlayerResources: (
+      state,
+      {
+        payload: { playerId, updatedResources },
+      }: PayloadAction<{ playerId: string; updatedResources: TResourceTotals }>
+    ) => {
+      if (state.resources[playerId]) {
+        state.resources[playerId] = updatedResources;
+      }
+    },
     updatePlayers: (state, { payload: { players } }: PayloadAction<{ players: IPlayers }>) => {
       // add all players
       state.players = players;
@@ -76,8 +86,9 @@ export const {
   playerTakesAction,
   setWinner,
   updatePlayerAge,
+  updatePlayerResources,
   updatePlayers,
-  updateResources,
+  updateAllPlayersResources,
 } = playersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
@@ -85,6 +96,8 @@ export const {
 // in the slice file. For example: `useSelector((state: RootState) => state.players.value)`
 export const selectCurrentAction = (state: RootState) => state.players.currentPlayerActionNumber;
 export const selectCurrentPlayerId = (state: RootState) => state.players.currentPlayer;
+export const selectPlayerResources = (state: RootState, playerId: string) =>
+  state.players.resources[playerId];
 export const selectPlayers = (state: RootState) => state.players.players;
 export const selectSpecificPlayer = (state: RootState, playerId: string) =>
   state.players.players[playerId];
