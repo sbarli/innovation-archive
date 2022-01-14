@@ -4,7 +4,7 @@ import { RootState } from '../store';
 import { ICard, IScorePilesByPlayer, IScoresByPlayer } from '../types';
 
 interface IPlayerAndCardProps {
-  player: string;
+  playerId: string;
   card: ICard;
 }
 
@@ -26,19 +26,19 @@ export const scoresSlice = createSlice({
       state.scores = scores;
       state.scorePiles = scorePiles;
     },
-    increaseScore: (state, { payload: { player, card } }: PayloadAction<IPlayerAndCardProps>) => {
-      state.scores[player] += card.age;
-      if (Array.isArray(state.scorePiles[player])) {
-        state.scorePiles[player].push(card.id);
+    increaseScore: (state, { payload: { playerId, card } }: PayloadAction<IPlayerAndCardProps>) => {
+      state.scores[playerId] += card.age;
+      if (Array.isArray(state.scorePiles[playerId])) {
+        state.scorePiles[playerId].push(card.id);
       }
     },
-    decreaseScore: (state, { payload: { player, card } }: PayloadAction<IPlayerAndCardProps>) => {
-      if (Array.isArray(state.scorePiles[player])) {
-        const playerScorePile = state.scorePiles[player];
+    decreaseScore: (state, { payload: { playerId, card } }: PayloadAction<IPlayerAndCardProps>) => {
+      if (Array.isArray(state.scorePiles[playerId])) {
+        const playerScorePile = state.scorePiles[playerId];
         const cardToRemoveIdx = playerScorePile.indexOf(card.id);
         if (cardToRemoveIdx > -1) {
-          state.scores[player] -= card.age;
-          state.scorePiles[player].splice(cardToRemoveIdx, 1);
+          state.scores[playerId] -= card.age;
+          state.scorePiles[playerId].splice(cardToRemoveIdx, 1);
         }
       }
     },
@@ -51,7 +51,8 @@ export const { initScores, increaseScore, decreaseScore } = scoresSlice.actions;
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
 export const selectScores = (state: RootState) => state.scores.scores;
-
 export const selectScorePiles = (state: RootState) => state.scores.scorePiles;
+export const selectSpecificPlayerScore = (state: RootState, playerId: string) =>
+  state.scores.scores[playerId];
 
 export default scoresSlice.reducer;
