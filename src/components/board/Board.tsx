@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Colors } from '../../enums';
 import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
-import { Card } from '../card';
+import { CardFront } from '../card-front';
 
 export function Board({ player }: { player: string }) {
   const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
@@ -15,7 +15,9 @@ export function Board({ player }: { player: string }) {
 
   const CardsByColor = Object.keys(playerBoard).reduce((acc, k) => {
     if (k !== 'player') {
-      acc.push(playerBoard[k as Colors].cards.map(cardId => <Card key={cardId} cardId={cardId} />));
+      acc.push(
+        playerBoard[k as Colors].cards.map(cardId => <CardFront key={cardId} cardId={cardId} />)
+      );
     }
     return acc;
   }, [] as ReactNode[]);

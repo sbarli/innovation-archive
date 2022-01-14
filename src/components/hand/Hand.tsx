@@ -7,8 +7,8 @@ import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 import { THand } from '../../types';
 import noop from '../../utils/noop';
-import { Card } from '../card';
 import { CardBack } from '../card-back';
+import { CardFront } from '../card-front';
 
 const createCurrentPlayerCardView = (playerHand: THand, meldAction: (cardId: CardIds) => void) =>
   Object.keys(playerHand)
@@ -17,7 +17,7 @@ const createCurrentPlayerCardView = (playerHand: THand, meldAction: (cardId: Car
       if (colorPile?.length) {
         acc.push(
           colorPile.map(cardId => (
-            <Card key={cardId} cardId={cardId} onCardClick={() => meldAction(cardId)} />
+            <CardFront key={cardId} cardId={cardId} onCardClick={() => meldAction(cardId)} />
           ))
         );
       }

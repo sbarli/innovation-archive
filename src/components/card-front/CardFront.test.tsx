@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { CardIds } from '../../enums';
 import { store } from '../../store';
 
-import { Card } from '.';
+import { CardFront } from '.';
 
 test('renders something', () => {
   const { getByTestId } = render(
     <Provider store={store}>
-      <Card cardId={CardIds.ASTRONOMY} />
+      <CardFront cardId={CardIds.ASTRONOMY} />
     </Provider>
   );
 
-  expect(getByTestId('card')).toBeInTheDocument();
+  expect(getByTestId('card-front')).toBeInTheDocument();
 });
