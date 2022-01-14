@@ -8,6 +8,7 @@ import { RootState } from '../../store';
 import { THand } from '../../types';
 import noop from '../../utils/noop';
 import { Card } from '../card';
+import { CardBack } from '../card-back';
 
 const createCurrentPlayerCardView = (playerHand: THand, meldAction: (cardId: CardIds) => void) =>
   Object.keys(playerHand)
@@ -28,7 +29,7 @@ const createOpponentPlayerCardView = (playerHand: THand) =>
   Object.keys(playerHand).reduce((acc, color) => {
     const colorPile = playerHand[color as Colors];
     if (colorPile?.length) {
-      acc.push(colorPile.map(cardId => <div key={cardId}>{cardsById[cardId].age}</div>));
+      acc.push(colorPile.map(cardId => <CardBack key={cardId} cardAge={cardsById[cardId].age} />));
     }
     return acc;
   }, [] as ReactNode[]);
