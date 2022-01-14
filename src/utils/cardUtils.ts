@@ -161,7 +161,7 @@ export const combineResourceTotals = (...args: TResourceTotals[]) =>
     { ...baseCardResourceTotals } as TResourceTotals
   );
 
-interface IRemoveCardResourcesFromTotalsProps {
+interface IUpdateResourceTotalsWhenMeldingProps {
   coveringCardId?: CardIds;
   meldingCardId: CardIds;
   resourceTotals: TResourceTotals;
@@ -172,7 +172,7 @@ export const updateResourceTotalsWhenMelding = ({
   meldingCardId,
   resourceTotals,
   splayDirection = null,
-}: IRemoveCardResourcesFromTotalsProps) => {
+}: IUpdateResourceTotalsWhenMeldingProps) => {
   const coveringCard = coveringCardId ? cardsById[coveringCardId] : null;
   const meldingCard = cardsById[meldingCardId];
   if (!meldingCard || (coveringCardId && !coveringCard)) {
@@ -254,4 +254,64 @@ export const calculateTotalTopCardsOnBoard = (board: IBoard) => {
     return acc;
   }, 0);
   return total;
+};
+
+interface IUpdateResourceTotalsWhenTuckingProps {
+  isEmptyPile?: boolean;
+  resourceTotals: TResourceTotals;
+  splayDirection: SplayDirections | null;
+  tuckingCardId: CardIds;
+}
+export const updateResourceTotalsWhenTucking = ({
+  isEmptyPile = false,
+  resourceTotals,
+  splayDirection = null,
+  tuckingCardId,
+}: IUpdateResourceTotalsWhenTuckingProps) => {
+  const tuckingCard = cardsById[tuckingCardId];
+  // only add resources for tucking card if the
+  // current pile is empty or the pile is splayed
+  if (!tuckingCard || (!isEmptyPile && !splayDirection)) {
+    return null;
+  }
+  const updatedResourceTotals = { ...resourceTotals };
+  switch (splayDirection) {
+    case SplayDirections.LEFT:
+      // add resource space 4
+      if (tuckingCard.resourceSpace4) {
+        updatedResourceTotals[tuckingCard.resourceSpace4] += 1;
+      }
+      break;
+    case SplayDirections.RIGHT:
+      // add resource spaces 1, 2
+      if (tuckingCard.resourceSpace1) {
+        updatedResourceTotals[tuckingCard.resourceSpace1] += 1;
+      }
+      if (tuckingCard.resourceSpace2) {
+        updatedResourceTotals[tuckingCard.resourceSpace2] += 1;
+      }
+      break;
+    case SplayDirections.UP:
+      // add resource space 2, 3, 4
+      if (tuckingCard.resourceSpace2) {
+        updatedResourceTotals[tuckingCard.resourceSpace2] += 1;
+      }
+      if (tuckingCard.resourceSpace3) {
+        updatedResourceTotals[tuckingCard.resourceSpace3] += 1;
+      }
+      if (tuckingCard.resourceSpace4) {
+        updatedResourceTotals[tuckingCard.resourceSpace4] += 1;
+      }
+      break;
+    default:
+      // assumes this hit bc it is an empty pile
+      // so we should add all resources
+      updatedResourceTotals[Resources.CASTLES] += tuckingCard.numCastles;
+      updatedResourceTotals[Resources.CROWNS] += tuckingCard.numCrowns;
+      updatedResourceTotals[Resources.FACTORIES] += tuckingCard.numFactories;
+      updatedResourceTotals[Resources.LEAVES] += tuckingCard.numLeaves;
+      updatedResourceTotals[Resources.LIGHTBULBS] += tuckingCard.numLightbulbs;
+      updatedResourceTotals[Resources.TIMEPIECES] += tuckingCard.numTimepieces;
+  }
+  return updatedResourceTotals;
 };
