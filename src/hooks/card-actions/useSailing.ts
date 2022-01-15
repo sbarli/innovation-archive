@@ -9,12 +9,12 @@ export const useSailing = (playerId: string) => {
   const drawAction = useDrawCard(playerId);
   const meldAction = useMeldCard(playerId);
 
-  const sailing = useCallback(() => {
-    const drawnCard = drawAction({ ageToDraw: Ages.TWO, addCardToPlayerHand: false });
-    if (drawnCard) {
-      meldAction(drawnCard.id);
+  const dogma = useCallback(() => {
+    const drawnCards = drawAction({ ageToDraw: Ages.ONE, addCardToPlayerHand: false });
+    if (drawnCards) {
+      meldAction(drawnCards[0].id);
     }
   }, [drawAction, meldAction]);
 
-  return sailing;
+  return dogma;
 };

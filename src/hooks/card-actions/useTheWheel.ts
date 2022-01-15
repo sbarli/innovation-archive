@@ -3,12 +3,12 @@ import { useCallback } from 'react';
 import { Ages } from '../../enums';
 import { useDrawCard } from '../dogma-actions/use-draw-card';
 
-// Draw a 2.
-export const useWriting = (playerId: string) => {
+// Draw two 1's.
+export const useTheWheel = (playerId: string) => {
   const drawAction = useDrawCard(playerId);
 
   const dogma = useCallback(() => {
-    drawAction({ ageToDraw: Ages.TWO });
+    drawAction({ ageToDraw: Ages.ONE, numCardsToDraw: 2 });
   }, [drawAction]);
 
   return dogma;
