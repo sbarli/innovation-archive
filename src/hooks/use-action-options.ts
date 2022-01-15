@@ -8,6 +8,7 @@ import noop from '../utils/noop';
 
 import { useDrawCard } from './use-draw-card';
 import { useMeldCard } from './use-meld-card';
+import { usePlayerTakesAction } from './use-player-takes-action';
 
 const BASE_ACTION_OPTIONS = {
   canAchieve: false,
@@ -25,8 +26,8 @@ export const useActionOptions = ({ player }: { player: string }) => {
   const ageAchievements = useSelector((state: RootState) => state.achievements.ageAchievements);
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
   const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
-  const playerDrawAction = useDrawCard(player);
-  const playerMeldAction = useMeldCard(player);
+  const playerDrawAction = usePlayerTakesAction(player, useDrawCard);
+  const playerMeldAction = usePlayerTakesAction(player, useMeldCard);
 
   if (!player) {
     return {

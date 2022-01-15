@@ -9,3 +9,7 @@ export interface IBaseProps {
   children?: ReactNode;
   'data-testid'?: string;
 }
+
+export type TActionFunc = (...args: any) => void;
+
+export type TPlayerActionClosureFunc = (playerId: string) => TActionFunc;

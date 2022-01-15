@@ -6,7 +6,6 @@ import { CardIds, Colors } from '../enums';
 import { addCardToBoard, selectPlayerBoard } from '../state/boardsSlice';
 import { removeCardFromHand, selectPlayerHand } from '../state/handsSlice';
 import {
-  playerTakesAction,
   selectPlayerResources,
   selectSpecificPlayer,
   updatePlayerAge,
@@ -59,7 +58,6 @@ export const useMeldCard = (playerId: string) => {
       dispatch(updatePlayerResources({ playerId, updatedResources: updatedResourceTotals }));
       dispatch(removeCardFromHand({ player: playerId, color: card.color, card: cardId }));
       dispatch(addCardToBoard({ player: playerId, color: card.color, card: cardId }));
-      dispatch(playerTakesAction());
     },
     [dispatch, player.age, playerBoard, playerHand, playerId, playerResources]
   );

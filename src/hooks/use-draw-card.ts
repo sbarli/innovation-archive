@@ -5,7 +5,7 @@ import { setWinningPlayer } from '../actions/gameActions';
 import { playerDrawsCard } from '../actions/playerActions';
 import { cards as cardsById } from '../data/cardsById';
 import { selectDeck } from '../state/cardsSlice';
-import { playerTakesAction, selectSpecificPlayer } from '../state/playersSlice';
+import { selectSpecificPlayer } from '../state/playersSlice';
 import { recurseDraw } from '../utils/gameUtils';
 
 import { useAppSelector } from './use-app-selector';
@@ -29,7 +29,6 @@ export const useDrawCard = (playerId: string) => {
     }
     const card = cardsById[cardDrawn];
     dispatch(playerDrawsCard({ playerId, card }));
-    dispatch(playerTakesAction());
   }, [deck, dispatch, playerAge, playerId]);
 
   return drawCard;
