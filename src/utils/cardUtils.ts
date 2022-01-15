@@ -1,6 +1,6 @@
 import { cards as cardsById } from '../data/cardsById';
 import { Ages, CardIds, Colors, Resources, SplayDirections, TOTAL_CARDS_IN_AGE } from '../enums';
-import { IBoard, IHands, TCardIdsByAge, TCardsById, THand, TResourceTotals } from '../types';
+import { IBoard, ICard, IHands, TCardIdsByAge, TCardsById, THand, TResourceTotals } from '../types';
 
 import { shuffleArray } from './sharedUtils';
 
@@ -314,4 +314,14 @@ export const updateResourceTotalsWhenTucking = ({
       updatedResourceTotals[Resources.TIMEPIECES] += tuckingCard.numTimepieces;
   }
   return updatedResourceTotals;
+};
+
+export const sortCardsByColor = (cards: ICard[]) => {
+  return cards.reduce((acc, card) => {
+    if (!acc[card.color]) {
+      acc[card.color] = [];
+    }
+    acc[card.color].push(card.id);
+    return acc;
+  }, {} as THand);
 };

@@ -2,12 +2,12 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setWinningPlayer } from '../../actions/gameActions';
-import { cards as cardsById } from '../../data/cardsById';
 import { Ages } from '../../enums';
-import { drawCardsFromDeck, selectDeck } from '../../state/cardsSlice';
-import { addCardToHand } from '../../state/handsSlice';
+import { selectDeck, updateDeck } from '../../state/cardsSlice';
+import { addCardsToHand } from '../../state/handsSlice';
 import { selectSpecificPlayer } from '../../state/playersSlice';
-import { recurseDraw } from '../../utils/gameUtils';
+import { sortCardsByColor } from '../../utils/cardUtils';
+import { drawFromDeck } from '../../utils/gameUtils';
 import { useAppSelector } from '../use-app-selector';
 
 export const useDrawCard = (playerId: string) => {
@@ -20,27 +20,29 @@ export const useDrawCard = (playerId: string) => {
     ({
       addCardToPlayerHand = true,
       ageToDraw,
+      numCardsToDraw = 1,
     }: {
       addCardToPlayerHand?: boolean;
       ageToDraw?: Ages;
+      numCardsToDraw?: number;
     } = {}) => {
       if (!deck || !playerAge) {
         return;
       }
-      const { ageDrawn, cardDrawn, hasWon } = recurseDraw(deck, ageToDraw ?? playerAge);
+      const { cardsDrawn, hasWon, updatedDeck } = drawFromDeck({
+        age: ageToDraw ?? playerAge,
+        cardsToDraw: numCardsToDraw,
+        deck,
+      });
       if (hasWon) {
         dispatch(setWinningPlayer(playerId));
         return;
       }
-      if (!ageDrawn || cardDrawn === null) {
-        throw new Error('something went wrong in recurseDraw');
-      }
-      const card = cardsById[cardDrawn];
-      dispatch(drawCardsFromDeck({ agesToDraw: [{ age: card.age, numCards: 1 }] }));
+      dispatch(updateDeck({ deck: updatedDeck }));
       if (addCardToPlayerHand) {
-        dispatch(addCardToHand({ player: playerId, card: card.id, color: card.color }));
+        dispatch(addCardsToHand({ player: playerId, data: sortCardsByColor(cardsDrawn) }));
       }
-      return card;
+      return cardsDrawn;
     },
     [deck, dispatch, playerAge, playerId]
   );

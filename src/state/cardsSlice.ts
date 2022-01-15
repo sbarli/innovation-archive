@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { cards as cardData } from '../data/cardsById';
-import { Ages } from '../enums';
+import { Ages, CardIds } from '../enums';
 import { RootState } from '../store';
 import { ICard, IDogmaEffect, TCardIdsByAge, TCardsById } from '../types';
 
@@ -21,19 +21,14 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    // deck reducers
-    initDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TCardIdsByAge }>) => {
-      state.deck = deck;
-    },
-    drawCardsFromDeck: (
+    removeCardFromDeck: (
       state,
-      { payload: { agesToDraw } }: PayloadAction<{ agesToDraw: { age: Ages; numCards: number }[] }>
+      { payload: { age, cardId } }: PayloadAction<{ age: Ages; cardId: CardIds }>
     ) => {
-      agesToDraw.forEach(data => {
-        if (state.deck?.[data.age]) {
-          state.deck[data.age].splice(state.deck[data.age].length - data.numCards, data.numCards);
-        }
-      });
+      const cardIdxToRemove = state.deck?.[age]?.indexOf(cardId) ?? -1;
+      if (state.deck?.[age] && cardIdxToRemove > -1) {
+        state.deck[age].splice(cardIdxToRemove, 1);
+      }
     },
     returnCardsToDeck: (state, { payload: { cards } }: PayloadAction<{ cards: ICard[] }>) => {
       cards.forEach(card => {
@@ -42,10 +37,26 @@ export const cardsSlice = createSlice({
         }
       });
     },
+    updateAgePile: (
+      state,
+      { payload: { age, newPile } }: PayloadAction<{ age: Ages; newPile: CardIds[] }>
+    ) => {
+      if (state.deck) {
+        state.deck[age] = newPile;
+      }
+    },
+    updateDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TCardIdsByAge }>) => {
+      state.deck = deck;
+    },
   },
 });
 
-export const { initDeck, drawCardsFromDeck, returnCardsToDeck } = cardsSlice.actions;
+export const {
+  removeCardFromDeck,
+  returnCardsToDeck,
+  updateAgePile,
+  updateDeck,
+} = cardsSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

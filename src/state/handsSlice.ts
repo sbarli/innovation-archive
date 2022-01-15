@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { Colors } from '../enums';
 import { RootState } from '../store';
-import { ICard, ICardActionProps, IHands } from '../types';
+import { ICard, ICardActionProps, IHands, THand } from '../types';
 
 interface IHandsState {
   hands: IHands;
@@ -24,6 +25,17 @@ export const handsSlice = createSlice({
     ) => {
       if (state.hands[player]?.[color]) {
         state.hands[player][color].push(card);
+      }
+    },
+    addCardsToHand: (
+      state,
+      { payload: { player, data } }: PayloadAction<{ player: string; data: THand }>
+    ) => {
+      if (state.hands[player]) {
+        Object.keys(data).forEach(c => {
+          const color = c as Colors;
+          state.hands[player][color] = [...state.hands[player][color], ...data[color]];
+        });
       }
     },
     removeCardFromHand: (
@@ -60,6 +72,7 @@ export const handsSlice = createSlice({
 export const {
   initHands,
   addCardToHand,
+  addCardsToHand,
   removeCardFromHand,
   removeCardsFromHands,
 } = handsSlice.actions;
