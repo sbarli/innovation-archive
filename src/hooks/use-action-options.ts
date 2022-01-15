@@ -6,9 +6,9 @@ import { checkIfPlayerCanAchieve } from '../utils/achievementUtils';
 import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../utils/cardUtils';
 import noop from '../utils/noop';
 
+import { useDrawCard } from './dogma-actions/use-draw-card';
+import { useMeldCard } from './dogma-actions/use-meld-card';
 import { useRemoveCardFromHand } from './dogma-actions/use-remove-card-from-hand';
-import { useDrawCard } from './use-draw-card';
-import { useMeldCard } from './use-meld-card';
 import { usePlayerTakesAction } from './use-player-takes-action';
 
 const BASE_ACTION_OPTIONS = {

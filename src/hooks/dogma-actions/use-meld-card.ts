@@ -1,18 +1,17 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { cards as cardsById } from '../data/cardsById';
-import { CardIds } from '../enums';
-import { addCardToBoard, selectPlayerBoard } from '../state/boardsSlice';
+import { cards as cardsById } from '../../data/cardsById';
+import { CardIds } from '../../enums';
+import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import {
   selectPlayerResources,
   selectSpecificPlayer,
   updatePlayerAge,
   updatePlayerResources,
-} from '../state/playersSlice';
-import { updateResourceTotalsWhenMelding } from '../utils/cardUtils';
-
-import { useAppSelector } from './use-app-selector';
+} from '../../state/playersSlice';
+import { updateResourceTotalsWhenMelding } from '../../utils/cardUtils';
+import { useAppSelector } from '../use-app-selector';
 
 // const checkCardInHand = (hand: THand, cardId: CardIds) =>
 //   Object.keys(hand).reduce((isInHand, key) => {
