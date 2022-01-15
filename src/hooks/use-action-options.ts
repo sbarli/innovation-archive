@@ -6,6 +6,7 @@ import { checkIfPlayerCanAchieve } from '../utils/achievementUtils';
 import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../utils/cardUtils';
 import noop from '../utils/noop';
 
+import { useRemoveCardFromHand } from './dogma-actions/use-remove-card-from-hand';
 import { useDrawCard } from './use-draw-card';
 import { useMeldCard } from './use-meld-card';
 import { usePlayerTakesAction } from './use-player-takes-action';
@@ -27,7 +28,7 @@ export const useActionOptions = ({ player }: { player: string }) => {
   const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
   const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
   const playerDrawAction = usePlayerTakesAction(player, useDrawCard);
-  const playerMeldAction = usePlayerTakesAction(player, useMeldCard);
+  const playerMeldAction = usePlayerTakesAction(player, useRemoveCardFromHand, useMeldCard);
 
   if (!player) {
     return {
