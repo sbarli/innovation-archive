@@ -2,7 +2,7 @@ import { cards as allCards } from '../data/cardsById';
 import { Ages } from '../enums';
 import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
-import { initDeck } from '../state/cardsSlice';
+import { updateDeck } from '../state/cardsSlice';
 import { initHands, removeCardsFromHands } from '../state/handsSlice';
 import {
   initPlayerOrder,
@@ -69,7 +69,7 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
     playerIds
   );
 
-  dispatch(initDeck({ deck: starterDeck }));
+  dispatch(updateDeck({ deck: starterDeck }));
   dispatch(updatePlayers({ players }));
   dispatch(initHands({ hands }));
   dispatch(initBoards({ boards }));
