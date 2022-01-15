@@ -25,10 +25,10 @@ export const ActionsBar = ({
         <p>Current Action Number: {currentActionNumber}</p>
         <h4>Current Action Options:</h4>
         <div>
-          {canAchieve && <button>Achieve</button>}
-          {canDogma && <button>Dogma</button>}
           {canDraw && <button onClick={drawAction}>Draw</button>}
-          {canMeld && <button>Meld</button>}
+          {canAchieve && <button>Achieve</button>}
+          {canDogma && <p>Dogma</p>}
+          {canMeld && <p>Meld</p>}
         </div>
       </Collapse>
     </div>
