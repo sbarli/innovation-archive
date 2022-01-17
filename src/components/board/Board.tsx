@@ -16,7 +16,10 @@ export function Board({ player }: { player: string }) {
   const CardsByColor = Object.keys(playerBoard).reduce((acc, k) => {
     if (k !== 'player') {
       acc.push(
-        playerBoard[k as Colors].cards.map(cardId => <CardFront key={cardId} cardId={cardId} />)
+        playerBoard[k as Colors].cards.map((cardId, idx) => {
+          const isTopCardOnBoard = idx === 0;
+          return <CardFront key={cardId} cardId={cardId} isTopCardOnBoard={isTopCardOnBoard} />;
+        })
       );
     }
     return acc;

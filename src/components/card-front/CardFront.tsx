@@ -6,9 +6,10 @@ import noop from '../../utils/noop';
 
 interface ICardFrontProps {
   cardId: CardIds;
+  isTopCardOnBoard?: boolean;
   onCardClick?(): void;
 }
-export function CardFront({ cardId, onCardClick = noop }: ICardFrontProps) {
+export function CardFront({ cardId, isTopCardOnBoard, onCardClick = noop }: ICardFrontProps) {
   const cardDetails = getCardById(cardId);
   if (!cardDetails) {
     return null;
@@ -16,7 +17,10 @@ export function CardFront({ cardId, onCardClick = noop }: ICardFrontProps) {
 
   return (
     <div style={{ color: cardDetails.color }} data-testid="card-front" onClick={onCardClick}>
-      <h3>{cardDetails.name}</h3>
+      <h3>
+        {isTopCardOnBoard ? '🌟 ' : ''}
+        {cardDetails.name}
+      </h3>
       <p>Age: {cardDetails.age}</p>
     </div>
   );
