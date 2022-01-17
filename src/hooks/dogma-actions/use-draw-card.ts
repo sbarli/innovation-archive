@@ -7,7 +7,7 @@ import { selectDeck, updateDeck } from '../../state/cardsSlice';
 import { addCardsToHand } from '../../state/handsSlice';
 import { selectSpecificPlayer } from '../../state/playersSlice';
 import { sortCardsByColor } from '../../utils/cards';
-import { drawFromDeck } from '../../utils/gameUtils';
+import { drawFromDeck } from '../../utils/game';
 import { useAppSelector } from '../use-app-selector';
 
 export const useDrawCard = (playerId: string) => {

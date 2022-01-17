@@ -1,9 +1,19 @@
 import { cloneDeep } from 'lodash-es';
 
-import { Ages, CardIds } from '../enums';
-import { ICard, TCardIdsByAge } from '../types';
-
-import { getCardById } from './cards';
+import { Ages, CardIds } from '../../enums';
+import {
+  IAchievementsByPlayer,
+  IBoards,
+  ICard,
+  IResourcesByPlayer,
+  IScorePilesByPlayer,
+  IScoresByPlayer,
+  TCardIdsByAge,
+} from '../../types';
+import { createInitialPlayerAchievements } from '../achievements';
+import { createBaseBoard } from '../board';
+import { getCardById } from '../cards';
+import { createInitialResourceTotals } from '../resources';
 
 export const recurseDraw = (
   deck: TCardIdsByAge,
@@ -56,3 +66,22 @@ export const drawFromDeck = ({
   }
   return { cardsDrawn, hasWon: winner, updatedDeck: deckCopy };
 };
+
+export const createDefaultGameData = (playerIds: string[]) =>
+  playerIds.reduce(
+    (acc, player) => {
+      acc.boards[player] = createBaseBoard(player);
+      acc.playerAchievements[player] = createInitialPlayerAchievements();
+      acc.playerResources[player] = createInitialResourceTotals();
+      acc.scores[player] = 0;
+      acc.scorePiles[player] = [];
+      return acc;
+    },
+    {
+      boards: {} as IBoards,
+      playerAchievements: {} as IAchievementsByPlayer,
+      playerResources: {} as IResourcesByPlayer,
+      scores: {} as IScoresByPlayer,
+      scorePiles: {} as IScorePilesByPlayer,
+    }
+  );

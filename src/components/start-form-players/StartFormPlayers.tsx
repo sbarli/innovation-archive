@@ -7,7 +7,7 @@ import styled from 'styled-components/macro';
 
 import RenderText from '../../libs/forms/fields/RenderText/RenderText';
 import { minChar, required } from '../../libs/forms/utils/validation';
-import { formatPlayerId } from '../../utils/playerUtils';
+import { formatPlayerId } from '../../utils/players';
 
 const StyledPlayerInput = styled.div`
   display: flex;

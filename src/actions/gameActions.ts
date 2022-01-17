@@ -18,10 +18,10 @@ import {
   pullAgeAchievementsFromStarterDeck,
 } from '../utils/achievements';
 import { sortAndShuffleCards } from '../utils/cards';
+import { createDefaultGameData } from '../utils/game';
 import { createInitialHandsForPlayers } from '../utils/hand';
-import { createBasePlayers, getPlayerOrder, updatePlayersWithOrder } from '../utils/playerUtils';
+import { createBasePlayers, getPlayerOrder, updatePlayersWithOrder } from '../utils/players';
 import { calculateTotalResourcesForCards } from '../utils/resources';
-import { createDefaultGameData } from '../utils/sharedUtils';
 
 const NUM_CARDS_TO_START = 2;
 

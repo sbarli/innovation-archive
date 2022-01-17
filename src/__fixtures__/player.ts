@@ -1,4 +1,4 @@
-import { createBasePlayers } from '../utils/playerUtils';
+import { createBasePlayers } from '../utils/players';
 
 export const createInitialPlayersStore = (playerNames: string[]) => {
   const players = createBasePlayers(playerNames.map(name => ({ name })));

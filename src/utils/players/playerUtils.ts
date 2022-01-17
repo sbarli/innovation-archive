@@ -1,4 +1,4 @@
-import { IPlayers, IStarterCardsData } from '../types';
+import { IPlayers, IStarterCardsData } from '../../types';
 
 interface IPlayerName {
   name: string;

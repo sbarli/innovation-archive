@@ -5,7 +5,7 @@ import { createInitialHands } from '../../__fixtures__/hand';
 import { createInitialPlayersStore } from '../../__fixtures__/player';
 import { initialStoreState } from '../../state/global-state';
 import { RootState } from '../../store';
-import { createDefaultGameData } from '../sharedUtils';
+import { createDefaultGameData } from '../game';
 
 export interface IContextDefaults {
   reduxStore: RootState;
