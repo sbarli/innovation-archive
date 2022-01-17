@@ -1,8 +1,9 @@
 import { cloneDeep } from 'lodash-es';
 
-import { cards as cardsById } from '../data/cardsById';
 import { Ages, CardIds } from '../enums';
 import { ICard, TCardIdsByAge } from '../types';
+
+import { getCardById } from './cardUtils';
 
 export const recurseDraw = (
   deck: TCardIdsByAge,
@@ -50,7 +51,7 @@ export const drawFromDeck = ({
     if (!cardDrawn) {
       throw new Error('Something went wrong drawing card from deck');
     }
-    const card = cardsById[cardDrawn];
+    const card = getCardById(cardDrawn);
     cardsDrawn.push(card);
   }
   return { cardsDrawn, hasWon: winner, updatedDeck: deckCopy };

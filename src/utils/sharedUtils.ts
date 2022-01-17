@@ -7,7 +7,8 @@ import {
 } from '../types';
 
 import { createInitialPlayerAchievements } from './achievementUtils';
-import { createBaseBoard, createInitialResourceTotals } from './cardUtils';
+import { createBaseBoard } from './board';
+import { createInitialResourceTotals } from './resources';
 
 export const shuffleArray = (initArray: any[]) => {
   const copiedArray = [...initArray];
