@@ -5,7 +5,7 @@ import { CardIds, Colors } from '../../enums';
 import { usePlayerName } from '../../hooks/use-player-name';
 import { selectHands } from '../../state/handsSlice';
 import { IHands, IStarterCardIdsData } from '../../types';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 
 const mapHandForPlayer = ({
   hands,

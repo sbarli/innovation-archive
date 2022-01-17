@@ -16,8 +16,8 @@ import { ICard, IResourcesByPlayer, IStarterCardIdsData } from '../types';
 import {
   createInitialAgeAchievements,
   pullAgeAchievementsFromStarterDeck,
-} from '../utils/achievementUtils';
-import { sortAndShuffleCards } from '../utils/cardUtils';
+} from '../utils/achievements';
+import { sortAndShuffleCards } from '../utils/cards';
 import { createInitialHandsForPlayers } from '../utils/hand';
 import { createBasePlayers, getPlayerOrder, updatePlayersWithOrder } from '../utils/playerUtils';
 import { calculateTotalResourcesForCards } from '../utils/resources';

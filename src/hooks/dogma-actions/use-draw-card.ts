@@ -6,7 +6,7 @@ import { Ages } from '../../enums';
 import { selectDeck, updateDeck } from '../../state/cardsSlice';
 import { addCardsToHand } from '../../state/handsSlice';
 import { selectSpecificPlayer } from '../../state/playersSlice';
-import { sortCardsByColor } from '../../utils/cardUtils';
+import { sortCardsByColor } from '../../utils/cards';
 import { drawFromDeck } from '../../utils/gameUtils';
 import { useAppSelector } from '../use-app-selector';
 

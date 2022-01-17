@@ -6,7 +6,7 @@ import {
   IScoresByPlayer,
 } from '../types';
 
-import { createInitialPlayerAchievements } from './achievementUtils';
+import { createInitialPlayerAchievements } from './achievements';
 import { createBaseBoard } from './board';
 import { createInitialResourceTotals } from './resources';
 

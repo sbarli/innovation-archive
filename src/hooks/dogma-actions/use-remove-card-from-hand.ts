@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { CardIds } from '../../enums';
 import { removeCardFromHand, selectPlayerHand } from '../../state/handsSlice';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 import { useAppSelector } from '../use-app-selector';
 
 export const useRemoveCardFromHand = (playerId: string) => {

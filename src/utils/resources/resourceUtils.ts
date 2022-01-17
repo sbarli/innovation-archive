@@ -1,6 +1,6 @@
 import { CardIds, Resources, SplayDirections } from '../../enums';
 import { TResourceTotals } from '../../types';
-import { getCardById } from '../cardUtils';
+import { getCardById } from '../cards';
 
 const baseCardResourceTotals = Object.freeze({
   [Resources.CASTLES]: 0,

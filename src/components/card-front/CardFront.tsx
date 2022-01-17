@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CardIds } from '../../enums';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 import noop from '../../utils/noop';
 
 interface ICardFrontProps {

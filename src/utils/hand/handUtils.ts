@@ -1,6 +1,6 @@
 import { CardIds, Colors } from '../../enums';
 import { IHands, THand } from '../../types';
-import { determineCardColor } from '../cardUtils';
+import { determineCardColor } from '../cards';
 
 /**
  * @name createBaseHand

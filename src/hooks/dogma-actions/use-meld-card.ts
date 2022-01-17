@@ -9,7 +9,7 @@ import {
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 import { updateResourceTotalsWhenMelding } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
 

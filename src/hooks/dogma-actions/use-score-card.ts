@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { CardIds } from '../../enums';
 import { increaseScore } from '../../state/scoresSlice';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 
 export const useScoreCard = (playerId: string) => {
   const dispatch = useDispatch();

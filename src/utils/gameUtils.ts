@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash-es';
 import { Ages, CardIds } from '../enums';
 import { ICard, TCardIdsByAge } from '../types';
 
-import { getCardById } from './cardUtils';
+import { getCardById } from './cards';
 
 export const recurseDraw = (
   deck: TCardIdsByAge,

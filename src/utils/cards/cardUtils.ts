@@ -1,8 +1,7 @@
-import { cards as cardsById } from '../data/cardsById';
-import { Ages, CardIds, TOTAL_CARDS_IN_AGE } from '../enums';
-import { ICard, TCardIdsByAge, TCardsById, THand } from '../types';
-
-import { shuffleArray } from './sharedUtils';
+import { cards as cardsById } from '../../data/cardsById';
+import { Ages, CardIds, TOTAL_CARDS_IN_AGE } from '../../enums';
+import { ICard, TCardIdsByAge, TCardsById, THand } from '../../types';
+import { shuffleArray } from '../sharedUtils';
 
 export const getCardById = (cardId: CardIds) => cardsById[cardId];
 

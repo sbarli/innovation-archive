@@ -1,5 +1,5 @@
-import { Ages, BASE_AGE_ACHIEVEMENTS, CardIds } from '../enums';
-import { TAgeAchievements, TCardIdsByAge } from '../types';
+import { Ages, BASE_AGE_ACHIEVEMENTS, CardIds } from '../../enums';
+import { TAgeAchievements, TCardIdsByAge } from '../../types';
 
 type TAgeAchievementCardIdsByAge = {
   [key in Ages]: CardIds | undefined;

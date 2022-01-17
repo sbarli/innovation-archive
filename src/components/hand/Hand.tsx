@@ -5,7 +5,7 @@ import { CardIds, Colors } from '../../enums';
 import { Collapse } from '../../libs/ui/collapse';
 import { RootState } from '../../store';
 import { THand } from '../../types';
-import { getCardById } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cards';
 import noop from '../../utils/noop';
 import { CardBack } from '../card-back';
 import { CardFront } from '../card-front';
