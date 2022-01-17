@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { store } from '../../store';
-import { createInitialResourceTotals } from '../../utils/cardUtils';
+import { createInitialResourceTotals } from '../../utils/resources';
 
 import { ResourceTotals } from '.';
 

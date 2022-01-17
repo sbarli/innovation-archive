@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { cards as cardsById } from '../../data/cardsById';
 import { CardIds } from '../../enums';
+import { getCardById } from '../../utils/cardUtils';
 import noop from '../../utils/noop';
 
 interface ICardFrontProps {
@@ -9,7 +9,10 @@ interface ICardFrontProps {
   onCardClick?(): void;
 }
 export function CardFront({ cardId, onCardClick = noop }: ICardFrontProps) {
-  const cardDetails = cardsById[cardId];
+  const cardDetails = getCardById(cardId);
+  if (!cardDetails) {
+    return null;
+  }
 
   return (
     <div style={{ color: cardDetails.color }} data-testid="card-front" onClick={onCardClick}>

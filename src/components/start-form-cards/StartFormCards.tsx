@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { cards as cardsById } from '../../data/cardsById';
 import { CardIds, Colors } from '../../enums';
 import { usePlayerName } from '../../hooks/use-player-name';
 import { selectHands } from '../../state/handsSlice';
 import { IHands, IStarterCardIdsData } from '../../types';
+import { getCardById } from '../../utils/cardUtils';
 
 const mapHandForPlayer = ({
   hands,
@@ -21,7 +21,7 @@ const mapHandForPlayer = ({
       hands[playerChoosing][cur as Colors].forEach(cardId => {
         acc.push(
           <button key={`${playerChoosing}-${cardId}`} onClick={() => onCardClick(cardId)}>
-            {cardsById[cardId].name}
+            {getCardById(cardId)?.name ?? ''}
           </button>
         );
       });

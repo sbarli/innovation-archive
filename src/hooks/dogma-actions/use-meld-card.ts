@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { cards as cardsById } from '../../data/cardsById';
 import { CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import {
@@ -10,7 +9,8 @@ import {
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
-import { updateResourceTotalsWhenMelding } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cardUtils';
+import { updateResourceTotalsWhenMelding } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
 
 // const checkCardInHand = (hand: THand, cardId: CardIds) =>
@@ -30,7 +30,7 @@ export const useMeldCard = (playerId: string) => {
 
   const meldCard = useCallback(
     (cardId: CardIds) => {
-      const card = cardsById[cardId];
+      const card = getCardById(cardId);
       if (!card) {
         return;
       }

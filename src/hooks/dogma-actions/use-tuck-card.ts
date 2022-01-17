@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { cards as cardsById } from '../../data/cardsById';
 import { BoardPlacementOptions, CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import { selectPlayerHand } from '../../state/handsSlice';
@@ -11,7 +10,8 @@ import {
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
-import { updateResourceTotalsWhenTucking } from '../../utils/cardUtils';
+import { getCardById } from '../../utils/cardUtils';
+import { updateResourceTotalsWhenTucking } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
 
 export const useTuckCard = (playerId: string) => {
@@ -23,7 +23,7 @@ export const useTuckCard = (playerId: string) => {
 
   const tuckCard = useCallback(
     (cardId: CardIds) => {
-      const card = cardsById[cardId];
+      const card = getCardById(cardId);
       if (!playerHand || !card) {
         return;
       }

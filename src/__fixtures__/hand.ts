@@ -1,6 +1,6 @@
 import { cards as cardsById } from '../data/cardsById';
 import { IHands } from '../types';
-import { createBaseHand } from '../utils/cardUtils';
+import { createBaseHand } from '../utils/hand';
 
 export const createInitialHands = (playerIds: string[]) => {
   const cards = Object.values(cardsById);

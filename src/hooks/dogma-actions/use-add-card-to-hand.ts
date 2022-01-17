@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { cards as cardsById } from '../../data/cardsById';
 import { CardIds } from '../../enums';
 import { addCardToHand, selectPlayerHand } from '../../state/handsSlice';
+import { getCardById } from '../../utils/cardUtils';
 import { useAppSelector } from '../use-app-selector';
 
 export const useAddCardToHand = (playerId: string) => {
@@ -12,7 +12,7 @@ export const useAddCardToHand = (playerId: string) => {
 
   const addCardToPlayerHand = useCallback(
     (cardId: CardIds) => {
-      const card = cardsById[cardId];
+      const card = getCardById(cardId);
       if (!playerHand || !card) {
         return;
       }

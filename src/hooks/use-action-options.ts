@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { Ages } from '../enums';
 import { RootState } from '../store';
 import { checkIfPlayerCanAchieve } from '../utils/achievementUtils';
-import { calculateTotalCardsInHand, calculateTotalTopCardsOnBoard } from '../utils/cardUtils';
+import { calculateTotalTopCardsOnBoard } from '../utils/board';
+import { calculateTotalCardsInHand } from '../utils/hand';
 import noop from '../utils/noop';
 
 import { useDrawCard } from './dogma-actions/use-draw-card';
