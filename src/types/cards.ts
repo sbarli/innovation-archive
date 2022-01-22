@@ -8,35 +8,9 @@ export type TCardIdsByAge = {
   [key in Ages]: CardIds[];
 };
 
-export interface IAgeAchievement {
-  card: CardIds | undefined;
-  cost: number;
-  isAvailable: boolean;
-}
-
-export type TAgeAchievements = {
-  [key in Ages]: IAgeAchievement;
-};
-
-export type TSpecialAchievements = {
-  [key in SpecialAchievements]: boolean;
-};
-
-export type TDeck = {
-  [key in Ages]: CardIds[];
-};
-
-export type THand = {
+export type TCardIdsByColor = {
   [key in Colors]: CardIds[];
 };
-
-export type TResourceTotals = {
-  [key in Resources]: number;
-};
-
-export interface IHands {
-  [key: string]: THand;
-}
 
 export interface IDogmaEffect {
   effectId: string;
@@ -65,9 +39,8 @@ export interface ICard {
 }
 
 export interface ICardActionProps {
+  cardId: CardIds;
   player: string;
-  card: CardIds;
-  color: Colors;
 }
 
 export interface IStarterCardIdsData {
