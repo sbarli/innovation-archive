@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Colors } from '../enums';
+import { CardIds } from '../enums';
 import { RootState } from '../store';
-import { ICard, ICardActionProps, IHands, THand } from '../types';
+import { ICardActionProps, IHands } from '../types';
 
 interface IHandsState {
   hands: IHands;
@@ -19,49 +19,43 @@ export const handsSlice = createSlice({
     initHands: (state, { payload: { hands } }: PayloadAction<{ hands: IHands }>) => {
       state.hands = hands;
     },
-    addCardToHand: (
-      state,
-      { payload: { player, color, card } }: PayloadAction<ICardActionProps>
-    ) => {
-      if (state.hands[player]?.[color]) {
-        state.hands[player][color].push(card);
+    addCardToHand: (state, { payload: { player, cardId } }: PayloadAction<ICardActionProps>) => {
+      if (state.hands[player]) {
+        state.hands[player].push(cardId);
       }
     },
     addCardsToHand: (
       state,
-      { payload: { player, data } }: PayloadAction<{ player: string; data: THand }>
+      { payload: { player, data } }: PayloadAction<{ player: string; data: CardIds[] }>
     ) => {
       if (state.hands[player]) {
-        Object.keys(data).forEach(c => {
-          const color = c as Colors;
-          state.hands[player][color] = [...state.hands[player][color], ...data[color]];
-        });
+        data.forEach(card => state.hands[player].push(card));
       }
     },
     removeCardFromHand: (
       state,
-      { payload: { player, color, card } }: PayloadAction<ICardActionProps>
+      { payload: { player, cardId } }: PayloadAction<ICardActionProps>
     ) => {
-      if (state.hands[player]?.[color]) {
-        const cardIdx = state.hands[player][color].indexOf(card);
+      if (state.hands[player]) {
+        const cardIdx = state.hands[player].indexOf(cardId);
         if (cardIdx > -1) {
-          state.hands[player][color].splice(cardIdx, 1);
+          state.hands[player].splice(cardIdx, 1);
         }
       }
     },
     removeCardsFromHands: (
       state,
-      { payload: { data } }: PayloadAction<{ data: { [key: string]: ICard[] } }>
+      { payload: { data } }: PayloadAction<{ data: { [key: string]: CardIds[] } }>
     ) => {
       Object.keys(data).forEach(player => {
         const playerHand = state.hands[player];
         if (!playerHand) {
           return state;
         }
-        data[player].forEach(card => {
-          const cardIdx = playerHand[card.color].indexOf(card.id);
+        data[player].forEach(cardId => {
+          const cardIdx = playerHand.indexOf(cardId);
           if (cardIdx > -1) {
-            state.hands[player][card.color].splice(cardIdx, 1);
+            state.hands[player].splice(cardIdx, 1);
           }
         });
       });
