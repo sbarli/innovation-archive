@@ -1,10 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components/macro';
 
 import { setupGame, setupPlayerOrder } from '../../actions/gameActions';
 import { StartFormCards } from '../../components/start-form-cards';
 import { StartFormPlayers } from '../../components/start-form-players';
+
+const StartGameWrapper = styled.div`
+  height: 100%;
+  margin: 1rem 3rem;
+`;
 
 export function StartGame() {
   const dispatch = useDispatch();
@@ -34,12 +40,11 @@ export function StartGame() {
   }
 
   return (
-    <div className="StartGame">
-      <h1>Welcome to the Start Game Page!</h1>
-      <Link to="/">Go Home</Link>
+    <StartGameWrapper className="StartGame">
+      <h2>Game Setup</h2>
       {page === 1 && <StartFormPlayers onSubmit={onSubmitPage1} />}
       {page === 2 && <StartFormCards onSubmit={onSubmitPage2} />}
-    </div>
+    </StartGameWrapper>
   );
 }
 

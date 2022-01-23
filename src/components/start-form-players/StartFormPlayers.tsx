@@ -3,29 +3,19 @@ import arrayMutators from 'final-form-arrays';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import styled from 'styled-components/macro';
 
 import RenderText from '../../libs/forms/fields/RenderText/RenderText';
 import { minChar, required } from '../../libs/forms/utils/validation';
 import { formatPlayerId } from '../../utils/players';
 
-const StyledPlayerInput = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 2rem 0;
-`;
-
-const StyledRemove = styled.div`
-  font-size: 1.2rem;
-  margin-left: 8px;
-`;
-
-const StyledError = styled.div`
-  color: red;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-`;
+import {
+  StyledError,
+  StyledForm,
+  StyledHeader,
+  StyledPlayerFields,
+  StyledPlayerInput,
+  StyledRemove,
+} from './StartFormPlayers.styled';
 
 const BASE_PLAYER = { name: '' };
 
@@ -93,8 +83,8 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
       }) => {
         const maxPlayerInputsVisible = values?.players?.length >= 4;
         return (
-          <form onSubmit={handleSubmit}>
-            <h2>Setup your game</h2>
+          <StyledForm onSubmit={handleSubmit}>
+            <StyledHeader>Players</StyledHeader>
             <div>
               <button
                 type="button"
@@ -110,20 +100,18 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
             </div>
             <FieldArray name="players">
               {({ fields, meta: { error } }) => (
-                <div>
+                <StyledPlayerFields>
                   {fields.map((name, index) => (
                     <StyledPlayerInput key={name}>
                       <Field
-                        name={`${name}.name`}
-                        label={`Player ${index + 1}`}
                         component={RenderText}
+                        label={`Player ${index + 1}`}
+                        labelAbove
+                        name={`${name}.name`}
                         validate={validateName}
                       />
                       {index > 1 && (
-                        <StyledRemove
-                          onClick={() => fields.remove(index)}
-                          style={{ cursor: 'pointer' }}
-                        >
+                        <StyledRemove onClick={() => fields.remove(index)}>
                           <span aria-label="Remove Player" role="img">
                             ❌
                           </span>
@@ -132,14 +120,14 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
                     </StyledPlayerInput>
                   ))}
                   {typeof error === 'string' && !pristine && <StyledError>{error}</StyledError>}
-                </div>
+                </StyledPlayerFields>
               )}
             </FieldArray>
 
             <button type="submit" disabled={submitting || pristine}>
               Let's Play!
             </button>
-          </form>
+          </StyledForm>
         );
       }}
     />

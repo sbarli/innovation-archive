@@ -11,32 +11,52 @@
  */
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 import FieldError from '../../validation/field-error/FieldError';
 
 const FieldContainer = styled.div`
-  label {
-    font-weight: var(--font-weight-bold);
-    margin-right: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
-  input {
-    padding: 5px 10px;
-    border: 1px solid;
-    border-radius: 10px;
-    box-shadow: none;
-  }
+const labelAboveStyles = css`
+  display: block;
+  margin-bottom: 0.5rem;
+`;
+
+const labelAsideStyles = css`
+  margin-right: 1rem;
+`;
+
+const StyledLabel = styled.label<{ $showAbove: boolean }>`
+  font-weight: bold;
+  ${p => (p.$showAbove ? labelAboveStyles : labelAsideStyles)}
+`;
+
+const StyledInput = styled.input`
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: none;
 `;
 
 interface IRenderTextProps extends FieldRenderProps<string, HTMLElement> {
-  label: string;
+  label?: string;
+  labelAbove?: boolean;
 }
 
-const RenderText = ({ input, meta: { touched, error }, label }: IRenderTextProps) => (
+const RenderText = ({
+  input,
+  meta: { touched, error },
+  label,
+  labelAbove = false,
+}: IRenderTextProps) => (
   <FieldContainer>
-    {label && <label>{label}</label>}
-    <input {...input} type="text" />
+    {label && <StyledLabel $showAbove={labelAbove}>{label}</StyledLabel>}
+    <StyledInput {...input} type="text" />
     <FieldError name={input.name} />
   </FieldContainer>
 );
