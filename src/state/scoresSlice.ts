@@ -52,7 +52,7 @@ export const { initScores, increaseScore, decreaseScore } = scoresSlice.actions;
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
 export const selectScores = (state: RootState) => state.scores.scores;
 export const selectScorePiles = (state: RootState) => state.scores.scorePiles;
-export const selectSpecificPlayerScore = (state: RootState, playerId: string) =>
+export const selectPlayerScore = (state: RootState, playerId: string) =>
   state.scores.scores[playerId];
 
 export default scoresSlice.reducer;

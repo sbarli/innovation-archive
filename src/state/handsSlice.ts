@@ -19,43 +19,40 @@ export const handsSlice = createSlice({
     initHands: (state, { payload: { hands } }: PayloadAction<{ hands: IHands }>) => {
       state.hands = hands;
     },
-    addCardToHand: (state, { payload: { player, cardId } }: PayloadAction<ICardActionProps>) => {
-      if (state.hands[player]) {
-        state.hands[player].push(cardId);
+    addCardToHand: (state, { payload: { playerId, cardId } }: PayloadAction<ICardActionProps>) => {
+      if (state.hands[playerId]) {
+        state.hands[playerId].push(cardId);
       }
     },
     addCardsToHand: (
       state,
-      { payload: { player, data } }: PayloadAction<{ player: string; data: CardIds[] }>
+      { payload: { playerId, cardIds } }: PayloadAction<{ playerId: string; cardIds: CardIds[] }>
     ) => {
-      if (state.hands[player]) {
-        data.forEach(card => state.hands[player].push(card));
+      if (state.hands[playerId]) {
+        cardIds.forEach(cardId => state.hands[playerId].push(cardId));
       }
     },
     removeCardFromHand: (
       state,
-      { payload: { player, cardId } }: PayloadAction<ICardActionProps>
+      { payload: { playerId, cardId } }: PayloadAction<ICardActionProps>
     ) => {
-      if (state.hands[player]) {
-        const cardIdx = state.hands[player].indexOf(cardId);
+      if (state.hands[playerId]) {
+        const cardIdx = state.hands[playerId].indexOf(cardId);
         if (cardIdx > -1) {
-          state.hands[player].splice(cardIdx, 1);
+          state.hands[playerId].splice(cardIdx, 1);
         }
       }
     },
-    removeCardsFromHands: (
-      state,
-      { payload: { data } }: PayloadAction<{ data: { [key: string]: CardIds[] } }>
-    ) => {
-      Object.keys(data).forEach(player => {
-        const playerHand = state.hands[player];
+    removeCardsFromHands: (state, { payload: { data } }: PayloadAction<{ data: IHands }>) => {
+      Object.keys(data).forEach(playerId => {
+        const playerHand = state.hands[playerId];
         if (!playerHand) {
           return state;
         }
-        data[player].forEach(cardId => {
+        data[playerId].forEach(cardId => {
           const cardIdx = playerHand.indexOf(cardId);
           if (cardIdx > -1) {
-            state.hands[player].splice(cardIdx, 1);
+            state.hands[playerId].splice(cardIdx, 1);
           }
         });
       });

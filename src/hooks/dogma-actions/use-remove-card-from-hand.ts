@@ -2,23 +2,21 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CardIds } from '../../enums';
-import { removeCardFromHand, selectPlayerHand } from '../../state/handsSlice';
+import { removeCardFromHand } from '../../state/handsSlice';
 import { getCardById } from '../../utils/cards';
-import { useAppSelector } from '../use-app-selector';
 
 export const useRemoveCardFromHand = (playerId: string) => {
   const dispatch = useDispatch();
-  const playerHand = useAppSelector(state => selectPlayerHand(state, playerId));
 
   const removeCardFromPlayerHand = useCallback(
     (cardId: CardIds) => {
       const card = getCardById(cardId);
-      if (!playerHand || !card) {
+      if (!card) {
         return;
       }
-      dispatch(removeCardFromHand({ player: playerId, color: card.color, card: cardId }));
+      dispatch(removeCardFromHand({ playerId, cardId }));
     },
-    [dispatch, playerHand, playerId]
+    [dispatch, playerId]
   );
 
   return removeCardFromPlayerHand;

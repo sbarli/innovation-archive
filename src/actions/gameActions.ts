@@ -1,4 +1,4 @@
-import { cards as allCards } from '../data/cardsById';
+import { cards as cardsById } from '../data/cardsById';
 import { Ages } from '../enums';
 import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
@@ -12,7 +12,7 @@ import {
 } from '../state/playersSlice';
 import { initScores } from '../state/scoresSlice';
 import { AppThunk } from '../store';
-import { ICard, IResourcesByPlayer, IStarterCardIdsData } from '../types';
+import { ICard, IHands, IResourcesByPlayer, IStarterCardIdsData } from '../types';
 import {
   createInitialAgeAchievements,
   pullAgeAchievementsFromStarterDeck,
@@ -33,16 +33,12 @@ interface ISetupGameProps {
   players: IPlayerName[];
 }
 
-interface IStarterCardSetup {
-  [key: string]: ICard[];
-}
-
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
 export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk => dispatch => {
-  const starterDeck = sortAndShuffleCards(allCards);
+  const starterDeck = sortAndShuffleCards(cardsById);
   const players = createBasePlayers(playerValues);
   const numPlayers = playerValues.length;
   const playerIds = Object.keys(players);
@@ -81,7 +77,7 @@ export const setupPlayerOrder = (
 ): AppThunk => dispatch => {
   // get the name of each card to determine player order
   const starterCardNamesData = starterCardIdsData.map(val => {
-    const cardName = allCards[val.card].name;
+    const cardName = cardsById[val.card].name;
     return {
       card: cardName,
       player: val.player,
@@ -92,22 +88,30 @@ export const setupPlayerOrder = (
 
   // create a map of the cards to remove from
   // each players hand and add to their board
-  const data = starterCardIdsData.reduce((acc, cur) => {
-    acc[cur.player] = [allCards[cur.card]];
-    return acc;
-  }, {} as IStarterCardSetup);
+  const { boardData, handData } = starterCardIdsData.reduce(
+    (acc, cur) => {
+      if (!acc.boardData[cur.player]) {
+        acc.boardData[cur.player] = [];
+        acc.handData[cur.player] = [];
+      }
+      acc.boardData[cur.player].push(cardsById[cur.card]);
+      acc.handData[cur.player].push(cur.card);
+      return acc;
+    },
+    { boardData: {} as { [key: string]: ICard[] }, handData: {} as IHands }
+  );
 
   // update resources totals for players
   const playerResources = playerOrder.reduce((acc, player) => {
-    const cardsMovingToBoard = data[player].map(card => card.id);
+    const cardsMovingToBoard = handData[player];
     const playerResourceTotal = calculateTotalResourcesForCards(cardsMovingToBoard);
     acc[player] = playerResourceTotal;
     return acc;
   }, {} as IResourcesByPlayer);
 
   dispatch(initPlayerOrder({ playerOrder }));
-  dispatch(removeCardsFromHands({ data }));
-  dispatch(addCardsToBoards({ data }));
+  dispatch(removeCardsFromHands({ data: handData }));
+  dispatch(addCardsToBoards({ data: boardData }));
   dispatch(updateAllPlayersResources({ playerResources }));
   dispatch(updatePlayers({ players: updatedPlayersWithOrder }));
 };

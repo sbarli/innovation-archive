@@ -9,7 +9,7 @@ import { Hand } from '.';
 test('renders null if no hand exists for player', () => {
   const { getByTestId } = render(
     <Provider store={store}>
-      <Hand player="" />
+      <Hand isCurrentPlayer={false} player="" />
     </Provider>
   );
 

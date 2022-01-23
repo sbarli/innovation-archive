@@ -15,6 +15,14 @@ import { createBaseBoard } from '../board';
 import { getCardById } from '../cards';
 import { createInitialResourceTotals } from '../resources';
 
+/**
+ * @name recurseDraw
+ * @description recurses through the deck starting
+ *  at @age until a card is found to draw or until
+ *  the player wins by drawing from age 11 or higher
+ * @TODO: this player doesn't necessarily win need to
+ *    check highest player score to determine winner
+ */
 export const recurseDraw = (
   deck: TCardIdsByAge,
   age: Ages
@@ -32,10 +40,13 @@ export const recurseDraw = (
 };
 
 /**
- *
+ * @name drawFromDeck
+ * @description draws cards from the deck
+ *  until all n cards are drawn or until
+ *  the player wins.
  * @returns
  * {
- *   cardsDrawn: ICard[];
+ *   cardsDrawn: CardIds[];
  *   hasWon: boolean;
  * }
  *
@@ -50,7 +61,7 @@ export const drawFromDeck = ({
   deck: TCardIdsByAge;
 }) => {
   const deckCopy = cloneDeep(deck);
-  const cardsDrawn: ICard[] = [];
+  const cardsDrawn: CardIds[] = [];
   let winner = false;
   for (let numDrawn = 0; numDrawn < cardsToDraw; numDrawn += 1) {
     const { cardDrawn, hasWon } = recurseDraw(deckCopy, age);
@@ -61,8 +72,7 @@ export const drawFromDeck = ({
     if (!cardDrawn) {
       throw new Error('Something went wrong drawing card from deck');
     }
-    const card = getCardById(cardDrawn);
-    cardsDrawn.push(card);
+    cardsDrawn.push(cardDrawn);
   }
   return { cardsDrawn, hasWon: winner, updatedDeck: deckCopy };
 };

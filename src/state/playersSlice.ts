@@ -99,8 +99,7 @@ export const selectCurrentPlayerId = (state: RootState) => state.players.current
 export const selectPlayerResources = (state: RootState, playerId: string) =>
   state.players.resources[playerId];
 export const selectPlayers = (state: RootState) => state.players.players;
-export const selectSpecificPlayer = (state: RootState, playerId: string) =>
-  state.players.players[playerId];
+export const selectPlayer = (state: RootState, playerId: string) => state.players.players[playerId];
 export const selectWinner = (state: RootState) => state.players.winner;
 
 export default playersSlice.reducer;

@@ -1,19 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { cards as cardData } from '../data/cardsById';
 import { Ages, CardIds } from '../enums';
 import { RootState } from '../store';
-import { ICard, IDogmaEffect, TCardIdsByAge, TCardsById } from '../types';
+import { ICard, TCardIdsByAge } from '../types';
 
 interface ICardsState {
-  cards: TCardsById;
-  dogmaEffects: IDogmaEffect[];
   deck: TCardIdsByAge | null;
 }
 
 export const initialState: ICardsState = {
-  cards: cardData,
-  dogmaEffects: [],
   deck: null,
 };
 
@@ -61,7 +56,6 @@ export const {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
-export const selectCards = (state: RootState) => state.cards.cards;
 export const selectDeck = (state: RootState) => state.cards.deck;
 export const selectAgeCards = (state: RootState, age: Ages) =>
   state.cards.deck ? state.cards.deck[age] : state.cards.deck;

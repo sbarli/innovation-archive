@@ -5,14 +5,13 @@ import { setWinningPlayer } from '../../actions/gameActions';
 import { Ages } from '../../enums';
 import { selectDeck, updateDeck } from '../../state/cardsSlice';
 import { addCardsToHand } from '../../state/handsSlice';
-import { selectSpecificPlayer } from '../../state/playersSlice';
-import { sortCardsByColor } from '../../utils/cards';
+import { selectPlayer } from '../../state/playersSlice';
 import { drawFromDeck } from '../../utils/game';
 import { useAppSelector } from '../use-app-selector';
 
 export const useDrawCard = (playerId: string) => {
   const dispatch = useDispatch();
-  const player = useAppSelector(state => selectSpecificPlayer(state, playerId));
+  const player = useAppSelector(state => selectPlayer(state, playerId));
   const playerAge = player?.age;
   const deck = useAppSelector(selectDeck);
 
@@ -40,7 +39,7 @@ export const useDrawCard = (playerId: string) => {
       }
       dispatch(updateDeck({ deck: updatedDeck }));
       if (addCardToPlayerHand) {
-        dispatch(addCardsToHand({ player: playerId, data: sortCardsByColor(cardsDrawn) }));
+        dispatch(addCardsToHand({ playerId, cardIds: cardsDrawn }));
       }
       return cardsDrawn;
     },

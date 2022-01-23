@@ -5,7 +5,7 @@ import { CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import {
   selectPlayerResources,
-  selectSpecificPlayer,
+  selectPlayer,
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
@@ -24,7 +24,7 @@ import { useAppSelector } from '../use-app-selector';
 
 export const useMeldCard = (playerId: string) => {
   const dispatch = useDispatch();
-  const player = useAppSelector(state => selectSpecificPlayer(state, playerId));
+  const player = useAppSelector(state => selectPlayer(state, playerId));
   const playerBoard = useAppSelector(state => selectPlayerBoard(state, playerId));
   const playerResources = useAppSelector(state => selectPlayerResources(state, playerId));
 

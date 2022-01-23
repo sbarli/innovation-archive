@@ -1,15 +1,17 @@
-import { useSelector } from 'react-redux';
-
 import { Ages } from '../enums';
-import { RootState } from '../store';
+import { selectAgeAchievements } from '../state/achievementsSlice';
+import { selectPlayerBoard } from '../state/boardsSlice';
+import { selectPlayerHand } from '../state/handsSlice';
+import { selectPlayer } from '../state/playersSlice';
+import { selectPlayerScore } from '../state/scoresSlice';
 import { checkIfPlayerCanAchieve } from '../utils/achievements';
 import { calculateTotalTopCardsOnBoard } from '../utils/board';
-import { calculateTotalCardsInHand } from '../utils/hand';
 import noop from '../utils/noop';
 
 import { useDrawCard } from './dogma-actions/use-draw-card';
 import { useMeldCard } from './dogma-actions/use-meld-card';
 import { useRemoveCardFromHand } from './dogma-actions/use-remove-card-from-hand';
+import { useAppSelector } from './use-app-selector';
 import { usePlayerTakesAction } from './use-player-takes-action';
 
 const BASE_ACTION_OPTIONS = {
@@ -22,12 +24,12 @@ const BASE_ACTION_OPTIONS = {
 };
 
 export const useActionOptions = ({ player }: { player: string }) => {
-  const playerData = useSelector((state: RootState) => state.players.players[player]);
+  const playerData = useAppSelector(state => selectPlayer(state, player));
   const playerAge = (playerData?.age as Ages) ?? Ages.ONE;
-  const playerScore = useSelector((state: RootState) => state.scores.scores[player]);
-  const ageAchievements = useSelector((state: RootState) => state.achievements.ageAchievements);
-  const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
-  const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
+  const playerScore = useAppSelector(state => selectPlayerScore(state, player));
+  const ageAchievements = useAppSelector(selectAgeAchievements);
+  const playerHand = useAppSelector(state => selectPlayerHand(state, player));
+  const playerBoard = useAppSelector(state => selectPlayerBoard(state, player));
   const playerDrawAction = usePlayerTakesAction(player, useDrawCard);
   const playerMeldAction = usePlayerTakesAction(player, useRemoveCardFromHand, useMeldCard);
 
@@ -39,7 +41,7 @@ export const useActionOptions = ({ player }: { player: string }) => {
 
   const canDogma = calculateTotalTopCardsOnBoard(playerBoard) > 0;
 
-  const canMeld = calculateTotalCardsInHand(playerHand) > 0;
+  const canMeld = playerHand.length > 0;
 
   const canAchieve = checkIfPlayerCanAchieve({
     ageAchievements,

@@ -1,48 +1,33 @@
 import React, { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 
-import { CardIds, Colors } from '../../enums';
+import { CardIds } from '../../enums';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { RootState } from '../../store';
-import { THand } from '../../types';
+import { selectPlayerHand } from '../../state/handsSlice';
 import { getCardById } from '../../utils/cards';
 import noop from '../../utils/noop';
 import { CardBack } from '../card-back';
 import { CardFront } from '../card-front';
 
-const createCurrentPlayerCardView = (playerHand: THand, meldAction: (cardId: CardIds) => void) =>
-  Object.keys(playerHand).reduce((colorPiles, color, idx) => {
-    const colorPile = playerHand[color as Colors];
-    if (colorPile?.length) {
-      const cardsInPile = colorPile.reduce((pile, cardId) => {
-        const cardComponent = (
-          <CardFront key={cardId} cardId={cardId} onCardClick={() => meldAction(cardId)} />
-        );
-        if (!!cardComponent) {
-          pile.push(cardComponent);
-        }
-        return pile;
-      }, [] as ReactNode[]);
-      colorPiles.push(<div key={idx}>{cardsInPile}</div>);
+const createCurrentPlayerCardView = (
+  playerHand: CardIds[],
+  meldAction: (cardId: CardIds) => void
+) =>
+  playerHand.reduce((cards, cardId) => {
+    const card = <CardFront key={cardId} cardId={cardId} onCardClick={() => meldAction(cardId)} />;
+    if (!!card) {
+      cards.push(card);
     }
-    return colorPiles;
+    return cards;
   }, [] as ReactNode[]);
 
-const createOpponentPlayerCardView = (playerHand: THand) =>
-  Object.keys(playerHand).reduce((oppHand, color) => {
-    const colorPile = playerHand[color as Colors];
-    if (colorPile?.length) {
-      oppHand.push(
-        colorPile.reduce((oppColorPile, cardId) => {
-          const cardAge = getCardById(cardId)?.age;
-          if (cardAge) {
-            oppColorPile.push(<CardBack key={cardId} cardAge={cardAge} />);
-          }
-          return oppColorPile;
-        }, [] as ReactNode[])
-      );
+const createOpponentPlayerCardView = (playerHand: CardIds[]) =>
+  playerHand.reduce((cards, cardId) => {
+    const cardAge = getCardById(cardId)?.age;
+    if (cardAge) {
+      cards.push(<CardBack key={cardId} cardAge={cardAge} />);
     }
-    return oppHand;
+    return cards;
   }, [] as ReactNode[]);
 
 interface IHandProps {
@@ -52,7 +37,7 @@ interface IHandProps {
 }
 
 export function Hand({ isCurrentPlayer, meldAction = noop, player }: IHandProps) {
-  const playerHand = useSelector((state: RootState) => state.hands.hands[player]);
+  const playerHand = useAppSelector(state => selectPlayerHand(state, player));
 
   if (!playerHand) {
     return null;

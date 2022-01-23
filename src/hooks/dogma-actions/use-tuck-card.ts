@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { BoardPlacementOptions, CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
-import { selectPlayerHand } from '../../state/handsSlice';
 import {
   selectPlayerResources,
-  selectSpecificPlayer,
+  selectPlayer,
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
@@ -16,15 +15,14 @@ import { useAppSelector } from '../use-app-selector';
 
 export const useTuckCard = (playerId: string) => {
   const dispatch = useDispatch();
-  const player = useAppSelector(state => selectSpecificPlayer(state, playerId));
-  const playerHand = useAppSelector(state => selectPlayerHand(state, playerId));
+  const player = useAppSelector(state => selectPlayer(state, playerId));
   const playerBoard = useAppSelector(state => selectPlayerBoard(state, playerId));
   const playerResources = useAppSelector(state => selectPlayerResources(state, playerId));
 
   const tuckCard = useCallback(
     (cardId: CardIds) => {
       const card = getCardById(cardId);
-      if (!playerHand || !card) {
+      if (!card) {
         return;
       }
       // recalculate resource totals
@@ -54,7 +52,7 @@ export const useTuckCard = (playerId: string) => {
         })
       );
     },
-    [dispatch, player.age, playerBoard, playerHand, playerId, playerResources]
+    [dispatch, player.age, playerBoard, playerId, playerResources]
   );
 
   return tuckCard;

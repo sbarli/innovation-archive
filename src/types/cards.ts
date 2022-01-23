@@ -40,7 +40,7 @@ export interface ICard {
 
 export interface ICardActionProps {
   cardId: CardIds;
-  player: string;
+  playerId: string;
 }
 
 export interface IStarterCardIdsData {

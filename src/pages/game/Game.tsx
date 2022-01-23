@@ -8,7 +8,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
 import {
   selectCurrentPlayerId,
-  selectSpecificPlayer,
+  selectPlayer,
   selectWinner,
 } from '../../state/playersSlice';
 
@@ -16,7 +16,7 @@ export function Game() {
   const winnerId = useAppSelector(selectWinner);
   const currentPlayerId = useAppSelector(selectCurrentPlayerId);
   const currentPlayerName = usePlayerName(currentPlayerId ?? '');
-  const winner = useAppSelector(state => selectSpecificPlayer(state, winnerId ?? ''));
+  const winner = useAppSelector(state => selectPlayer(state, winnerId ?? ''));
 
   if (winnerId && winner) {
     return (
