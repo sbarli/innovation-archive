@@ -42,7 +42,7 @@ export const deckSlice = createSlice({
       state[age] = newPile;
     },
     updateDeck: (state, { payload: { deck } }: PayloadAction<{ deck: TCardIdsByAge }>) => {
-      state = deck;
+      return deck;
     },
   },
 });
