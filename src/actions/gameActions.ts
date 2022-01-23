@@ -2,7 +2,7 @@ import { cards as cardsById } from '../data/cardsById';
 import { Ages } from '../enums';
 import { initAchievements } from '../state/achievementsSlice';
 import { addCardsToBoards, initBoards } from '../state/boardsSlice';
-import { updateDeck } from '../state/cardsSlice';
+import { updateDeck } from '../state/deckSlice';
 import { initHands, removeCardsFromHands } from '../state/handsSlice';
 import {
   initPlayerOrder,

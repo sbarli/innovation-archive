@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { setWinningPlayer } from '../../actions/gameActions';
 import { Ages } from '../../enums';
-import { selectDeck, updateDeck } from '../../state/cardsSlice';
+import { selectDeck, updateDeck } from '../../state/deckSlice';
 import { addCardsToHand } from '../../state/handsSlice';
 import { selectPlayer } from '../../state/playersSlice';
 import { drawFromDeck } from '../../utils/game';
