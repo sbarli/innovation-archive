@@ -9,10 +9,6 @@ export type TBoard = {
   [key in Colors]: IBoardPile;
 };
 
-export interface IBoard extends TBoard {
-  player: string;
-}
-
 export interface IBoards {
-  [key: string]: IBoard;
+  [key: string]: TBoard;
 }

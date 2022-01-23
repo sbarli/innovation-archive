@@ -57,6 +57,7 @@ export const {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
+export const selectDeck = (state: RootState) => state.deck;
 export const selectAgeCards = (state: RootState, age: Ages) => state.deck[age];
 
 export default deckSlice.reducer;

@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 
 import { Colors } from '../../enums';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { RootState } from '../../store';
+import { selectPlayerBoard } from '../../state/boardsSlice';
 import { CardFront } from '../card-front';
 
 export function Board({ player }: { player: string }) {
-  const playerBoard = useSelector((state: RootState) => state.boards.boards[player]);
+  const playerBoard = useAppSelector(state => selectPlayerBoard(state, player));
 
   if (!playerBoard) {
     return null;

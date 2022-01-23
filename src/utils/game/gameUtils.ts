@@ -4,7 +4,6 @@ import { Ages, CardIds } from '../../enums';
 import {
   IAchievementsByPlayer,
   IBoards,
-  ICard,
   IResourcesByPlayer,
   IScorePilesByPlayer,
   IScoresByPlayer,
@@ -12,7 +11,6 @@ import {
 } from '../../types';
 import { createInitialPlayerAchievements } from '../achievements';
 import { createBaseBoard } from '../board';
-import { getCardById } from '../cards';
 import { createInitialResourceTotals } from '../resources';
 
 /**

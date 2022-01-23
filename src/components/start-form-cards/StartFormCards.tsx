@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { CardIds, Colors } from '../../enums';
+import { CardIds } from '../../enums';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
 import { selectHands } from '../../state/handsSlice';
 import { IHands, IStarterCardIdsData } from '../../types';
@@ -16,21 +16,14 @@ const mapHandForPlayer = ({
   onCardClick: (cardId: CardIds) => void;
   playerChoosing: string;
 }) =>
-  Object.keys(hands[playerChoosing]).reduce((acc: any, cur: any) => {
-    if (hands[playerChoosing][cur as Colors].length) {
-      hands[playerChoosing][cur as Colors].forEach(cardId => {
-        acc.push(
-          <button key={`${playerChoosing}-${cardId}`} onClick={() => onCardClick(cardId)}>
-            {getCardById(cardId)?.name ?? ''}
-          </button>
-        );
-      });
-    }
-    return acc;
-  }, []);
+  (hands[playerChoosing] ?? []).map(cardId => (
+    <button key={`${playerChoosing}-${cardId}`} onClick={() => onCardClick(cardId)}>
+      {getCardById(cardId)?.name ?? ''}
+    </button>
+  ));
 
 export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }) => {
-  const hands = useSelector(selectHands);
+  const hands = useAppSelector(selectHands);
   const players = Object.keys(hands);
 
   const [playerChoosingIdx, setPlayerChoosingIdx] = useState(0);

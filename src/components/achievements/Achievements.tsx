@@ -1,16 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { RootState } from '../../store';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { selectAgeAchievements, selectSpecialAchievements } from '../../state/achievementsSlice';
 
 import { AgeAchievements } from './age-achievements';
 import { SpecialAchievements } from './special-achievements';
 
 export function Achievements() {
-  const ageAchievements = useSelector((state: RootState) => state.achievements.ageAchievements);
-  const specialAchievements = useSelector(
-    (state: RootState) => state.achievements.specialAchievements
-  );
+  const ageAchievements = useAppSelector(selectAgeAchievements);
+  const specialAchievements = useAppSelector(selectSpecialAchievements);
 
   return (
     <div data-testid="achievements">

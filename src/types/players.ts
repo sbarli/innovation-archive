@@ -1,6 +1,6 @@
 import { CardIds, CardNames, SpecialAchievements } from '../enums';
 
-import { TResourceTotals } from './cards';
+import { TResourceTotals } from './resources';
 
 export interface IPlayer {
   id: string;

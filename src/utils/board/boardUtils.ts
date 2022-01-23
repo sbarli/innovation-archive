@@ -1,5 +1,5 @@
 import { Colors } from '../../enums';
-import { IBoard } from '../../types';
+import { TBoard } from '../../types';
 
 /**
  * @name baseBoardPile
@@ -29,7 +29,6 @@ const baseBoardPile = Object.freeze({
  */
 export const createBaseBoard = (player: string) => {
   return {
-    player,
     [Colors.RED]: Object.assign({}, baseBoardPile),
     [Colors.BLUE]: Object.assign({}, baseBoardPile),
     [Colors.GREEN]: Object.assign({}, baseBoardPile),
@@ -38,7 +37,7 @@ export const createBaseBoard = (player: string) => {
   };
 };
 
-export const calculateTotalTopCardsOnBoard = (board: IBoard) => {
+export const calculateTotalTopCardsOnBoard = (board: TBoard) => {
   if (!board) {
     return 0;
   }

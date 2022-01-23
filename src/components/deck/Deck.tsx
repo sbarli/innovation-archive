@@ -1,14 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { Ages } from '../../enums';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { RootState } from '../../store';
+import { selectDeck } from '../../state/deckSlice';
 
 import { Stack } from './stack';
 
 export function Deck() {
-  const deck = useSelector((state: RootState) => state.cards.deck);
+  const deck = useAppSelector(selectDeck);
 
   if (!deck) {
     return null;

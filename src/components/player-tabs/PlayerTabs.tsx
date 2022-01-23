@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { TabsPanel } from '../../libs/ui/tabs-panel';
 import { selectCurrentPlayerId, selectPlayers } from '../../state/playersSlice';
 import { CurrentPlayerView } from '../current-player-view';
@@ -13,8 +13,8 @@ const PlayerTabsWrapper = styled.div`
 `;
 
 export const PlayerTabs = () => {
-  const allPlayers = useSelector(selectPlayers);
-  const currentPlayer = useSelector(selectCurrentPlayerId);
+  const allPlayers = useAppSelector(selectPlayers);
+  const currentPlayer = useAppSelector(selectCurrentPlayerId);
 
   const [currentTab, setCurrentTab] = useState<string>('');
 
