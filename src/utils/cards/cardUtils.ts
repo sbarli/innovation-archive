@@ -1,6 +1,6 @@
 import { cards as cardsById } from '../../data/cardsById';
 import { Ages, CardIds, TOTAL_CARDS_IN_AGE } from '../../enums';
-import { ICard, TCardIdsByAge, TCardsById, THand } from '../../types';
+import { ICard, TCardIdsByAge, TCardIdsByColor, TCardsById } from '../../types';
 import { shuffleArray } from '../manipulate';
 
 export const getCardById = (cardId: CardIds) => cardsById[cardId];
@@ -41,5 +41,5 @@ export const sortCardsByColor = (cards: ICard[]) => {
     }
     acc[card.color].push(card.id);
     return acc;
-  }, {} as THand);
+  }, {} as TCardIdsByColor);
 };

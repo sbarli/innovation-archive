@@ -41,8 +41,8 @@ export const calculateTotalTopCardsOnBoard = (board: TBoard) => {
   if (!board) {
     return 0;
   }
-  const total = Object.keys(board).reduce((acc, key) => {
-    if (key !== 'player' && board[key as Colors]?.cards?.length) {
+  const total = Object.keys(board).reduce((acc, color) => {
+    if (board[color as Colors]?.cards?.length) {
       acc += 1;
     }
     return acc;

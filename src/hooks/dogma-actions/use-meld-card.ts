@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import {
-  selectPlayerResources,
   selectPlayer,
+  selectPlayerResources,
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
@@ -14,9 +14,9 @@ import { updateResourceTotalsWhenMelding } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
 
 // const checkCardInHand = (hand: THand, cardId: CardIds) =>
-//   Object.keys(hand).reduce((isInHand, key) => {
-//     if (!isInHand && key !== 'player') {
-//       const colorHasCard = hand[key as Colors].indexOf(cardId) > -1;
+//   Object.keys(hand).reduce((isInHand, color) => {
+//     if (!isInHand) {
+//       const colorHasCard = hand[color as Colors].indexOf(cardId) > -1;
 //       return colorHasCard;
 //     }
 //     return isInHand;

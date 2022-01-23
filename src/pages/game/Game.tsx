@@ -6,11 +6,7 @@ import { Deck } from '../../components/deck';
 import { PlayerTabs } from '../../components/player-tabs';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
-import {
-  selectCurrentPlayerId,
-  selectPlayer,
-  selectWinner,
-} from '../../state/playersSlice';
+import { selectCurrentPlayerId, selectPlayer, selectWinner } from '../../state/playersSlice';
 
 export function Game() {
   const winnerId = useAppSelector(selectWinner);

@@ -12,7 +12,7 @@ export const useSailing = (playerId: string) => {
   const dogma = useCallback(() => {
     const drawnCards = drawAction({ ageToDraw: Ages.ONE, addCardToPlayerHand: false });
     if (drawnCards) {
-      meldAction(drawnCards[0].id);
+      meldAction(drawnCards[0]);
     }
   }, [drawAction, meldAction]);
 
