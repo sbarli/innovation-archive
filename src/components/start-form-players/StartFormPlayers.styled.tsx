@@ -14,7 +14,6 @@ export const StyledHeader = styled.h3`
 export const StyledPlayerFields = styled.div`
   display: grid;
   grid-auto-flow: row;
-  width: 13rem;
   margin: 1.5rem 0;
 `;
 
@@ -23,22 +22,30 @@ export const StyledPlayerInput = styled.div`
   grid-auto-flow: column;
   justify-content: flex-start;
   margin-top: 0.5rem;
-  margin-left: 1.25rem;
+  margin-left: 2rem;
 
   :first-child {
     margin-top: 0;
+    margin-right: 2rem;
+  }
+
+  :nth-child(2) {
+    margin-right: 2rem;
   }
 `;
 
 export const StyledRemove = styled.div`
   cursor: pointer;
   font-size: 1rem;
-  align-self: flex-end;
+  align-self: center;
   padding-left: 1rem;
+  width: 2rem;
+  overflow: visible;
+  span {
+    width: 1rem;
+  }
 `;
 
-export const StyledError = styled.div`
-  color: red;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
+export const StyledErrorWrapper = styled.div`
+  margin: 2rem 2rem 0;
 `;

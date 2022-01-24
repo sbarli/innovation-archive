@@ -11,15 +11,10 @@
  */
 import React from 'react';
 import { Field } from 'react-final-form';
-import styled from 'styled-components/macro';
 
-const StyledError = styled.div`
-  color: red;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-`;
+import { StyledError } from './FieldError.styled';
 
-const FieldError = ({ name }: { name: string }) => (
+const FieldError = ({ name = '' }: { name?: string }) => (
   <Field
     name={name}
     subscription={{ touched: true, error: true }}

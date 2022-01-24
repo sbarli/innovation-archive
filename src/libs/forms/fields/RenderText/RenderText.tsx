@@ -37,6 +37,7 @@ const StyledLabel = styled.label<{ $showAbove: boolean }>`
 `;
 
 const StyledInput = styled.input`
+  width: var(--input-width);
   padding: 5px 10px;
   border: 1px solid;
   border-radius: 10px;

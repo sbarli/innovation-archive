@@ -6,10 +6,12 @@ import { FieldArray } from 'react-final-form-arrays';
 
 import RenderText from '../../libs/forms/fields/RenderText/RenderText';
 import { minChar, required } from '../../libs/forms/utils/validation';
+import { StyledError } from '../../libs/forms/validation/field-error/FieldError.styled';
+import { Button, ButtonSizes, ButtonThemes } from '../../libs/ui/Button';
 import { formatPlayerId } from '../../utils/players';
 
 import {
-  StyledError,
+  StyledErrorWrapper,
   StyledForm,
   StyledHeader,
   StyledPlayerFields,
@@ -86,7 +88,9 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
           <StyledForm onSubmit={handleSubmit}>
             <StyledHeader>Players</StyledHeader>
             <div>
-              <button
+              <Button
+                $size={ButtonSizes.SM}
+                $theme={ButtonThemes.OUTLINE}
                 type="button"
                 onClick={() => {
                   if (!maxPlayerInputsVisible) {
@@ -96,7 +100,7 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
                 disabled={maxPlayerInputsVisible}
               >
                 {maxPlayerInputsVisible ? 'Max 4 Players' : 'Add Player'}
-              </button>
+              </Button>
             </div>
             <FieldArray name="players">
               {({ fields, meta: { error } }) => (
@@ -119,14 +123,23 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
                       )}
                     </StyledPlayerInput>
                   ))}
-                  {typeof error === 'string' && !pristine && <StyledError>{error}</StyledError>}
+                  {typeof error === 'string' && !pristine && (
+                    <StyledErrorWrapper>
+                      <StyledError $center>{error}</StyledError>
+                    </StyledErrorWrapper>
+                  )}
                 </StyledPlayerFields>
               )}
             </FieldArray>
 
-            <button type="submit" disabled={submitting || pristine}>
+            <Button
+              $size={ButtonSizes.MD}
+              $theme={ButtonThemes.FILLED}
+              type="submit"
+              disabled={submitting || pristine}
+            >
               Let's Play!
-            </button>
+            </Button>
           </StyledForm>
         );
       }}
