@@ -1,16 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import styled from 'styled-components/macro';
 
 import { setupGame, setupPlayerOrder } from '../../actions/gameActions';
 import { StartFormCards } from '../../components/start-form-cards';
 import { StartFormPlayers } from '../../components/start-form-players';
-
-const StartGameWrapper = styled.div`
-  height: 100%;
-  margin: 1rem 3rem;
-`;
+import { PageWrapper } from '../../libs/ui/page-wrapper';
 
 export function StartGame() {
   const dispatch = useDispatch();
@@ -40,11 +35,11 @@ export function StartGame() {
   }
 
   return (
-    <StartGameWrapper className="StartGame">
+    <PageWrapper data-testid="start-game">
       <h2>Game Setup</h2>
       {page === 1 && <StartFormPlayers onSubmit={onSubmitPage1} />}
       {page === 2 && <StartFormCards onSubmit={onSubmitPage2} />}
-    </StartGameWrapper>
+    </PageWrapper>
   );
 }
 

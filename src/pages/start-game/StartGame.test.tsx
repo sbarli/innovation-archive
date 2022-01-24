@@ -6,12 +6,14 @@ import { store } from '../../store';
 
 import { StartGame } from '.';
 
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <StartGame />
-    </Provider>
-  );
+describe('<StartGame />', () => {
+  it('renders', () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <StartGame />
+      </Provider>
+    );
 
-  expect(getByText(/Start/i)).toBeInTheDocument();
+    expect(getByTestId('start-game')).toBeInTheDocument();
+  });
 });

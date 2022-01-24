@@ -7,10 +7,9 @@ import { selectCurrentPlayerId, selectPlayers } from '../../state/playersSlice';
 import { CurrentPlayerView } from '../current-player-view';
 import { OpponentPlayerView } from '../opponent-player-view';
 
-const PlayerTabsWrapper = styled.div`
-  max-width: 720px;
-  margin: auto;
-`;
+import { PlayerTabItem } from './player-tab-item';
+
+const PlayerTabsWrapper = styled.div``;
 
 export const PlayerTabs = () => {
   const allPlayers = useAppSelector(selectPlayers);
@@ -34,7 +33,13 @@ export const PlayerTabs = () => {
 
   const tabItemsData = Object.values(allPlayers).map(player => ({
     id: player.id,
-    name: player.id === currentPlayer ? `${player.name} ✅` : player.name,
+    name: (
+      <PlayerTabItem
+        isCurrentPlayer={player.id === currentPlayer}
+        isSelectedTab={player.id === currentTab}
+        name={player.name}
+      />
+    ),
   }));
 
   const TabContent =

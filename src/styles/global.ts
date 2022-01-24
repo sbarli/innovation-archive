@@ -39,6 +39,7 @@ font-family: 'Nunito Sans', sans-serif; */
   --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
   --font-size-sm: 0.9rem;
+  --font-size-lg: 1.2rem;
   /* form-related variables */
   --form-border: 1px solid;
   --input-width: 15rem;

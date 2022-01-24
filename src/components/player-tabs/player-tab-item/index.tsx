@@ -1,0 +1,1 @@
+export { PlayerTabItem } from './PlayerTabItem';
