@@ -7,10 +7,6 @@ export const StyledForm = styled.form`
   justify-content: center;
 `;
 
-export const StyledHeader = styled.h3`
-  margin: 0.5rem auto;
-`;
-
 export const StyledPlayerFields = styled.div`
   display: grid;
   grid-auto-flow: row;

@@ -1,11 +1,22 @@
 import React, { useCallback, useState } from 'react';
+import styled from 'styled-components/macro';
 
 import { CardIds } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
+import { Button, ButtonThemes } from '../../libs/ui/button';
+import { HeaderThree } from '../../libs/ui/header-three';
 import { selectHands } from '../../state/handsSlice';
 import { IHands, IStarterCardIdsData } from '../../types';
 import { getCardById } from '../../utils/cards';
+
+const CardButtons = styled.div`
+  max-width: 45rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 3rem;
+  margin: 2rem auto;
+`;
 
 const mapHandForPlayer = ({
   hands,
@@ -17,9 +28,13 @@ const mapHandForPlayer = ({
   playerChoosing: string;
 }) =>
   (hands[playerChoosing] ?? []).map(cardId => (
-    <button key={`${playerChoosing}-${cardId}`} onClick={() => onCardClick(cardId)}>
+    <Button
+      key={`${playerChoosing}-${cardId}`}
+      $theme={ButtonThemes.OUTLINE}
+      onClick={() => onCardClick(cardId)}
+    >
       {getCardById(cardId)?.name ?? ''}
-    </button>
+    </Button>
   ));
 
 export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }) => {
@@ -52,11 +67,10 @@ export const StartFormCards = ({ onSubmit }: { onSubmit: (values: any) => void }
   });
 
   return (
-    <div>
-      <h2>{playerChoosingName}</h2>
-      <h3>Choose your first card</h3>
-      {playerChoosingHand}
-    </div>
+    <>
+      <HeaderThree>{playerChoosingName}: Choose your first card</HeaderThree>
+      <CardButtons>{playerChoosingHand}</CardButtons>
+    </>
   );
 };
 

@@ -7,13 +7,13 @@ import { FieldArray } from 'react-final-form-arrays';
 import RenderText from '../../libs/forms/fields/RenderText/RenderText';
 import { minChar, required } from '../../libs/forms/utils/validation';
 import { StyledError } from '../../libs/forms/validation/field-error/FieldError.styled';
-import { Button, ButtonSizes, ButtonThemes } from '../../libs/ui/Button';
+import { Button, ButtonSizes, ButtonThemes } from '../../libs/ui/button';
+import { HeaderThree } from '../../libs/ui/header-three';
 import { formatPlayerId } from '../../utils/players';
 
 import {
   StyledErrorWrapper,
   StyledForm,
-  StyledHeader,
   StyledPlayerFields,
   StyledPlayerInput,
   StyledRemove,
@@ -86,7 +86,7 @@ export const StartFormPlayers = ({ onSubmit }: { onSubmit: (values: any) => void
         const maxPlayerInputsVisible = values?.players?.length >= 4;
         return (
           <StyledForm onSubmit={handleSubmit}>
-            <StyledHeader>Players</StyledHeader>
+            <HeaderThree>Players</HeaderThree>
             <div>
               <Button
                 $size={ButtonSizes.SM}
