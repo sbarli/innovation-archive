@@ -1,6 +1,24 @@
+import castleImage from '../../assets/resources/castle.png';
+import crownImage from '../../assets/resources/crown.png';
+import factoryImage from '../../assets/resources/factory.png';
+import leafImage from '../../assets/resources/leaf.png';
+import lightbulbImage from '../../assets/resources/lightbulb.png';
+import timepieceImage from '../../assets/resources/timepiece.png';
 import { CardIds, Resources, SplayDirections } from '../../enums';
 import { TResourceTotals } from '../../types';
 import { getCardById } from '../cards';
+
+type TResourceToResourceImageMap = {
+  [key in Resources]: string;
+};
+export const resourceToResourceImageMap: TResourceToResourceImageMap = Object.freeze({
+  [Resources.CASTLES]: castleImage,
+  [Resources.CROWNS]: crownImage,
+  [Resources.FACTORIES]: factoryImage,
+  [Resources.LEAVES]: leafImage,
+  [Resources.LIGHTBULBS]: lightbulbImage,
+  [Resources.TIMEPIECES]: timepieceImage,
+});
 
 const baseCardResourceTotals = Object.freeze({
   [Resources.CASTLES]: 0,
