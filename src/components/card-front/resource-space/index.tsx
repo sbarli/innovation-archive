@@ -1,0 +1,1 @@
+export { ResourceSpace } from './ResourceSpace';
