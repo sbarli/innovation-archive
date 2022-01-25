@@ -30,11 +30,7 @@ interface IResourceSpaceProps {
   resource: Resources | null;
 }
 export function ResourceSpace({ resource }: IResourceSpaceProps) {
-  console.log('');
-  console.log('resource: ', resource);
   const resourceImgPath = resource ? resourceToResourceImageMap[resource] : null;
-  console.log('resourceImgPath: ', resourceImgPath);
-  console.log('');
   return (
     <ResourceSpaceContainer data-testid="resource-space">
       {resourceImgPath ? (
