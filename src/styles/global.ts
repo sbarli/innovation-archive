@@ -58,6 +58,17 @@ font-family: 'Nunito Sans', sans-serif; */
   --card-secondary: #E3DBDB;
   --card-tertiary: #C9D5B5;
   --card-border: #522B29;
+  --card-empty-resource-bg: #0B0B0B;
+  --card-purple-effect: #b7bfdc;
+  --card-purple-bg: #70509b;
+  --card-green-effect: #9bd29c;
+  --card-green-bg: #5db39d;
+  --card-yellow-effect: #f5f6bf;
+  --card-yellow-bg: #f6f6a2;
+  --card-red-effect: #451517;
+  --card-red-bg: #e790aa;
+  --card-blue-effect: #89cbe0;
+  --card-blue-bg: #9bd3e2;
   /* player-related variables */
   --player-one-color: #4F5D2F;
   --player-two-color: #311847;
