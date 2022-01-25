@@ -1,0 +1,1 @@
+export { CardAge } from './CardAge';
