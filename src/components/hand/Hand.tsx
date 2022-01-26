@@ -4,6 +4,7 @@ import { CardIds } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
 import { selectPlayerHand } from '../../state/handsSlice';
+import { CardGrid } from '../../styles/card';
 import { getCardById } from '../../utils/cards';
 import noop from '../../utils/noop';
 import { CardBack } from '../card-back';
@@ -48,10 +49,8 @@ export function Hand({ isCurrentPlayer, meldAction = noop, player }: IHandProps)
     : createOpponentPlayerCardView(playerHand);
 
   return (
-    <div data-testid="player-hand">
-      <Collapse header="Hand" showCaret={false}>
-        {CardsInHand}
-      </Collapse>
-    </div>
+    <Collapse header="Hand" showCaret={false}>
+      <CardGrid data-testid="player-hand">{CardsInHand}</CardGrid>
+    </Collapse>
   );
 }
