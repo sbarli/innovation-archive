@@ -4,7 +4,9 @@ import { Colors } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
 import { selectPlayerBoard } from '../../state/boardsSlice';
-import { CardFront } from '../card-front';
+import { CardGrid } from '../../styles/card';
+
+import { BoardPile } from './board-pile';
 
 export function Board({ player }: { player: string }) {
   const playerBoard = useAppSelector(state => selectPlayerBoard(state, player));
@@ -13,24 +15,18 @@ export function Board({ player }: { player: string }) {
     return null;
   }
 
-  const CardsByColor = Object.keys(playerBoard).reduce((acc, k) => {
-    if (k !== 'player') {
-      acc.push(
-        playerBoard[k as Colors].cards.map((cardId, idx) => {
-          const isTopCardOnBoard = idx === 0;
-          return <CardFront key={cardId} cardId={cardId} isTopCardOnBoard={isTopCardOnBoard} />;
-        })
-      );
-    }
+  const CardPilesByColor = Object.keys(playerBoard).reduce((acc, k) => {
+    const pile = playerBoard[k as Colors];
+    acc.push(
+      <BoardPile key={k} cardIds={pile.cards} color={k as Colors} splayDirection={pile.splayed} />
+    );
     return acc;
   }, [] as ReactNode[]);
 
   return (
     <div data-testid="player-board">
       <Collapse header="Board" showCaret={false}>
-        {CardsByColor.map((section, idx) => (
-          <div key={idx}>{section}</div>
-        ))}
+        <CardGrid>{CardPilesByColor}</CardGrid>
       </Collapse>
     </div>
   );

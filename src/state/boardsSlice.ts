@@ -49,22 +49,25 @@ export const boardsSlice = createSlice({
       }: PayloadAction<IBoardCardActionProps>
     ) => {
       if (state.boards[player]?.[color].cards) {
-        if (placement === BoardPlacementOptions.TUCK) {
+        if (placement === BoardPlacementOptions.MELD) {
           state.boards[player][color].cards.push(card);
+        } else {
+          state.boards[player][color].cards.unshift(card);
         }
-        state.boards[player][color].cards.unshift(card);
       }
     },
     addCardsToBoards: (
       state,
       { payload: { data } }: PayloadAction<{ data: { [key: string]: ICard[] } }>
     ) => {
+      // TODO: enable tucking multiple cards
+      // currently only supports melding (push)
       Object.keys(data).forEach(player => {
         if (!state.boards[player]) {
           return state;
         }
         data[player].forEach(card => {
-          state.boards[player][card.color].cards.unshift(card.id);
+          state.boards[player][card.color].cards.push(card.id);
         });
       });
     },

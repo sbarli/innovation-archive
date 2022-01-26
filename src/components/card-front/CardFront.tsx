@@ -10,10 +10,9 @@ import { ResourceSpace } from './resource-space';
 
 interface ICardFrontProps {
   cardId: CardIds;
-  isTopCardOnBoard?: boolean;
   onCardClick?(): void;
 }
-export function CardFront({ cardId, isTopCardOnBoard, onCardClick = noop }: ICardFrontProps) {
+export function CardFront({ cardId, onCardClick = noop }: ICardFrontProps) {
   const cardDetails = getCardById(cardId);
   if (!cardDetails) {
     return null;
@@ -23,10 +22,7 @@ export function CardFront({ cardId, isTopCardOnBoard, onCardClick = noop }: ICar
     <CardFrontWrapper data-testid="card-front" onClick={onCardClick}>
       <TopCardRow>
         <ResourceSpace resource={cardDetails.resourceSpace1} />
-        <CardName $color={cardDetails.color}>
-          {isTopCardOnBoard ? '🌟 ' : ''}
-          {cardDetails.name}
-        </CardName>
+        <CardName $color={cardDetails.color}>{cardDetails.name}</CardName>
         <CardAge age={cardDetails.age} />
       </TopCardRow>
       <BottomResourceRow>

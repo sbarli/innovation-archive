@@ -256,7 +256,6 @@ export enum SplayDirections {
   LEFT = 'left',
   RIGHT = 'right',
   UP = 'up',
-  DOWN = 'down',
 }
 
 export const TOTAL_CARDS_IN_AGE = {
