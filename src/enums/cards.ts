@@ -297,3 +297,16 @@ export const BASE_SPECIAL_ACHIEVEMENTS = {
   [SpecialAchievements.WORLD]: true,
   [SpecialAchievements.UNIVERSE]: true,
 };
+
+export const AGE_NUMBER_TO_NAME = {
+  [Ages.ONE]: 'PREHISTORY',
+  [Ages.TWO]: 'CLASSICAL',
+  [Ages.THREE]: 'MEDIEVAL',
+  [Ages.FOUR]: 'RENAISSANCE',
+  [Ages.FIVE]: 'EXPLORATION',
+  [Ages.SIX]: 'ENLIGHTENMENT',
+  [Ages.SEVEN]: 'ROMANCE',
+  [Ages.EIGHT]: 'MODERN',
+  [Ages.NINE]: 'POSTMODERN',
+  [Ages.TEN]: 'INFORMATION',
+};
