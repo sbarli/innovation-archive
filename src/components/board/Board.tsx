@@ -25,7 +25,7 @@ export function Board({ player }: { player: string }) {
 
   return (
     <div data-testid="player-board">
-      <Collapse header="Board" showCaret={false}>
+      <Collapse header="Board" showCaret={false} shouldDefaultOpen>
         <CardGrid>{CardPilesByColor}</CardGrid>
       </Collapse>
     </div>

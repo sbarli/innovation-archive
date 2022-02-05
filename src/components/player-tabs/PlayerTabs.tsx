@@ -21,11 +21,19 @@ export const PlayerTabs = () => {
     setCurrentTab(newTab);
   }, []);
 
+  // set first tab
   useEffect(() => {
     if (!currentTab && currentPlayer) {
       setCurrentTab(currentPlayer);
     }
   }, [currentTab, currentPlayer]);
+
+  // update tab when current player changes
+  useEffect(() => {
+    if (currentPlayer) {
+      setCurrentTab(currentPlayer);
+    }
+  }, [currentPlayer]);
 
   if (!currentTab) {
     return null;

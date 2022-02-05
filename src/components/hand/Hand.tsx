@@ -49,7 +49,7 @@ export function Hand({ isCurrentPlayer, meldAction = noop, player }: IHandProps)
     : createOpponentPlayerCardView(playerHand);
 
   return (
-    <Collapse header="Hand" showCaret={false}>
+    <Collapse header="Hand" showCaret={false} shouldDefaultOpen={isCurrentPlayer}>
       <CardGrid data-testid="player-hand">{CardsInHand}</CardGrid>
     </Collapse>
   );

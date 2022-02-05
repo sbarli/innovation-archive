@@ -35,10 +35,11 @@ export const CardPosition = styled.div<{
   placeInPile: number;
   splayDirection: SplayDirections | null;
 }>`
-  position: absolute;
+  /* TODO: should be absolute to get splay direction right, but messes up rows */
+  position: relative;
   top: 0;
   left: 0;
   ${p => (p.splayDirection === SplayDirections.RIGHT ? splayedRightStyles : '')}
   ${p => (p.splayDirection === SplayDirections.LEFT ? splayedLeftStyles : '')}
-    ${p => (p.splayDirection === SplayDirections.UP ? splayedUpStyles : '')}
+  ${p => (p.splayDirection === SplayDirections.UP ? splayedUpStyles : '')}
 `;

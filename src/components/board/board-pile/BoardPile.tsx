@@ -16,15 +16,24 @@ export const BoardPile = ({ cardIds, color, splayDirection }: IBoardPileProps) =
     return <BoardPileWrapper cardsInPile={false} color={color}></BoardPileWrapper>;
   }
 
-  const Cards = cardIds.map((cardId, idx) => (
-    <CardPosition key={cardId} placeInPile={idx} splayDirection={splayDirection}>
-      <CardFront cardId={cardId} />
+  // if cards are splayed, show them
+  //  splayed to see all resources
+  // otherwise, just show top card
+  const CardView = splayDirection ? (
+    cardIds.map((cardId, idx) => (
+      <CardPosition key={cardId} placeInPile={idx} splayDirection={splayDirection}>
+        <CardFront cardId={cardId} />
+      </CardPosition>
+    ))
+  ) : (
+    <CardPosition placeInPile={cardIds.length - 1} splayDirection={splayDirection}>
+      <CardFront cardId={cardIds[cardIds.length - 1]} />
     </CardPosition>
-  ));
+  );
 
   return (
     <BoardPileWrapper cardsInPile color={color}>
-      {Cards}
+      {CardView}
     </BoardPileWrapper>
   );
 };
