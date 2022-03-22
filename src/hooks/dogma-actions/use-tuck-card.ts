@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { BoardPlacementOptions, CardIds } from '../../enums';
 import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
 import {
-  selectPlayerResources,
   selectPlayer,
+  selectPlayerResources,
   updatePlayerAge,
   updatePlayerResources,
 } from '../../state/playersSlice';
