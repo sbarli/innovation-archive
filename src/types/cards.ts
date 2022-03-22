@@ -13,9 +13,14 @@ export type TCardIdsByColor = {
 };
 
 export interface IDogmaEffect {
-  effectId: string;
   description: string;
-  isDemand?: boolean;
+  effectId?: string;
+  effectType?: string[];
+  isDemand: boolean;
+  isOptional: boolean;
+  repeat: boolean;
+  specialAchievement: SpecialAchievements | null;
+  dogma(): void;
 }
 
 export interface ICard {
