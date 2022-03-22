@@ -1,3 +1,5 @@
+import { SpecialAchievements } from '../../enums';
+
 export const masonry = [
   {
     description:
@@ -6,7 +8,7 @@ export const masonry = [
     isDemand: false,
     isOptional: true,
     repeat: false,
-    specialAchievement: 'Monument',
+    specialAchievement: SpecialAchievements.MONUMENT,
     dogma: () => {},
   },
 ];

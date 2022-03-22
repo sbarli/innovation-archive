@@ -1,3 +1,5 @@
+import { SpecialAchievements } from '../../enums';
+
 export const translation = [
   {
     description:
@@ -15,7 +17,7 @@ export const translation = [
     isDemand: false,
     isOptional: false,
     repeat: false,
-    specialAchievement: 'World',
+    specialAchievement: SpecialAchievements.WORLD,
     dogma: () => {},
   },
 ];

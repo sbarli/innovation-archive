@@ -1,3 +1,5 @@
+import { SpecialAchievements } from '../../enums';
+
 export const construction = [
   {
     description: 'I DEMAND you transfer two cards from your hand to my hand! Draw a 2!',
@@ -14,7 +16,7 @@ export const construction = [
     isDemand: false,
     isOptional: false,
     repeat: false,
-    specialAchievement: 'Empire',
+    specialAchievement: SpecialAchievements.EMPIRE,
     dogma: () => {},
   },
 ];

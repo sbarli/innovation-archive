@@ -1,3 +1,5 @@
+import { SpecialAchievements } from '../../enums';
+
 export const astronomy = [
   {
     description:
@@ -16,7 +18,7 @@ export const astronomy = [
     isDemand: false,
     isOptional: false,
     repeat: false,
-    specialAchievement: 'Universe',
+    specialAchievement: SpecialAchievements.UNIVERSE,
     dogma: () => {},
   },
 ];
