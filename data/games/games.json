@@ -1,0 +1,44 @@
+{
+  "pimone_tumbaa": {
+    "gameId": "pimone_tumbaa",
+    "deckId": "pimone_tumbaa_deck",
+    "player1Id": "pimone",
+    "player2Id": "tumbaa",
+    "currentPlayerId": "pimone",
+    "actionNumber": 2,
+    "pimone": {
+      "achievements": [],
+      "age": 1,
+      "boardId": "pimone_tumbaa_pimone",
+      "hand": ["CLOTHING"],
+      "resourceTotals": {
+        "castles": 0,
+        "crowns": 1,
+        "leaves": 0,
+        "lightbulbs": 2,
+        "factories": 0,
+        "timepieces": 0
+      },
+      "score": 1,
+      "scoreCardIds": ["MASONRY"],
+      "specialAchievements": []
+    },
+    "tumbaa": {
+      "achievements": [],
+      "age": 1,
+      "boardId": "pimone_tumbaa_tumbaa",
+      "hand": ["CODE_OF_LAWS"],
+      "resourceTotals": {
+        "castles": 3,
+        "crowns": 0,
+        "leaves": 0,
+        "lightbulbs": 0,
+        "factories": 0,
+        "timepieces": 0
+      },
+      "score": 0,
+      "scoreCardIds": [],
+      "specialAchievements": []
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "pimone": {
+    "playerId": "pimone",
+    "name": "Pimone",
+    "gameIds": ["pimone_tumbaa"]
+  },
+  "tumbaa": {
+    "playerId": "tumbaa",
+    "name": "tumbaa",
+    "gameIds": ["pimone_tumbaa"]
+  }
+}

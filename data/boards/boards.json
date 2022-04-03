@@ -1,0 +1,48 @@
+{
+  "pimone_tumbaa_pimone": {
+    "boardId": "pimone_tumbaa_pimone",
+    "red": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "blue": {
+      "cardIds": ["WRITING"],
+      "splayed": null
+    },
+    "yellow": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "purple": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "green": {
+      "cardIds": [],
+      "splayed": null
+    }
+  },
+  "pimone_tumbaa_tumbaa": {
+    "boardId": "pimone_tumbaa_tumbaa",
+    "red": {
+      "cardIds": ["METALWORKING"],
+      "splayed": null
+    },
+    "blue": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "yellow": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "purple": {
+      "cardIds": [],
+      "splayed": null
+    },
+    "green": {
+      "cardIds": [],
+      "splayed": null
+    }
+  }
+}

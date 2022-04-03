@@ -29,9 +29,9 @@ const formattedCards = Object.keys(cards).reduce((acc, cardId) => {
       return updatedEffect;
     }),
   };
-  acc.push(card);
+  acc[cardId] = card;
   return acc;
-}, []);
+}, {});
 
 fs.writeFile('./output/cards.json', JSON.stringify(formattedCards, null, 2), function(err) {
   if (err) {
