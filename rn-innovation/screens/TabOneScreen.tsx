@@ -4,7 +4,8 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { getAllTestData } from '../firebase/get/test-data';
-import { RootTabScreenProps } from '../types';
+import { RootTabScreenProps } from '../expo-types';
+import { Hand } from '../components/hand/hand';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [fetchedData, setFetchedData] = useState(false);
@@ -29,11 +30,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
     }
   }, []);
 
+  if (!game) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <Text style={styles.title}>Hand</Text>
+      <Hand hand={game.pimone.hand ?? []} />
     </View>
   );
 }
