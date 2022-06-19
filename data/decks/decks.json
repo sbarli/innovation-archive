@@ -1,0 +1,114 @@
+{
+  "pimone_tumbaa_deck": {
+    "ONE": [
+      "POTTERY",
+      "OARS",
+      "ARCHERY",
+      "AGRICULTURE",
+      "MYSTICISM",
+      "CITY_STATES",
+      "DOMESTICATION",
+      "TOOLS",
+      "THE_WHEEL"
+    ],
+    "TWO": [
+      "CANAL_BUILDING",
+      "MONOTHEISM",
+      "ROAD_BUILDING",
+      "CONSTRUCTION",
+      "FERMENTING",
+      "CALENDAR",
+      "PHILOSOPHY",
+      "MATHEMATICS",
+      "MAPMAKING"
+    ],
+    "THREE": [
+      "ENGINEERING",
+      "TRANSLATION",
+      "FEUDALISM",
+      "MACHINERY",
+      "MEDICINE",
+      "OPTICS",
+      "COMPASS",
+      "EDUCATION",
+      "ALCHEMY"
+    ],
+    "FOUR": [
+      "INVENTION",
+      "COLONIALISM",
+      "REFORMATION",
+      "ANATOMY",
+      "ENTERPRISE",
+      "PERSPECTIVE",
+      "NAVIGATION",
+      "PRINTING_PRESS",
+      "EXPERIMENTATION"
+    ],
+    "FIVE": [
+      "MEASUREMENT",
+      "STATISTICS",
+      "CHEMISTRY",
+      "COAL",
+      "THE_PIRATE_CODE",
+      "STEAM_ENGINE",
+      "BANKING",
+      "PHYSICS",
+      "SOCIETIES"
+    ],
+    "SIX": [
+      "EMANCIPATION",
+      "VACCINATION",
+      "CLASSIFICATION",
+      "METRIC_SYSTEM",
+      "ENCYCLOPEDIA",
+      "MACHINE_TOOLS",
+      "INDUSTRIALIZATION",
+      "DEMOCRACY",
+      "CANNING"
+    ],
+    "SEVEN": [
+      "BICYCLE",
+      "EVOLUTION",
+      "SANITATION",
+      "EXPLOSIVES",
+      "ELECTRICITY",
+      "PUBLICATIONS",
+      "LIGHTING",
+      "RAILROAD",
+      "REFRIGERATION"
+    ],
+    "EIGHT": [
+      "MOBILITY",
+      "FLIGHT",
+      "ROCKETRY",
+      "SKYSCRAPERS",
+      "SOCIALISM",
+      "CORPORATIONS",
+      "MASS_MEDIA",
+      "EMPIRICISM",
+      "QUANTUM_THEORY"
+    ],
+    "NINE": [
+      "COLLABORATION",
+      "GENETICS",
+      "SERVICES",
+      "SPECIALIZATION",
+      "SUBURBIA",
+      "ECOLOGY",
+      "FISSION",
+      "SATELLITES",
+      "COMPOSITES"
+    ],
+    "TEN": [
+      "BIOENGINEERING",
+      "DATABASES",
+      "MINIATURIZATION",
+      "SOFTWARE",
+      "SELF_SERVICE",
+      "AI",
+      "STEM_CELLS",
+      "GLOBALIZATION",
+      "THE_INTERNET"
+    ]
+  }
+}
