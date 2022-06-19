@@ -14,18 +14,14 @@ export const Hand = ({ hand }: IHandProps) => {
   const CardsInHand = loadingCardData
     ? null
     : hand.map(cardId => {
-      const card = cardsById[cardId];
-      return (
-        <CardFrontBasic key={cardId} card={card} />
-      );
-    });
+        const card = cardsById[cardId];
+        return <CardFrontBasic key={cardId} card={card} rotated />;
+      });
 
   return (
     <Skeleton isLoading={loadingCardData}>
       <Center>
-        <HStack>
-          {CardsInHand}
-        </HStack>
+        <HStack>{CardsInHand}</HStack>
       </Center>
     </Skeleton>
   );
