@@ -1,11 +1,11 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 
-import achievementsReducer from '../state/achievementsSlice';
-import boardsReducer from '../state/boardsSlice';
-import deckReducer from '../state/deckSlice';
-import handsReducer from '../state/handsSlice';
-import playersReducer from '../state/playersSlice';
-import scoresReducer from '../state/scoresSlice';
+import achievementsReducer from '../state/slices/achievementsSlice';
+import boardsReducer from '../state/slices/boardsSlice';
+import deckReducer from '../state/slices/deckSlice';
+import handsReducer from '../state/slices/handsSlice';
+import playersReducer from '../state/slices/playersSlice';
+import scoresReducer from '../state/slices/scoresSlice';
 
 export const store = configureStore({
   reducer: {

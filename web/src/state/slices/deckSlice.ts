@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Ages, CardIds } from '../enums';
-import { RootState } from '../store';
-import { ICard, TCardIdsByAge } from '../types';
+import { Ages, CardIds } from '../../enums';
+import { RootState } from '../../store';
+import { ICard, TCardIdsByAge } from '../../types';
 
 export const initialState: TCardIdsByAge = {
   [Ages.ONE]: [],
