@@ -97,7 +97,7 @@ export const setupPlayerOrder = (
       if (cardIdxInHand > -1) {
         acc.updatedHands[val.player] = [
           ...acc.updatedHands[val.player].slice(0, cardIdxInHand),
-          ...acc.updatedHands[val.player].slice(cardIdxInHand),
+          ...acc.updatedHands[val.player].slice(cardIdxInHand + 1),
         ];
         acc.updatedBoards[val.player][cardColor].cards = [
           ...acc.updatedBoards[val.player][cardColor].cards,
