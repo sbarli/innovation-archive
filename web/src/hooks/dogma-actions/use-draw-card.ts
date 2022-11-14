@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { setWinningPlayer } from '../../actions/gameActions';
 import { Ages } from '../../enums';
-import { selectDeck, updateDeck } from '../../state/deckSlice';
-import { addCardsToHand } from '../../state/handsSlice';
-import { selectPlayer } from '../../state/playersSlice';
+import { selectDeck, selectPlayer, selectPlayerHand } from '../../state/selectors';
+import { updateDeck } from '../../state/slices/deckSlice';
+import { updatePlayerHand } from '../../state/slices/handsSlice';
 import { drawFromDeck } from '../../utils/game';
 import { useAppSelector } from '../use-app-selector';
 
@@ -14,14 +14,15 @@ export const useDrawCard = (playerId: string) => {
   const player = useAppSelector(state => selectPlayer(state, playerId));
   const playerAge = player?.age;
   const deck = useAppSelector(selectDeck);
+  const playerHand = useAppSelector(state => selectPlayerHand(state, playerId));
 
   const drawCard = useCallback(
     ({
-      addCardToPlayerHand = true,
+      addCardsToPlayerHand = true,
       ageToDraw,
       numCardsToDraw = 1,
     }: {
-      addCardToPlayerHand?: boolean;
+      addCardsToPlayerHand?: boolean;
       ageToDraw?: Ages;
       numCardsToDraw?: number;
     } = {}) => {
@@ -38,12 +39,12 @@ export const useDrawCard = (playerId: string) => {
         return;
       }
       dispatch(updateDeck({ deck: updatedDeck }));
-      if (addCardToPlayerHand) {
-        dispatch(addCardsToHand({ playerId, cardIds: cardsDrawn }));
+      if (playerHand && addCardsToPlayerHand) {
+        dispatch(updatePlayerHand({ playerId, hand: [...playerHand, ...cardsDrawn] }));
       }
       return cardsDrawn;
     },
-    [deck, dispatch, playerAge, playerId]
+    [deck, dispatch, playerAge, playerHand, playerId]
   );
 
   return drawCard;

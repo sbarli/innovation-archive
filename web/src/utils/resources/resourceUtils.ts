@@ -5,7 +5,7 @@ import leafImage from '../../assets/resources/leaf.png';
 import lightbulbImage from '../../assets/resources/lightbulb.png';
 import timepieceImage from '../../assets/resources/timepiece.png';
 import { CardIds, Resources, SplayDirections } from '../../enums';
-import { TResourceTotals } from '../../types';
+import { IBoardPile, TBoard, TResourceTotals } from '../../types';
 import { getCardById } from '../cards';
 
 type TResourceToResourceImageMap = {
@@ -20,7 +20,7 @@ export const resourceToResourceImageMap: TResourceToResourceImageMap = Object.fr
   [Resources.TIMEPIECES]: timepieceImage,
 });
 
-const baseCardResourceTotals = Object.freeze({
+const baseCardResourceTotals: TResourceTotals = Object.freeze({
   [Resources.CASTLES]: 0,
   [Resources.CROWNS]: 0,
   [Resources.FACTORIES]: 0,
@@ -34,7 +34,7 @@ export const createInitialResourceTotals = () => ({ ...baseCardResourceTotals })
 export const createCardResources = (cardId: CardIds) => {
   const card = getCardById(cardId);
 
-  const cardResourceTotals = { ...baseCardResourceTotals };
+  const cardResourceTotals = createInitialResourceTotals();
 
   cardResourceTotals[Resources.CASTLES] = card.numCastles;
   cardResourceTotals[Resources.CROWNS] = card.numCrowns;
@@ -132,6 +132,13 @@ export const updateResourceTotalsWhenMelding = ({
 export const calculateTotalResourcesForCards = (cardIds: CardIds[]) => {
   const resourcesPerCard = cardIds.map(createCardResources);
   return combineResourceTotals(...resourcesPerCard);
+};
+
+export const calculateTotalResourcesForBoard = (board: TBoard) => {
+  return Object.values(board).reduce((acc: TResourceTotals, color: IBoardPile) => {
+    const totalResourcesForColor = color.cards.map(createCardResources);
+    return combineResourceTotals(acc, ...totalResourcesForColor);
+  }, createInitialResourceTotals());
 };
 
 interface IUpdateResourceTotalsWhenTuckingProps {

@@ -1,14 +1,11 @@
+import { cloneDeep } from 'lodash-es';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { BoardPlacementOptions, CardIds } from '../../enums';
-import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
-import {
-  selectPlayer,
-  selectPlayerResources,
-  updatePlayerAge,
-  updatePlayerResources,
-} from '../../state/playersSlice';
+import { CardIds } from '../../enums';
+import { selectPlayer, selectPlayerBoard, selectPlayerResources } from '../../state/selectors';
+import { updatePlayerBoard } from '../../state/slices/boardsSlice';
+import { updatePlayerAge, updatePlayerResources } from '../../state/slices/playersSlice';
 import { getCardById } from '../../utils/cards';
 import { updateResourceTotalsWhenTucking } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
@@ -31,7 +28,7 @@ export const useTuckCard = (playerId: string) => {
       // if tucking to empty pile
       // update player age if tucked card is higher
       if (cardPileEmpty && card.age > player.age) {
-        dispatch(updatePlayerAge({ player: playerId, newAge: card.age }));
+        dispatch(updatePlayerAge({ playerId, newAge: card.age }));
       }
       // update resource totals, if applicable
       const updatedResourceTotals = updateResourceTotalsWhenTucking({
@@ -43,14 +40,11 @@ export const useTuckCard = (playerId: string) => {
       if (updatedResourceTotals) {
         dispatch(updatePlayerResources({ playerId, updatedResources: updatedResourceTotals }));
       }
-      dispatch(
-        addCardToBoard({
-          player: playerId,
-          color: card.color,
-          card: cardId,
-          placement: BoardPlacementOptions.TUCK,
-        })
-      );
+
+      // update board
+      const updatedBoard = cloneDeep(playerBoard);
+      updatedBoard[card.color].cards.unshift(cardId);
+      dispatch(updatePlayerBoard({ playerId, board: updatedBoard }));
     },
     [dispatch, player.age, playerBoard, playerId, playerResources]
   );

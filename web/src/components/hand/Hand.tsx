@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { CardIds } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { selectPlayerHand } from '../../state/handsSlice';
+import { selectPlayerHand } from '../../state/selectors';
 import { CardGrid } from '../../styles/card';
 import { getCardById } from '../../utils/cards';
 import noop from '../../utils/noop';

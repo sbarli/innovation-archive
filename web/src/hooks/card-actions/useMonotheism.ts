@@ -10,7 +10,7 @@ export const useMonotheism = (playerId: string) => {
   const tuckAction = useTuckCard(playerId);
 
   const dogma = useCallback(() => {
-    const drawnCards = drawAction({ ageToDraw: Ages.ONE, addCardToPlayerHand: false });
+    const drawnCards = drawAction({ ageToDraw: Ages.ONE, addCardsToPlayerHand: false });
     if (drawnCards) {
       tuckAction(drawnCards[0]);
     }

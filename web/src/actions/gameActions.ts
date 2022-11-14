@@ -1,18 +1,20 @@
+import { cloneDeep } from 'lodash-es';
+
 import { cards as cardsById } from '../data/cardsById';
 import { Ages } from '../enums';
-import { initAchievements } from '../state/achievementsSlice';
-import { addCardsToBoards, initBoards } from '../state/boardsSlice';
-import { updateDeck } from '../state/deckSlice';
-import { initHands, removeCardsFromHands } from '../state/handsSlice';
+import { initAchievements } from '../state/slices/achievementsSlice';
+import { updateAllBoards } from '../state/slices/boardsSlice';
+import { updateDeck } from '../state/slices/deckSlice';
+import { updateAllHands } from '../state/slices/handsSlice';
 import {
   initPlayerOrder,
   setWinner,
-  updateAllPlayersResources,
-  updatePlayers,
-} from '../state/playersSlice';
-import { initScores } from '../state/scoresSlice';
+  updateAllPlayers,
+  updateAllResources,
+} from '../state/slices/playersSlice';
+import { updateAllScores } from '../state/slices/scoresSlice';
 import { AppThunk } from '../store';
-import { ICard, IHands, IResourcesByPlayer, IStarterCardIdsData } from '../types';
+import { IBoards, IHands, IResourcesByPlayer, IStarterCardIdsData } from '../types';
 import {
   createInitialAgeAchievements,
   pullAgeAchievementsFromStarterDeck,
@@ -21,7 +23,7 @@ import { sortAndShuffleCards } from '../utils/cards';
 import { createDefaultGameData } from '../utils/game';
 import { createInitialHandsForPlayers } from '../utils/hand';
 import { createBasePlayers, getPlayerOrder, updatePlayersWithOrder } from '../utils/players';
-import { calculateTotalResourcesForCards } from '../utils/resources';
+import { calculateTotalResourcesForBoard } from '../utils/resources';
 
 const NUM_CARDS_TO_START = 2;
 
@@ -64,16 +66,18 @@ export const setupGame = ({ players: playerValues }: ISetupGameProps): AppThunk 
   );
 
   dispatch(updateDeck({ deck: starterDeck }));
-  dispatch(updatePlayers({ players }));
-  dispatch(initHands({ hands }));
-  dispatch(initBoards({ boards }));
+  dispatch(updateAllPlayers({ players }));
+  dispatch(updateAllHands({ hands }));
+  dispatch(updateAllBoards({ boards }));
   dispatch(initAchievements({ ageAchievements, playerAchievements }));
-  dispatch(initScores({ scores, scorePiles }));
-  dispatch(updateAllPlayersResources({ playerResources }));
+  dispatch(updateAllScores({ scores, scorePiles }));
+  dispatch(updateAllResources({ resources: playerResources }));
 };
 
 export const setupPlayerOrder = (
-  starterCardIdsData: IStarterCardIdsData[]
+  starterCardIdsData: IStarterCardIdsData[],
+  hands: IHands,
+  boards: IBoards
 ): AppThunk => dispatch => {
   // get the name of each card to determine player order
   const starterCardNamesData = starterCardIdsData.map(val => {
@@ -86,34 +90,41 @@ export const setupPlayerOrder = (
   const playerOrder = getPlayerOrder(starterCardNamesData);
   const updatedPlayersWithOrder = updatePlayersWithOrder(playerOrder);
 
-  // create a map of the cards to remove from
-  // each players hand and add to their board
-  const { boardData, handData } = starterCardIdsData.reduce(
-    (acc, cur) => {
-      if (!acc.boardData[cur.player]) {
-        acc.boardData[cur.player] = [];
-        acc.handData[cur.player] = [];
+  const { updatedBoards, updatedHands } = starterCardIdsData.reduce(
+    (acc, val) => {
+      const cardColor = cardsById[val.card].color;
+      const cardIdxInHand = acc.updatedHands[val.player].indexOf(val.card);
+      if (cardIdxInHand > -1) {
+        acc.updatedHands[val.player] = [
+          ...acc.updatedHands[val.player].slice(0, cardIdxInHand),
+          ...acc.updatedHands[val.player].slice(cardIdxInHand + 1),
+        ];
+        acc.updatedBoards[val.player][cardColor].cards = [
+          ...acc.updatedBoards[val.player][cardColor].cards,
+          val.card,
+        ];
       }
-      acc.boardData[cur.player].push(cardsById[cur.card]);
-      acc.handData[cur.player].push(cur.card);
       return acc;
     },
-    { boardData: {} as { [key: string]: ICard[] }, handData: {} as IHands }
+    {
+      updatedBoards: cloneDeep(boards),
+      updatedHands: cloneDeep(hands),
+    }
   );
 
   // update resources totals for players
-  const playerResources = playerOrder.reduce((acc, player) => {
-    const cardsMovingToBoard = handData[player];
-    const playerResourceTotal = calculateTotalResourcesForCards(cardsMovingToBoard);
-    acc[player] = playerResourceTotal;
+  const updatedResources = Object.keys(updatedBoards).reduce((acc, playerId) => {
+    const playerBoard = updatedBoards[playerId];
+    const playerResourceTotal = calculateTotalResourcesForBoard(playerBoard);
+    acc[playerId] = playerResourceTotal;
     return acc;
   }, {} as IResourcesByPlayer);
 
   dispatch(initPlayerOrder({ playerOrder }));
-  dispatch(removeCardsFromHands({ data: handData }));
-  dispatch(addCardsToBoards({ data: boardData }));
-  dispatch(updateAllPlayersResources({ playerResources }));
-  dispatch(updatePlayers({ players: updatedPlayersWithOrder }));
+  dispatch(updateAllHands({ hands: updatedHands }));
+  dispatch(updateAllBoards({ boards: updatedBoards }));
+  dispatch(updateAllResources({ resources: updatedResources }));
+  dispatch(updateAllPlayers({ players: updatedPlayersWithOrder }));
 };
 
 export const setWinningPlayer = (playerId: string): AppThunk => dispatch => {

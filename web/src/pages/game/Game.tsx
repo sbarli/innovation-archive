@@ -9,7 +9,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
 import { HeaderThree } from '../../libs/ui/header-three';
 import { PageWrapper } from '../../libs/ui/page-wrapper';
-import { selectCurrentPlayerId, selectPlayer, selectWinner } from '../../state/playersSlice';
+import { selectCurrentPlayerId, selectPlayer, selectWinner } from '../../state/selectors';
 
 const GameBoardWrapper = styled.div`
   margin-top: 1rem;

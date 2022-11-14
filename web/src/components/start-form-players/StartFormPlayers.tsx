@@ -1,5 +1,6 @@
 import { ARRAY_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
+import { cloneDeep } from 'lodash-es';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -21,7 +22,7 @@ import {
 
 const BASE_PLAYER = { name: '' };
 
-const createNewPlayer = () => Object.assign({}, BASE_PLAYER);
+const createNewPlayer = () => cloneDeep(BASE_PLAYER);
 
 const min2Char = minChar(2);
 

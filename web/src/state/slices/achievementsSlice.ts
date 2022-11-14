@@ -5,9 +5,8 @@ import {
   BASE_AGE_ACHIEVEMENTS,
   BASE_SPECIAL_ACHIEVEMENTS,
   SpecialAchievements,
-} from '../enums';
-import { RootState } from '../store';
-import { IAchievementsByPlayer, TAgeAchievements, TSpecialAchievements } from '../types';
+} from '../../enums';
+import { IAchievementsByPlayer, TAgeAchievements, TSpecialAchievements } from '../../types';
 
 interface ICardsState {
   specialAchievements: TSpecialAchievements;
@@ -68,16 +67,5 @@ export const {
   applyPlayerAgeAchievement,
   applyPlayerSpecialAchievement,
 } = achievementsSlice.actions;
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.cards.value)`
-export const selectAgeAchievements = (state: RootState) => state.achievements.ageAchievements;
-export const selectSpecialAchievements = (state: RootState) =>
-  state.achievements.specialAchievements;
-export const selectPlayersAchievements = (state: RootState) =>
-  state.achievements.playerAchievements;
-export const selectPlayerAchievements = (state: RootState, playerId: string) =>
-  state.achievements.playerAchievements[playerId];
 
 export default achievementsSlice.reducer;

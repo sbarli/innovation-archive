@@ -1,26 +1,14 @@
+import { cloneDeep } from 'lodash-es';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CardIds } from '../../enums';
-import { addCardToBoard, selectPlayerBoard } from '../../state/boardsSlice';
-import {
-  selectPlayer,
-  selectPlayerResources,
-  updatePlayerAge,
-  updatePlayerResources,
-} from '../../state/playersSlice';
+import { selectPlayer, selectPlayerBoard, selectPlayerResources } from '../../state/selectors';
+import { updatePlayerBoard } from '../../state/slices/boardsSlice';
+import { updatePlayerAge, updatePlayerResources } from '../../state/slices/playersSlice';
 import { getCardById } from '../../utils/cards';
 import { updateResourceTotalsWhenMelding } from '../../utils/resources';
 import { useAppSelector } from '../use-app-selector';
-
-// const checkCardInHand = (hand: THand, cardId: CardIds) =>
-//   Object.keys(hand).reduce((isInHand, color) => {
-//     if (!isInHand) {
-//       const colorHasCard = hand[color as Colors].indexOf(cardId) > -1;
-//       return colorHasCard;
-//     }
-//     return isInHand;
-//   }, false);
 
 export const useMeldCard = (playerId: string) => {
   const dispatch = useDispatch();
@@ -36,9 +24,10 @@ export const useMeldCard = (playerId: string) => {
       }
       // update player age, if melding card is higher
       if (card.age > player.age) {
-        dispatch(updatePlayerAge({ player: playerId, newAge: card.age }));
+        dispatch(updatePlayerAge({ playerId, newAge: card.age }));
       }
-      // recalculate resource totals
+
+      // update resource totals
       const cardPile = playerBoard[card.color]?.cards;
       const coveringCardId = cardPile?.length ? cardPile[cardPile.length - 1] : undefined;
       const updatedResourceTotals = updateResourceTotalsWhenMelding({
@@ -48,7 +37,11 @@ export const useMeldCard = (playerId: string) => {
         splayDirection: playerBoard[card.color]?.splayed,
       });
       dispatch(updatePlayerResources({ playerId, updatedResources: updatedResourceTotals }));
-      dispatch(addCardToBoard({ player: playerId, color: card.color, card: cardId }));
+
+      // update board
+      const updatedBoard = cloneDeep(playerBoard);
+      updatedBoard[card.color].cards.push(cardId);
+      dispatch(updatePlayerBoard({ playerId, board: updatedBoard }));
     },
     [dispatch, player.age, playerBoard, playerId, playerResources]
   );

@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ActionNumbers } from '../enums/game';
-import { RootState } from '../store';
-import { IPlayers, IResourcesByPlayer, TResourceTotals } from '../types';
+import { Ages } from '../../enums';
+import { ActionNumbers } from '../../enums/game';
+import { IPlayers, IResourcesByPlayer, TResourceTotals } from '../../types';
 
 interface PlayersState {
   players: IPlayers;
@@ -26,6 +26,7 @@ export const playersSlice = createSlice({
   name: 'players',
   initialState,
   reducers: {
+    // PLAYER REDUCERS
     initPlayerOrder: (
       state,
       { payload: { playerOrder } }: PayloadAction<{ playerOrder: string[] }>
@@ -46,23 +47,24 @@ export const playersSlice = createSlice({
       state.currentPlayer = state.players[state.currentPlayer].right;
       state.currentPlayerActionNumber = ActionNumbers.ONE;
     },
-    setWinner: (state, { payload: { playerId } }: PayloadAction<{ playerId: string }>) => {
-      state.winner = playerId;
-    },
-    updateAllPlayersResources: (
-      state,
-      { payload: { playerResources } }: PayloadAction<{ playerResources: IResourcesByPlayer }>
-    ) => {
-      // add all players
-      state.resources = playerResources;
+    updateAllPlayers: (state, { payload: { players } }: PayloadAction<{ players: IPlayers }>) => {
+      state.players = players;
     },
     updatePlayerAge: (
       state,
-      { payload: { player, newAge } }: PayloadAction<{ player: string; newAge: number }>
+      { payload: { playerId, newAge } }: PayloadAction<{ playerId: string; newAge: Ages }>
     ) => {
-      if (state.players[player]) {
-        state.players[player].age = newAge;
+      if (state.players[playerId]) {
+        state.players[playerId].age = newAge;
       }
+    },
+
+    // RESOURCE REDUCERS
+    updateAllResources: (
+      state,
+      { payload: { resources } }: PayloadAction<{ resources: IResourcesByPlayer }>
+    ) => {
+      state.resources = resources;
     },
     updatePlayerResources: (
       state,
@@ -74,9 +76,10 @@ export const playersSlice = createSlice({
         state.resources[playerId] = updatedResources;
       }
     },
-    updatePlayers: (state, { payload: { players } }: PayloadAction<{ players: IPlayers }>) => {
-      // add all players
-      state.players = players;
+
+    // WINNER REDUCERS
+    setWinner: (state, { payload: { playerId } }: PayloadAction<{ playerId: string }>) => {
+      state.winner = playerId;
     },
   },
 });
@@ -84,22 +87,11 @@ export const playersSlice = createSlice({
 export const {
   initPlayerOrder,
   playerTakesAction,
-  setWinner,
+  updateAllPlayers,
+  updateAllResources,
   updatePlayerAge,
   updatePlayerResources,
-  updatePlayers,
-  updateAllPlayersResources,
+  setWinner,
 } = playersSlice.actions;
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.players.value)`
-export const selectCurrentAction = (state: RootState) => state.players.currentPlayerActionNumber;
-export const selectCurrentPlayerId = (state: RootState) => state.players.currentPlayer;
-export const selectPlayerResources = (state: RootState, playerId: string) =>
-  state.players.resources[playerId];
-export const selectPlayers = (state: RootState) => state.players.players;
-export const selectPlayer = (state: RootState, playerId: string) => state.players.players[playerId];
-export const selectWinner = (state: RootState) => state.players.winner;
 
 export default playersSlice.reducer;

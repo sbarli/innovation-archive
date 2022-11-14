@@ -2,11 +2,14 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CardIds } from '../../enums';
-import { addCardToHand } from '../../state/handsSlice';
+import { selectPlayerHand } from '../../state/selectors';
+import { updatePlayerHand } from '../../state/slices/handsSlice';
 import { getCardById } from '../../utils/cards';
+import { useAppSelector } from '../use-app-selector';
 
 export const useAddCardToHand = (playerId: string) => {
   const dispatch = useDispatch();
+  const playerHand = useAppSelector(state => selectPlayerHand(state, playerId));
 
   const addCardToPlayerHand = useCallback(
     (cardId: CardIds) => {
@@ -14,9 +17,10 @@ export const useAddCardToHand = (playerId: string) => {
       if (!card) {
         return;
       }
-      dispatch(addCardToHand({ playerId, cardId }));
+      const updatedHand = [...playerHand, cardId];
+      dispatch(updatePlayerHand({ playerId, hand: updatedHand }));
     },
-    [dispatch, playerId]
+    [dispatch, playerHand, playerId]
   );
 
   return addCardToPlayerHand;

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
 // import { CardIds, Colors } from '../../enums';
-// import { selectPlayerBoard } from '../../state/boardsSlice';
-// import { selectPlayerHand } from '../../state/handsSlice';
+// import { selectPlayerBoard } from '../../state/selectors';
+// import { selectPlayerHand } from '../../state/selectors';
 // import { IBoard, THand } from '../../types';
 // import { useMeldCard } from '../dogma-actions/use-meld-card';
 // import { useAppSelector } from '../use-app-selector';

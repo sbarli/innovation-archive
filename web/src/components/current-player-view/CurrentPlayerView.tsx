@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 import { useActionOptions } from '../../hooks/use-action-options';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { selectCurrentAction } from '../../state/playersSlice';
+import { selectCurrentAction } from '../../state/selectors';
 import { ActionsBar } from '../actions-bar';
 import { Board } from '../board';
 import { Hand } from '../hand';
