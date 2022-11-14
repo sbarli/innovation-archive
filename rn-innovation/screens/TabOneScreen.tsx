@@ -5,7 +5,8 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { getAllTestData } from '../firebase/get/test-data';
 import { RootTabScreenProps } from '../expo-types';
-import { Hand } from '../components/hand/hand';
+import { Hand } from '../components/hand';
+import { Board } from '../components/board';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [fetchedData, setFetchedData] = useState(false);
@@ -36,6 +37,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Board</Text>
+      <Board board={boards?.[0] ?? {}} />
       <Text style={styles.title}>Hand</Text>
       <Hand hand={game.pimone.hand ?? []} />
     </View>

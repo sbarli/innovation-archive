@@ -3,17 +3,26 @@ import { ICard } from '../../../types';
 
 interface ICardFrontBasicProps {
   card: ICard;
+  rotated?: boolean;
 }
 
-export const CardFrontBasic = ({ card }: ICardFrontBasicProps) => {
+const getStyles = (rotated: boolean) =>
+  rotated
+    ? {
+        transform: [{ rotate: '270deg' }],
+      }
+    : {};
 
+export const CardFrontBasic = ({ card, rotated = false }: ICardFrontBasicProps) => {
   return (
-    <Container h="125" w="275" borderRadius="lg"
+    <Container
+      h="100"
+      w="275"
+      borderRadius="lg"
       borderColor="black"
       borderWidth="1"
-      style={{
-        transform: [{ rotate: '270deg' }],
-      }}
+      style={getStyles(rotated)}
+      backgroundColor={`${card.color}.100`}
     >
       <HStack
         key={card.cardId}
@@ -43,8 +52,7 @@ export const CardFrontBasic = ({ card }: ICardFrontBasicProps) => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text
-          >{card.age}</Text>
+          <Text>{card.age}</Text>
         </Box>
       </HStack>
     </Container>
