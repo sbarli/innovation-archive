@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { TabsPanel } from '../../libs/ui/tabs-panel';
-import { selectCurrentPlayerId, selectPlayers } from '../../state/playersSlice';
+import { selectCurrentPlayerId, selectPlayers } from '../../state/selectors';
 import { CurrentPlayerView } from '../current-player-view';
 import { OpponentPlayerView } from '../opponent-player-view';
 

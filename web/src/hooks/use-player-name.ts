@@ -1,4 +1,4 @@
-import { selectPlayers } from '../state/playersSlice';
+import { selectPlayers } from '../state/selectors';
 
 import { useAppSelector } from './use-app-selector';
 

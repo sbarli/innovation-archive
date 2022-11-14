@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { Colors } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { selectPlayerBoard } from '../../state/boardsSlice';
+import { selectPlayerBoard } from '../../state/selectors';
 import { CardGrid } from '../../styles/card';
 
 import { BoardPile } from './board-pile';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { selectAgeAchievements, selectSpecialAchievements } from '../../state/achievementsSlice';
+import { selectAgeAchievements, selectSpecialAchievements } from '../../state/selectors';
 
 import { AgeAchievements } from './age-achievements';
 import { SpecialAchievements } from './special-achievements';

@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { usePlayerName } from '../../hooks/use-player-name';
 import { Button, ButtonThemes } from '../../libs/ui/button';
 import { HeaderThree } from '../../libs/ui/header-three';
-import { selectHands } from '../../state/handsSlice';
+import { selectHands } from '../../state/selectors';
 import { IHands, IStarterCardIdsData } from '../../types';
 import { getCardById } from '../../utils/cards';
 

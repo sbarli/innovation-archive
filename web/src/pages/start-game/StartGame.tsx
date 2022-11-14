@@ -5,10 +5,14 @@ import { Redirect } from 'react-router-dom';
 import { setupGame, setupPlayerOrder } from '../../actions/gameActions';
 import { StartFormCards } from '../../components/start-form-cards';
 import { StartFormPlayers } from '../../components/start-form-players';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { PageWrapper } from '../../libs/ui/page-wrapper';
+import { selectBoards, selectHands } from '../../state/selectors';
 
 export function StartGame() {
   const dispatch = useDispatch();
+  const hands = useAppSelector(selectHands);
+  const boards = useAppSelector(selectBoards);
 
   const [page, setPage] = useState(1);
 
@@ -24,10 +28,10 @@ export function StartGame() {
   const onSubmitPage2 = useCallback(
     // TODO: type values
     (values: any) => {
-      dispatch(setupPlayerOrder(values));
+      dispatch(setupPlayerOrder(values, hands, boards));
       setPage(3);
     },
-    [dispatch]
+    [boards, dispatch, hands]
   );
 
   if (page === 3) {

@@ -1,9 +1,11 @@
 import { Ages } from '../enums';
-import { selectAgeAchievements } from '../state/achievementsSlice';
-import { selectPlayerBoard } from '../state/boardsSlice';
-import { selectPlayerHand } from '../state/handsSlice';
-import { selectPlayer } from '../state/playersSlice';
-import { selectPlayerScore } from '../state/scoresSlice';
+import {
+  selectAgeAchievements,
+  selectPlayer,
+  selectPlayerBoard,
+  selectPlayerHand,
+  selectPlayerScore,
+} from '../state/selectors';
 import { checkIfPlayerCanAchieve } from '../utils/achievements';
 import { calculateTotalTopCardsOnBoard } from '../utils/board';
 import noop from '../utils/noop';

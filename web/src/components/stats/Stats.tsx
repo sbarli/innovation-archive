@@ -3,9 +3,12 @@ import styled from 'styled-components/macro';
 
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { selectPlayerAchievements } from '../../state/achievementsSlice';
-import { selectPlayer, selectPlayerResources } from '../../state/playersSlice';
-import { selectPlayerScore } from '../../state/scoresSlice';
+import {
+  selectPlayer,
+  selectPlayerAchievements,
+  selectPlayerResources,
+  selectPlayerScore,
+} from '../../state/selectors';
 import { ResourceTotals } from '../resource-totals';
 
 const BasicStatsLayout = styled.div`

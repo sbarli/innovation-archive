@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash-es';
+
 import { Colors } from '../../enums';
 import { TBoard } from '../../types';
 
@@ -29,11 +31,11 @@ const baseBoardPile = Object.freeze({
  */
 export const createBaseBoard = (player: string) => {
   return {
-    [Colors.RED]: Object.assign({}, baseBoardPile),
-    [Colors.BLUE]: Object.assign({}, baseBoardPile),
-    [Colors.GREEN]: Object.assign({}, baseBoardPile),
-    [Colors.PURPLE]: Object.assign({}, baseBoardPile),
-    [Colors.YELLOW]: Object.assign({}, baseBoardPile),
+    [Colors.RED]: cloneDeep(baseBoardPile),
+    [Colors.BLUE]: cloneDeep(baseBoardPile),
+    [Colors.GREEN]: cloneDeep(baseBoardPile),
+    [Colors.PURPLE]: cloneDeep(baseBoardPile),
+    [Colors.YELLOW]: cloneDeep(baseBoardPile),
   };
 };
 

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { playerTakesAction } from '../state/playersSlice';
+import { playerTakesAction } from '../state/slices/playersSlice';
 import { TPlayerActionClosureFunc } from '../types';
 
 export const usePlayerTakesAction = (playerId: string, ...args: TPlayerActionClosureFunc[]) => {

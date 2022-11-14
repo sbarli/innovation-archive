@@ -3,7 +3,7 @@ import React from 'react';
 import { Ages } from '../../enums';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Collapse } from '../../libs/ui/collapse';
-import { selectDeck } from '../../state/deckSlice';
+import { selectDeck } from '../../state/selectors';
 
 import { Stack } from './stack';
 
