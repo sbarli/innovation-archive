@@ -1,0 +1,1 @@
+export { Dogma } from './Dogma';
