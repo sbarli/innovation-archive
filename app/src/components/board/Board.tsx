@@ -18,7 +18,13 @@ export function Board({ player }: { player: string }) {
   const CardPilesByColor = Object.keys(playerBoard).reduce((acc, k) => {
     const pile = playerBoard[k as Colors];
     acc.push(
-      <BoardPile key={k} cardIds={pile.cards} color={k as Colors} splayDirection={pile.splayed} />
+      <BoardPile
+        key={k}
+        cardIds={pile.cards}
+        color={k as Colors}
+        playerId={player}
+        splayDirection={pile.splayed}
+      />
     );
     return acc;
   }, [] as ReactNode[]);

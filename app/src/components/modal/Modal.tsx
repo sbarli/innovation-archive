@@ -19,10 +19,6 @@ export interface ModalProps {
 }
 
 export const Modal: FC<ModalProps> = ({ isShown, hide, modalContent, headerText }) => {
-  console.log('modalContent: ', modalContent);
-  console.log('hide: ', hide);
-  console.log('headerText: ', headerText);
-  console.log('isShown: ', isShown);
   const modal = (
     <>
       <Backdrop />
