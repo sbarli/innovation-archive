@@ -59,7 +59,8 @@ module.exports = {
     'jsx-a11y/no-autofocus': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
-    'no-shadow': [
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': [
       'warn',
       {
         builtinGlobals: false,
