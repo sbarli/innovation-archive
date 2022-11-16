@@ -5,6 +5,7 @@ import styled from 'styled-components/macro';
 import { Game } from '../../pages/game';
 import { Home } from '../../pages/home';
 import { StartGame } from '../../pages/start-game';
+import { TestGame } from '../../pages/test-game';
 import GlobalStyle from '../../styles/global';
 
 const AppWrapper = styled.div`
@@ -28,6 +29,9 @@ export function App() {
         </Route>
         <Route path="/game">
           <Game />
+        </Route>
+        <Route path="/test">
+          <TestGame />
         </Route>
       </Switch>
     </AppWrapper>
